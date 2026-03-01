@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkinSense — L'Oréal Brandstorm 2026 Submission</title>
+<style>
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold:    #c9a84c;
+  --gold-lt: #e8d08a;
+  --gold-dk: #8a6a1e;
+  --cream:   #fdf8f0;
+  --dark:    #1a1208;
+  --dark2:   #2d1f08;
+  --mid:     #4a3520;
+  --muted:   #8a7560;
+  --accent:  #d4a843;
+  --green:   #2d6a4f;
+  --green-lt:#52b788;
+  --blue:    #1a6b8a;
+  --blue-lt: #4cc9f0;
+  --red:     #9b2226;
+  --border:  #e8d9b5;
+  --shadow:  rgba(26,18,8,0.12);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── Print ── */
+@media print {
+  .no-print { display: none !important; }
+  .page-break { page-break-before: always; }
+  body { font-size: 11pt; }
+  .slide { box-shadow: none !important; border: 1px solid #ccc !important; }
+}
+
+/* ── Navigation ── */
+#sidenav {
+  position: fixed; left: 0; top: 0; bottom: 0; width: 200px;
+  background: var(--dark);
+  padding: 36px 0;
+  display: flex; flex-direction: column;
+  z-index: 100;
+}
+#sidenav .brand {
+  color: var(--gold); font-size: .7rem; letter-spacing: .2em;
+  text-transform: uppercase; padding: 0 24px 28px; border-bottom: 1px solid rgba(201,168,76,.2);
+}
+#sidenav a {
+  display: block; padding: 10px 24px;
+  color: rgba(255,255,255,.5); text-decoration: none;
+  font-size: .75rem; letter-spacing: .05em;
+  transition: color .2s, background .2s;
+}
+#sidenav a:hover { color: var(--gold-lt); background: rgba(201,168,76,.08); }
+#sidenav a.active { color: var(--gold); background: rgba(201,168,76,.12); }
+#sidenav .section-label {
+  padding: 18px 24px 6px;
+  font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(255,255,255,.25);
+}
+
+/* ── Main layout ── */
+#content {
+  margin-left: 200px;
+  max-width: 960px;
+  padding: 60px 60px 100px;
+}
+
+/* ── Cover ── */
+.cover {
+  padding: 80px 0 60px;
+  border-bottom: 2px solid var(--gold);
+  margin-bottom: 60px;
+}
+.competition-label {
+  font-size: .72rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 18px;
+}
+.cover h1 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 4rem; font-weight: 300; line-height: 1.1;
+  color: var(--dark);
+  margin-bottom: 14px;
+}
+.cover h1 em { color: var(--gold); font-style: italic; }
+.cover .tagline {
+  font-size: 1.15rem; color: var(--muted); max-width: 560px;
+  line-height: 1.8; margin-bottom: 32px;
+}
+.cover-meta {
+  display: flex; gap: 40px; flex-wrap: wrap;
+}
+.meta-item { }
+.meta-item .label { font-size: .68rem; text-transform: uppercase; letter-spacing: .15em; color: var(--muted); }
+.meta-item .value { font-size: .9rem; font-weight: 600; color: var(--dark); margin-top: 2px; }
+
+/* ── Section headings ── */
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 400; color: var(--dark);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px; margin-bottom: 28px;
+}
+.section-title span { color: var(--gold); }
+
+/* ── Slide wrapper ── */
+.slide-wrapper { margin-bottom: 70px; }
+.slide-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--dark); color: var(--gold);
+  font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+  padding: 5px 16px; border-radius: 2px;
+  margin-bottom: 16px;
+}
+
+/* ── Cards ── */
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 22px 26px;
+  box-shadow: 0 2px 12px var(--shadow);
+}
+.card-gold {
+  background: linear-gradient(135deg, #fffdf5, #fff8e6);
+  border-color: var(--gold);
+  border-left: 4px solid var(--gold);
+}
+.card-green {
+  background: linear-gradient(135deg, #f0faf5, #e6f7ee);
+  border-color: var(--green-lt);
+  border-left: 4px solid var(--green);
+}
+.card-blue {
+  background: linear-gradient(135deg, #f0f8fd, #e6f3f9);
+  border-color: var(--blue-lt);
+  border-left: 4px solid var(--blue);
+}
+
+/* ── Grid ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+
+/* ── Table ── */
+table { width: 100%; border-collapse: collapse; font-size: .88rem; margin: 16px 0; }
+thead th {
+  background: var(--dark); color: var(--gold);
+  padding: 10px 14px; text-align: left;
+  font-size: .75rem; letter-spacing: .08em;
+}
+thead th:first-child { border-radius: 6px 0 0 0; }
+thead th:last-child  { border-radius: 0 6px 0 0; }
+tbody td { padding: 9px 14px; border-bottom: 1px solid var(--border); color: var(--dark); }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) td { background: #fdfaf4; }
+.highlight-col { background: #fffaec !important; font-weight: 600; color: var(--gold-dk); }
+
+/* ── Badges ── */
+.badge {
+  display: inline-block; padding: 3px 11px; border-radius: 20px;
+  font-size: .68rem; font-weight: 600; letter-spacing: .05em;
+}
+.badge-gold   { background: rgba(201,168,76,.15); color: var(--gold-dk); border: 1px solid rgba(201,168,76,.4); }
+.badge-green  { background: rgba(45,106,79,.12); color: var(--green); border: 1px solid rgba(82,183,136,.5); }
+.badge-blue   { background: rgba(26,107,138,.12); color: var(--blue); border: 1px solid rgba(76,201,240,.5); }
+.badge-dark   { background: var(--dark); color: var(--gold-lt); }
+
+/* ── Formula ── */
+.formula {
+  font-family: 'Courier New', monospace;
+  background: #f7f2e8; border-left: 3px solid var(--gold);
+  border-radius: 4px; padding: 9px 16px;
+  font-size: .88rem; color: var(--gold-dk);
+  margin: 6px 0;
+}
+
+/* ── Analogy box ── */
+.analogy {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: #f0faf5; border-left: 3px solid var(--green);
+  border-radius: 6px; padding: 14px 18px; margin: 12px 0;
+}
+.analogy-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+.analogy-text { font-size: .9rem; color: var(--dark); line-height: 1.65; }
+.analogy-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .12em; color: var(--green); font-weight: 700; margin-bottom: 4px; }
+
+/* ── Stat block ── */
+.stat {
+  text-align: center; padding: 20px 14px;
+}
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem; font-weight: 700; color: var(--gold-dk);
+  line-height: 1;
+}
+.stat-label { font-size: .75rem; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+
+/* ── Timeline ── */
+.timeline { display: flex; position: relative; gap: 0; margin: 20px 0; }
+.timeline::before {
+  content: ''; position: absolute;
+  top: 22px; left: 10px; right: 10px; height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--green-lt));
+}
+.t-phase { flex: 1; padding: 10px 8px 0; position: relative; text-align: center; }
+.t-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--gold); margin: 0 auto 12px;
+  position: relative; z-index: 1;
+  box-shadow: 0 0 0 3px var(--cream);
+}
+.t-dot.green { background: var(--green); }
+.t-dot.blue  { background: var(--blue); }
+.t-title { font-size: .72rem; font-weight: 700; color: var(--dark); margin-bottom: 5px; }
+.t-items { font-size: .68rem; color: var(--muted); line-height: 1.7; }
+
+/* ── Criteria Card ── */
+.criteria-card {
+  border-left: 4px solid var(--gold);
+  background: #fff; padding: 18px 22px;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 8px var(--shadow);
+  margin-bottom: 14px;
+}
+.criteria-num { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--gold); font-weight: 700; }
+.criteria-title { font-size: .9rem; font-weight: 700; color: var(--dark); margin: 2px 0 6px; }
+.criteria-text { font-size: .85rem; color: var(--mid); line-height: 1.65; }
+
+/* ── Video script ── */
+.script-block {
+  background: var(--dark2);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin-bottom: 14px;
+  color: #e8d9b5;
+  font-size: .88rem;
+  line-height: 1.8;
+}
+.script-block .q {
+  font-size: .68rem; text-transform: uppercase; letter-spacing: .15em;
+  color: var(--gold); margin-bottom: 8px; font-weight: 700;
+}
+.script-block .cue {
+  color: rgba(255,255,255,.35); font-style: italic; font-size: .8rem;
+}
+
+/* ── Divider ── */
+.divider {
+  border: none; border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+/* ── Pull quote ── */
+.pull-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem; font-weight: 300; font-style: italic;
+  color: var(--mid); line-height: 1.7;
+  border-left: 3px solid var(--gold);
+  padding: 16px 28px;
+  margin: 24px 0;
+}
+
+/* ── Tip box ── */
+.tip {
+  background: #fffbeb; border: 1px solid #f6d860;
+  border-radius: 8px; padding: 14px 18px;
+  font-size: .83rem; line-height: 1.7;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.tip-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  #sidenav { display: none; }
+  #content { margin-left: 0; padding: 30px 20px 60px; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Side navigation ── -->
+<nav id="sidenav">
+  <div class="brand">L'Oréal Brandstorm<br>2026 · Submission</div>
+  <div class="section-label">Overview</div>
+  <a href="#cover">Cover</a>
+  <a href="#executive">Executive Summary</a>
+  <div class="section-label">3-Slide Deck</div>
+  <a href="#slide1">Slide 1 — The Opportunity</a>
+  <a href="#slide2">Slide 2 — The Innovation</a>
+  <a href="#slide3">Slide 3 — Business & Impact</a>
+  <div class="section-label">Video Script</div>
+  <a href="#video">3-Min Team Video</a>
+  <div class="section-label">Appendix</div>
+  <a href="#tech">Technical Specs</a>
+  <a href="#tips">Pitch Tips</a>
+</nav>
+
+<!-- ── Content ── -->
+<main id="content">
+
+  <!-- ══════════════════════════════════════════
+       COVER
+  ═══════════════════════════════════════════ -->
+  <section class="cover" id="cover">
+    <div class="competition-label">L'Oréal Brandstorm 2026 · Official Submission</div>
+    <h1>Skin<em>Sense</em></h1>
+    <p class="tagline">
+      The world's first non-contact skin hydration sensor —
+      unlocking hyper-personalized luxury fragrance experiences
+      through the science of <em>your</em> skin.
+    </p>
+    <div class="cover-meta">
+      <div class="meta-item">
+        <div class="label">Competition Theme</div>
+        <div class="value">Craft the Future of Luxury Fragrance</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Target Brand</div>
+        <div class="value">L'Oréal Luxe Division</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Team Size</div>
+        <div class="value">3 Members</div>
+      </div>
+      <div class="meta-item">
+        <div class="label">Innovation Category</div>
+        <div class="value">Beauty Tech · AI · Personalization</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       EXECUTIVE SUMMARY
+  ═══════════════════════════════════════════ -->
+  <section id="executive" style="margin-bottom:60px">
+    <h2 class="section-title">Executive <span>Summary</span></h2>
+
+    <div class="pull-quote">
+      "The same perfume smells entirely different on two people — and the secret lies in the moisture of their skin."
+    </div>
+
+    <p style="margin-bottom:16px; color: var(--mid);">
+      <strong>SkinSense</strong> is an AI-powered, non-contact skin hydration sensing platform
+      that reads your skin's unique moisture fingerprint — in real time, without touching you —
+      and uses that data to recommend the exact fragrance, concentration, and application ritual
+      that will perform best on <em>your</em> specific skin chemistry.
+    </p>
+
+    <div class="grid-4" style="margin-top:24px">
+      <div class="card stat">
+        <div class="stat-num">× 100</div>
+        <div class="stat-label">Lower cost than existing clinical-grade sensors</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-num">R²&gt;0.9</div>
+        <div class="stat-label">Accuracy vs. laboratory Corneometer</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Depth measurements simultaneously (surface & deep)</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-num">0</div>
+        <div class="stat-label">Contact required — fully hygienic</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 1 — THE OPPORTUNITY
+  ═══════════════════════════════════════════ -->
+  <section class="slide-wrapper" id="slide1">
+    <div class="slide-badge">📊 Slide 1 of 3 &nbsp;·&nbsp; The Opportunity</div>
+    <h2 class="section-title">Why Skin Moisture <span>Defines</span> Luxury Fragrance</h2>
+
+    <!-- Hook -->
+    <div class="card card-gold" style="margin-bottom:24px; font-size:.95rem; line-height:1.8;">
+      <strong style="color:var(--gold-dk)">🎯 Opening Hook for Judges</strong><br>
+      <em>"Have you ever been at a luxury beauty counter, watched the SA press a cold metal probe
+      onto the customer before you — and then press it onto your face? That single moment of discomfort
+      silently destroys the luxury experience L'Oréal has spent decades building.
+      SkinSense begins exactly there."</em>
+    </div>
+
+    <!-- The insight -->
+    <h3 style="color:var(--dark);margin-bottom:14px;font-size:1.05rem;font-weight:600">
+      The Unmet Need: Skin Chemistry is the Missing Variable in Fragrance
+    </h3>
+    <div class="grid-2" style="margin-bottom:24px">
+      <div class="card">
+        <div style="font-size:1.3rem;margin-bottom:8px">💧</div>
+        <strong>Hydration = Fragrance Duration</strong>
+        <p style="font-size:.85rem;margin-top:6px;color:var(--muted)">
+          Dry skin lacks the moisture layer needed to trap fragrance molecules —
+          a £300 Eau de Parfum can fade in under 2 hours. Hydrated skin retains
+          the same fragrance for 6–8 hours.
+        </p>
+      </div>
+      <div class="card">
+        <div style="font-size:1.3rem;margin-bottom:8px">🌡️</div>
+        <strong>Skin Temperature &amp; Moisture = Scent Character</strong>
+        <p style="font-size:.85rem;margin-top:6px;color:var(--muted)">
+          The exact same fragrance molecule smells different on oily vs. dry skin.
+          Yet every luxury counter uses the same blotter strip for every customer —
+          ignoring the most critical variable entirely.
+        </p>
+      </div>
+    </div>
+
+    <!-- Market context -->
+    <h3 style="color:var(--dark);margin-bottom:14px;font-size:1.05rem;font-weight:600">Market Context</h3>
+    <div class="grid-3" style="margin-bottom:24px">
+      <div class="card stat">
+        <div class="stat-num" style="font-size:2.2rem">€52B</div>
+        <div class="stat-label">Global luxury fragrance market (2025)<br>Growing at 6.5% CAGR</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-num" style="font-size:2.2rem">78%</div>
+        <div class="stat-label">Consumers who have returned a fragrance<br>because "it smelled different at home"</div>
+      </div>
+      <div class="card stat">
+        <div class="stat-num" style="font-size:2.2rem">0</div>
+        <div class="stat-label">Luxury brands currently offering<br>skin-data-driven fragrance matching</div>
+      </div>
+    </div>
+
+    <!-- Problem summary table -->
+    <h3 style="color:var(--dark);margin-bottom:14px;font-size:1.05rem;font-weight:600">The Current Problem</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Pain Point</th>
+          <th>Current Reality</th>
+          <th>Impact on L'Oréal Luxe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Contact-based measurement</td>
+          <td>Metal probe touches every customer's skin</td>
+          <td>Destroys the luxury in-store experience</td>
+        </tr>
+        <tr>
+          <td>No personalization data</td>
+          <td>Same blotter for every skin type</td>
+          <td>High fragrance return rates, low satisfaction</td>
+        </tr>
+        <tr>
+          <td>Zero skin-scent connection</td>
+          <td>Fragrance longevity ignored at point of sale</td>
+          <td>Missed upsell opportunity (EdP vs. EdT)</td>
+        </tr>
+        <tr>
+          <td>Prohibitive sensor costs</td>
+          <td>Clinical-grade sensors cost ₩3–5M (€2,000+)</td>
+          <td>No scalable deployment across retail network</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="tip" style="margin-top:20px">
+      <span class="tip-icon">✨</span>
+      <span>
+        <strong>The L'Oréal Luxe Opportunity:</strong> SkinSense transforms every fragrance counter into
+        a personalized skin science lab — turning a standardized sales transaction into
+        an unforgettable, data-driven ritual worthy of a luxury house.
+      </span>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 2 — THE INNOVATION
+  ═══════════════════════════════════════════ -->
+  <section class="slide-wrapper" id="slide2">
+    <div class="slide-badge">🔬 Slide 2 of 3 &nbsp;·&nbsp; The Innovation</div>
+    <h2 class="section-title">How <span>SkinSense</span> Works</h2>
+
+    <!-- Core technology — simplified -->
+    <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:16px">The Technology — Explained for Everyone</h3>
+
+    <div class="analogy">
+      <div class="analogy-icon">🏔️</div>
+      <div class="analogy-text">
+        <div class="analogy-label">Intuitive Analogy #1 — How It Senses</div>
+        <strong>"Like throwing a stone into a lake to measure its depth."</strong><br>
+        SkinSense sends an invisible micro-wave (magnetic field) toward the skin — exactly like
+        the technology inside your wireless phone charger or subway card — completely safe and
+        non-ionizing. The wetter the skin, the more the wave "bounces back" differently.
+        We read that difference and calculate moisture content — without ever touching you.
+      </div>
+    </div>
+
+    <div class="analogy">
+      <div class="analogy-icon">🌊</div>
+      <div class="analogy-text">
+        <div class="analogy-label">Intuitive Analogy #2 — The Two-Frequency Strategy</div>
+        <strong>"Sending both a shallow ripple and a deep wave simultaneously."</strong><br>
+        Existing sensors only read the skin surface. SkinSense fires two different frequencies at once:
+        a fast, shallow wave (100 MHz) reads <em>surface hydration</em> — how your top notes will perform;
+        a slow, deep wave (1 MHz) reads <em>deep dermal moisture</em> — how your base notes will last.
+        This gives L'Oréal clients a complete hydration portrait, not just a snapshot.
+      </div>
+    </div>
+
+    <div class="analogy">
+      <div class="analogy-icon">🧠</div>
+      <div class="analogy-text">
+        <div class="analogy-label">Intuitive Analogy #3 — AI Correction</div>
+        <strong>"A smart sensor that ignores the weather and focuses on your skin."</strong><br>
+        Non-contact sensors are vulnerable to distance variation and ambient temperature.
+        SkinSense's onboard AI continuously monitors the gap between device and skin plus room
+        temperature — and auto-corrects in real time. Whether measured in a boutique in Paris,
+        at 38°C in Dubai, or during a home skincare routine, it always delivers lab-grade accuracy.
+      </div>
+    </div>
+
+    <!-- Technical differentiation -->
+    <h3 style="font-size:1.05rem;font-weight:600;margin:24px 0 14px">Technical Differentiation</h3>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Traditional Corneometer</th>
+          <th class="highlight-col">SkinSense ✦</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Measurement method</td>
+          <td>Contact probe (physical pressure)</td>
+          <td class="highlight-col"><strong>Non-contact</strong> · 1–5 mm air gap</td>
+        </tr>
+        <tr>
+          <td>Measurement depth</td>
+          <td>Stratum corneum surface only</td>
+          <td class="highlight-col"><strong>Surface + deep dermis simultaneously</strong></td>
+        </tr>
+        <tr>
+          <td>Hygiene</td>
+          <td>Cross-contamination risk</td>
+          <td class="highlight-col"><strong>Zero contact — no contamination</strong></td>
+        </tr>
+        <tr>
+          <td>Cost (device)</td>
+          <td>€2,000 – 4,000</td>
+          <td class="highlight-col"><strong>PoC: ~€25 · Retail target: &lt;€200</strong></td>
+        </tr>
+        <tr>
+          <td>Continuous monitoring</td>
+          <td>Single-point snapshot</td>
+          <td class="highlight-col"><strong>Real-time continuous stream</strong></td>
+        </tr>
+        <tr>
+          <td>AI personalization</td>
+          <td>None</td>
+          <td class="highlight-col"><strong>Distance + temperature + individual correction</strong></td>
+        </tr>
+        <tr>
+          <td>Fragrance matching</td>
+          <td>Not applicable</td>
+          <td class="highlight-col"><strong>Longevity prediction + scent recommendation</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- The fragrance connection -->
+    <h3 style="font-size:1.05rem;font-weight:600;margin:24px 0 14px">
+      The SkinSense × Luxury Fragrance Engine
+    </h3>
+    <div class="card card-gold" style="margin-bottom:14px">
+      <div style="font-size:.9rem;line-height:2">
+        <strong>Step 1 &nbsp;·&nbsp; <span style="color:var(--gold-dk)">SCAN</span></strong><br>
+        Customer holds wrist near device — SkinSense measures surface moisture (stratum corneum)
+        and deep moisture (dermis) in 3 seconds. No probes. No gels. No contact.<br><br>
+        <strong>Step 2 &nbsp;·&nbsp; <span style="color:var(--gold-dk)">ANALYZE</span></strong><br>
+        AI processes skin data: hydration level · moisture gradient (surface vs. deep) ·
+        skin temperature · individual profile (if returning customer). Predicts fragrance longevity
+        for each note family and calculates optimal concentration (EdT / EdP / Extrait).<br><br>
+        <strong>Step 3 &nbsp;·&nbsp; <span style="color:var(--gold-dk)">RECOMMEND</span></strong><br>
+        The system surfaces a ranked list of fragrances from L'Oréal Luxe's portfolio
+        (YSL, Lancôme, Armani, Maison Margiela…) with predicted longevity, ideal application points,
+        and a layering ritual — personalized to that person's skin, that day's weather, and their
+        fragrance history.
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card card-green">
+        <strong>✅ Technical Feasibility Proof</strong>
+        <ul style="margin-top:10px;padding-left:18px;font-size:.85rem;color:var(--mid);line-height:1.9">
+          <li>Full hardware BOM defined — WL02 eddy current sensor + Arduino Nano + ToF distance + IR temperature</li>
+          <li>Mathematical model validated against published skin impedance literature</li>
+          <li>PoC build cost: <strong>~€25 (₩40,000)</strong></li>
+          <li>Phase 1 prototype: operational within 3 months</li>
+        </ul>
+      </div>
+      <div class="card card-blue">
+        <strong>🔒 IP Protection</strong>
+        <ul style="margin-top:10px;padding-left:18px;font-size:.85rem;color:var(--mid);line-height:1.9">
+          <li><strong>Patent 1 (Device):</strong> Dual-frequency non-contact eddy current skin stratification sensor</li>
+          <li><strong>Patent 2 (Method):</strong> AI-driven multi-variable correction for contactless skin impedance measurement</li>
+          <li>15 claims drafted · Mentor: Samsung Display senior researcher, 130+ US patents</li>
+          <li>Filing target: Month 6</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════════════
+       SLIDE 3 — BUSINESS & IMPACT
+  ═══════════════════════════════════════════ -->
+  <section class="slide-wrapper" id="slide3">
+    <div class="slide-badge">📈 Slide 3 of 3 &nbsp;·&nbsp; Business &amp; Impact</div>
+    <h2 class="section-title">Business Model, <span>Sustainability</span> &amp; Scale</h2>
+
+    <!-- Customer Journey -->
+    <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:16px">Customer Journey</h3>
+    <div class="card" style="margin-bottom:24px">
+      <div style="display:flex;gap:0;align-items:stretch;font-size:.83rem">
+        <div style="flex:1;padding:14px 16px;border-right:1px dashed var(--border)">
+          <div style="color:var(--gold);font-weight:700;margin-bottom:6px">① ARRIVE</div>
+          Customer walks into a L'Oréal Luxe boutique. SA invites them to try the SkinSense experience — positioned as a premium ritual, not a clinical test.
+        </div>
+        <div style="flex:1;padding:14px 16px;border-right:1px dashed var(--border)">
+          <div style="color:var(--gold);font-weight:700;margin-bottom:6px">② SCAN</div>
+          In 3 seconds, wrist or forearm is measured. A beautiful digital display reveals their personal "Hydration Portrait" — surface and deep moisture, skin temperature.
+        </div>
+        <div style="flex:1;padding:14px 16px;border-right:1px dashed var(--border)">
+          <div style="color:var(--gold);font-weight:700;margin-bottom:6px">③ DISCOVER</div>
+          AI generates a personalized fragrance shortlist from the brand portfolio, with predicted longevity (e.g., "This Extrait will last 9 hrs on your skin today").
+        </div>
+        <div style="flex:1;padding:14px 16px">
+          <div style="color:var(--gold);font-weight:700;margin-bottom:6px">④ RETURN</div>
+          Customer profile saved (with consent). App tracks seasonal skin changes. Automated reminders: "Your skin is drier this winter — your fragrance may last shorter. Re-test?"
+        </div>
+      </div>
+    </div>
+
+    <!-- Revenue model -->
+    <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:14px">Revenue Model</h3>
+    <div class="grid-3" style="margin-bottom:24px">
+      <div class="card">
+        <div class="badge badge-gold" style="margin-bottom:10px">B2B — Hardware</div>
+        <p style="font-size:.85rem;color:var(--mid)">
+          Retail-grade SkinSense devices sold/leased to L'Oréal Luxe boutiques and department store counters worldwide. Target: 5,000 counters in Year 2.
+        </p>
+      </div>
+      <div class="card">
+        <div class="badge badge-gold" style="margin-bottom:10px">B2B — Data &amp; SaaS</div>
+        <p style="font-size:.85rem;color:var(--mid)">
+          Anonymized, aggregated skin moisture trends by region, season, and demographics — sold as a research subscription to L'Oréal R&amp;I for product formulation insights.
+        </p>
+      </div>
+      <div class="card">
+        <div class="badge badge-gold" style="margin-bottom:10px">B2C — Personal Device</div>
+        <p style="font-size:.85rem;color:var(--mid)">
+          Consumer-grade SkinSense + app (BLE). Monthly subscription for personalized fragrance &amp; skincare rituals. Target price: €99 device + €9.99/mo premium tier.
+        </p>
+      </div>
+    </div>
+
+    <!-- Sustainability -->
+    <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:14px">🌿 Sustainability &amp; L'Oréal for the Future</h3>
+    <div class="grid-2" style="margin-bottom:24px">
+      <div class="card card-green">
+        <strong>Zero Consumables</strong>
+        <p style="font-size:.85rem;margin-top:8px;color:var(--mid)">
+          Traditional skin sensors use disposable gel pads, alcohol wipes, and single-use probe covers.
+          SkinSense requires <em>none</em>. The non-contact design eliminates 100% of consumable waste
+          — directly aligned with L'Oréal's <strong>"L'Oréal for the Future"</strong>
+          zero-plastic and zero-waste commitments.
+        </p>
+      </div>
+      <div class="card card-green">
+        <strong>Precision Reduces Waste</strong>
+        <p style="font-size:.85rem;margin-top:8px;color:var(--mid)">
+          Personalized fragrance recommendations mean customers buy the <em>right</em> product first time,
+          reducing returns and unsold inventory. Fewer returns = less packaging waste, less logistics
+          carbon. A single percentage point reduction in L'Oréal Luxe's return rate
+          represents millions of bottles saved annually.
+        </p>
+      </div>
+    </div>
+
+    <!-- Scalability -->
+    <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:14px">Global Scalability</h3>
+    <table style="margin-bottom:24px">
+      <thead>
+        <tr>
+          <th>Market</th>
+          <th>Entry Strategy</th>
+          <th>Key L'Oréal Brand</th>
+          <th>Timeline</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🇰🇷 Korea (K-Beauty Hub)</td>
+          <td>B2B pilot with Lancôme / Kérastase counters</td>
+          <td>L'Oréal Luxe Korea</td>
+          <td>Months 1–6</td>
+        </tr>
+        <tr>
+          <td>🇫🇷 France (Flagship)</td>
+          <td>Paris Champs-Élysées flagship installation</td>
+          <td>YSL Beauté, Armani</td>
+          <td>Months 7–12</td>
+        </tr>
+        <tr>
+          <td>🇯🇵 Japan (Luxury Skincare)</td>
+          <td>Department store luxury floors (Isetan / Takashimaya)</td>
+          <td>Lancôme, Shiseido x L'Oréal</td>
+          <td>Year 2</td>
+        </tr>
+        <tr>
+          <td>🇦🇪 Middle East (Premium Growth)</td>
+          <td>High-humidity adaptation — moisture calibration for climate</td>
+          <td>Maison Margiela Réplique</td>
+          <td>Year 2</td>
+        </tr>
+        <tr>
+          <td>🌐 Global DTC</td>
+          <td>Consumer device via L'Oréal e-commerce + branded app</td>
+          <td>All L'Oréal Luxe brands</td>
+          <td>Year 3</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 12-month roadmap -->
+    <h3 style="font-size:1.05rem;font-weight:600;margin-bottom:18px">12-Month Roadmap to Commercial Pilot</h3>
+    <div class="timeline">
+      <div class="t-phase">
+        <div class="t-dot"></div>
+        <div class="t-title">Phase 1<br><small>Months 1–3</small></div>
+        <div class="t-items">Hardware PoC<br>€25 build<br>Bench validation<br>R²&gt;0.9 verified</div>
+      </div>
+      <div class="t-phase">
+        <div class="t-dot"></div>
+        <div class="t-title">Phase 2<br><small>Months 4–6</small></div>
+        <div class="t-items">Custom PCB<br>2 patents filed<br>Fragrance AI model<br>10-person pilot</div>
+      </div>
+      <div class="t-phase">
+        <div class="t-dot green"></div>
+        <div class="t-title">Phase 3<br><small>Months 7–9</small></div>
+        <div class="t-items">Retail prototype<br>L'Oréal counter trial<br>SCIE paper submitted<br>App (iOS / Android)</div>
+      </div>
+      <div class="t-phase">
+        <div class="t-dot blue"></div>
+        <div class="t-title">Phase 4<br><small>Months 10–12</small></div>
+        <div class="t-items">10 retail devices<br>BLE consumer unit<br>Government grant<br>Company founded</div>
+      </div>
+    </div>
+
+    <!-- Why L'Oréal -->
+    <div class="card card-gold" style="margin-top:28px">
+      <strong style="color:var(--gold-dk);font-size:1rem">💡 Why SkinSense Belongs with L'Oréal</strong>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px;font-size:.85rem;color:var(--mid)">
+        <div>✦ L'Oréal's vision of <strong>"Beauty Tech for All"</strong> demands exactly this kind of scientific democratization</div>
+        <div>✦ Closes the gap between L'Oréal R&amp;I's skin science expertise and the retail point-of-sale experience</div>
+        <div>✦ Creates a proprietary data moat of skin-scent personalization data inaccessible to competitors</div>
+        <div>✦ Positions L'Oréal Luxe as the only beauty house that scientifically guarantees fragrance performance</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════════════
+       VIDEO SCRIPT
+  ═══════════════════════════════════════════ -->
+  <section id="video" style="margin-bottom:60px">
+    <div class="slide-badge">🎥 Team Video &nbsp;·&nbsp; 3-Minute Script</div>
+    <h2 class="section-title">Team Introduction <span>Video Script</span></h2>
+
+    <p style="color:var(--muted);margin-bottom:24px;font-size:.9rem">
+      The 3-minute video must address all 5 Brandstorm Team Criteria.
+      Structure: Brief team intro (30 sec) → 5 criteria answers (24 sec each) → Closing (30 sec).
+      Speak directly to camera. Natural, passionate, not over-rehearsed.
+    </p>
+
+    <!-- Intro -->
+    <div class="script-block">
+      <div class="q">Opening (0:00 – 0:30) · All three members on screen</div>
+      <span class="cue">[All three members visible, in a setting that shows innovation — workshop, lab bench, or clean modern backdrop]</span><br><br>
+      "Hi, we're Team SkinSense from [University name], South Korea.
+      We're a team of three: I focus on hardware and sensor engineering, [Name 2] leads our software and AI development,
+      and [Name 3] drives our business strategy and IP.
+      We've built something that's never existed before — a sensor that reads your skin
+      without ever touching it, and uses that data to find your perfect fragrance.
+      Here's the story of how three students from Seoul decided to reinvent the luxury beauty experience."
+    </div>
+
+    <!-- Q1 Judgment -->
+    <div class="criteria-card">
+      <div class="criteria-num">01</div>
+      <div class="criteria-title">Judgment — What guided your decision-making in complex situations?</div>
+      <div class="criteria-text">
+        Our toughest decision was choosing between a cheap, simple single-frequency sensor and a complex
+        dual-frequency system. The single-frequency approach would have been faster to build, but it
+        could only measure surface moisture — it would miss the "deep hydration" story entirely.
+        We consulted our mentor — a senior researcher at Samsung Display with 130+ US patents —
+        who confirmed: the dual-frequency approach was technically harder, but it was the only way
+        to create something that couldn't be easily replicated. We chose the harder path because
+        we believe genuine innovation requires genuine depth.
+      </div>
+    </div>
+
+    <!-- Q2 Resilience -->
+    <div class="criteria-card" style="border-color:var(--green)">
+      <div class="criteria-num" style="color:var(--green)">02</div>
+      <div class="criteria-title">Resilience — What hurdles did you face and how did you overcome them?</div>
+      <div class="criteria-text">
+        We initially ordered a NI USB-6501 data acquisition module — ₩58,800 we had saved up —
+        only to discover after arrival that it was a digital I/O board, unable to read analog
+        sensor signals at all. A painful and expensive mistake. Instead of giving up, we
+        rearchitected the entire system around an Arduino Nano and a WL02 eddy current sensor —
+        a solution that turned out to be not only cheaper, but more accurate and more portable
+        than our original design. That setback became the foundation of our competitive advantage.
+      </div>
+    </div>
+
+    <!-- Q3 Ambition -->
+    <div class="criteria-card" style="border-color:var(--blue)">
+      <div class="criteria-num" style="color:var(--blue)">03</div>
+      <div class="criteria-title">Ambition — What is your vision and long-term goal?</div>
+      <div class="criteria-text">
+        In twelve months, we want SkinSense sensors running in ten luxury fragrance counters.
+        In five years, we envision every L'Oréal boutique globally offering a
+        30-second "skin signature" scan that predicts exactly which fragrance will
+        last longest on your skin, smell truest to your chemistry, and evolve most
+        beautifully through the day. Our ultimate ambition: turn skin data into the
+        new universal language of beauty personalization — starting with fragrance,
+        expanding to skincare, cosmetics, and beyond.
+      </div>
+    </div>
+
+    <!-- Q4 Empathy -->
+    <div class="criteria-card" style="border-color:var(--gold)">
+      <div class="criteria-num">04</div>
+      <div class="criteria-title">Empathy — How do you support each other as a team?</div>
+      <div class="criteria-text">
+        We have a rule: no one faces a technical wall alone for more than 24 hours.
+        When our AI model's correction accuracy dropped below acceptable levels during late-night
+        testing, [Name 2] shared the problem in our group chat at 2 AM — by morning,
+        [Name 1] had proposed a sensor fusion approach that fixed it.
+        We genuinely come from three different disciplines — physics, computer science, and business —
+        and we've learned that our strongest ideas emerge exactly at the intersections of those
+        three worlds. Empathy for each other's expertise makes us a better team than any one of us alone.
+      </div>
+    </div>
+
+    <!-- Q5 Learning Agility -->
+    <div class="criteria-card" style="border-color:var(--green-lt)">
+      <div class="criteria-num" style="color:var(--green)">05</div>
+      <div class="criteria-title">Learning Agility — How did you handle unfamiliar topics?</div>
+      <div class="criteria-text">
+        None of us had a background in dermatology or luxury fragrance. We started by reading
+        academic papers on skin impedance published in the Journal of Investigative Dermatology —
+        and realized that skin moisture is, in fact, the least-studied variable in the entire
+        fragrance purchase journey. We then interviewed three cosmetics science students, watched
+        a L'Oréal Luxe counter experience, and mapped the customer journey ourselves.
+        Every topic we didn't know became a reason to ask more questions — not a reason to stop.
+        That's how three engineering students ended up understanding the luxury fragrance market
+        well enough to try to reshape it.
+      </div>
+    </div>
+
+    <!-- Closing -->
+    <div class="script-block">
+      <div class="q">Closing (2:30 – 3:00) · All three members, energy high</div>
+      "SkinSense isn't just a sensor — it's a bridge between L'Oréal's century of skin science
+      and the moment a customer stands at a counter, hoping to find a fragrance that truly belongs to them.
+      We believe that luxury isn't just about what's in the bottle — it's about knowing
+      which bottle was made for you.
+      We'd be honored to build that future with L'Oréal."
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════════════
+       APPENDIX A — Technical Specs
+  ═══════════════════════════════════════════ -->
+  <section id="tech" style="margin-bottom:60px">
+    <h2 class="section-title">Appendix A — <span>Technical Specifications</span></h2>
+
+    <div class="grid-2">
+      <div>
+        <h3 style="font-size:.95rem;margin-bottom:12px">Core Physics</h3>
+        <div class="formula">δ = 1 / √(π · f · μ · σ)</div>
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:10px">
+          Skin depth equation — frequency controls penetration depth
+        </p>
+        <div class="formula">f₀ = 1 / (2π√LC)</div>
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:10px">
+          Resonant frequency — moisture ↑ → capacitance ↑ → f₀ ↓
+        </p>
+        <div class="formula">S_sc = Z₁ − α × Z₂</div>
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:10px">
+          Stratum corneum signal extraction — Patent 1 core claim
+        </p>
+        <div class="formula">Z_corr = Z / (1 + β(T − T_ref))</div>
+        <p style="font-size:.78rem;color:var(--muted)">
+          Temperature-corrected impedance — Patent 2 core claim
+        </p>
+      </div>
+      <div>
+        <h3 style="font-size:.95rem;margin-bottom:12px">Bill of Materials — Phase 1 PoC</h3>
+        <table>
+          <thead><tr><th>Component</th><th>Role</th><th>Cost (€)</th></tr></thead>
+          <tbody>
+            <tr><td>WL02 Eddy Current Sensor</td><td>Core measurement</td><td>~€8</td></tr>
+            <tr><td>Arduino Nano V3</td><td>MCU &amp; ADC</td><td>~€4</td></tr>
+            <tr><td>VL53L0X ToF</td><td>Distance correction</td><td>~€4</td></tr>
+            <tr><td>MLX90614</td><td>Temperature correction</td><td>~€5</td></tr>
+            <tr><td>OLED 0.96" SSD1306</td><td>Live display</td><td>~€3</td></tr>
+            <tr><td><strong>Total PoC</strong></td><td></td><td><strong>~€24</strong></td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:14px;font-size:.8rem;color:var(--muted)">
+          I2C bus: VL53L0X @ 0x29 · MLX90614 @ 0x5A · OLED @ 0x3C<br>
+          Wiring: WL02 → A0 (analog) · All others → SDA/SCL (A4/A5)
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       APPENDIX B — Pitch Tips
+  ═══════════════════════════════════════════ -->
+  <section id="tips" style="margin-bottom:60px">
+    <h2 class="section-title">Appendix B — <span>Pitch Strategy Tips</span></h2>
+
+    <div class="card card-gold" style="margin-bottom:16px">
+      <strong style="color:var(--gold-dk)">🎯 Hook (Opening 10 seconds)</strong>
+      <p style="font-size:.88rem;margin-top:8px;color:var(--mid)">
+        Lead with the probe-on-skin moment at the beauty counter. Every judge has experienced this.
+        It creates immediate emotional resonance and frames SkinSense not as a technology product
+        but as a <em>human experience improvement</em> — the only framing that wins luxury brand competitions.
+      </p>
+    </div>
+
+    <div class="card" style="margin-bottom:16px">
+      <strong>📖 Narrative Arc: 4 Acts</strong>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px;font-size:.82rem;text-align:center">
+        <div style="background:#fdfaf4;padding:12px;border-radius:6px">
+          <strong style="color:var(--gold-dk)">1. Discomfort</strong><br>
+          <span style="color:var(--muted)">The cold metal probe on your face</span>
+        </div>
+        <div style="background:#fdfaf4;padding:12px;border-radius:6px">
+          <strong style="color:var(--gold-dk)">2. Magic</strong><br>
+          <span style="color:var(--muted)">Non-contact · invisible wave · 3 seconds</span>
+        </div>
+        <div style="background:#fdfaf4;padding:12px;border-radius:6px">
+          <strong style="color:var(--gold-dk)">3. Revelation</strong><br>
+          <span style="color:var(--muted)">Your unique skin portrait · your perfect scent</span>
+        </div>
+        <div style="background:#fdfaf4;padding:12px;border-radius:6px">
+          <strong style="color:var(--gold-dk)">4. Impact</strong><br>
+          <span style="color:var(--muted)">L'Oréal's fragrance becomes personal science</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="tip">
+        <span class="tip-icon">⚖️</span>
+        <span>
+          <strong>On the lack of clinical data:</strong> Lead with physical/mathematical models.
+          Judges at a business competition respond to <em>logical completeness</em>, not lab reports.
+          State: "Our physics model is validated by published literature — our PoC will confirm it empirically."
+        </span>
+      </div>
+      <div class="tip">
+        <span class="tip-icon">🌿</span>
+        <span>
+          <strong>On sustainability:</strong> Always connect zero-consumables to L'Oréal's own published
+          "L'Oréal for the Future" 2030 commitments. Judges know these targets — speaking their
+          language shows business maturity.
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div style="text-align:center;padding:40px 0 20px;font-size:.75rem;color:var(--muted);border-top:1px solid var(--border)">
+    SkinSense Team · L'Oréal Brandstorm 2026 Submission<br>
+    "Craft the Future of Luxury Fragrance" · Powered by Eddy Current Physics &amp; AI<br><br>
+    <em>Repository: waterfirst-suji/Moisture-Sensor</em>
+  </div>
+
+</main>
+
+<!-- Active nav highlight -->
+<script>
+const links = document.querySelectorAll('#sidenav a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(l => l.classList.remove('active'));
+      const id = e.target.id;
+      const active = document.querySelector(`#sidenav a[href="#${id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
