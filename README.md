@@ -10,7 +10,7 @@
 
 | 항목 | 내용 |
 |------|------|
-| 프로젝트명 | SkinSense |
+| 프로젝트명 | SkinSensor |
 | 핵심 기술 | 맴돌이전류(Eddy Current) 기반 비접촉 피부 수분 측정 |
 | 측정 대상 | 각질층(Stratum Corneum) — 두께 10~20μm |
 | 측정 주파수 | 100MHz (각질층 겉보습) / 1MHz (진피층 속보습) |
@@ -21,9 +21,9 @@
 
 ---
 
-## 왜 SkinSense인가?
+## 왜 SkinSensor인가?
 
-| | 기존 Corneometer | SkinSense |
+| | 기존 Corneometer | SkinSensor |
 |---|---|---|
 | 측정 방식 | 접촉식 (프로브 압박) | **비접촉** (1~5mm 거리) |
 | 측정 깊이 | 각질층 최상부만 | **겉보습 + 속보습 동시** |
@@ -159,4 +159,4 @@ PoC 프로토타입         PCB 코일 (JLCPCB)     AI 분류 모델 학습     
 
 ---
 
-*SkinSense Team · 2026 · "비접촉으로 피부를 읽다"*
+*SkinSensor Team · 2026 · "비접촉으로 피부를 읽다"*
