@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SkinSense — AI 융합 비접촉 피부 수분 센서</title>
+<style>
+  /* ── 기본 리셋 ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #0a0e1a;
+    --panel:    #111827;
+    --border:   #1e3a5f;
+    --accent:   #00c2ff;
+    --accent2:  #7c3aed;
+    --accent3:  #10b981;
+    --accent4:  #f59e0b;
+    --text:     #e2e8f0;
+    --muted:    #94a3b8;
+    --danger:   #ef4444;
+    --white:    #ffffff;
+    --grad1: linear-gradient(135deg, #0a0e1a 0%, #0f1e3a 100%);
+    --card-bg:  rgba(17,24,39,0.85);
+  }
+
+  html, body {
+    width: 100%; height: 100%;
+    font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+  }
+
+  /* ── 슬라이드 컨테이너 ── */
+  #deck {
+    width: 100vw; height: 100vh;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    padding: 60px 80px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .45s ease, transform .45s ease;
+    transform: translateX(40px);
+    background: var(--grad1);
+    overflow: hidden;
+  }
+  .slide.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+  }
+  .slide.exit {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+
+  /* 배경 장식 */
+  .slide::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 15% 20%, rgba(0,194,255,.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 85% 80%, rgba(124,58,237,.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* ── 공통 타이포그래피 ── */
+  .slide-label {
+    font-size: .72rem; font-weight: 700; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 12px;
+  }
+  h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; }
+  h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 700; margin-bottom: 32px; }
+  h3 { font-size: 1.05rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+  p  { line-height: 1.8; color: var(--muted); }
+
+  .accent  { color: var(--accent); }
+  .accent2 { color: var(--accent2); }
+  .accent3 { color: var(--accent3); }
+  .accent4 { color: var(--accent4); }
+  .white   { color: var(--white); }
+
+  /* ── 카드 ── */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 28px;
+    backdrop-filter: blur(8px);
+  }
+
+  /* ── 그리드 ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: 100%; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; width: 100%; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; width: 100%; }
+
+  /* ── 테이블 ── */
+  table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  th {
+    background: rgba(0,194,255,.12);
+    color: var(--accent);
+    padding: 10px 16px;
+    text-align: left;
+    font-weight: 700;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 9px 16px;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+    color: var(--text);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: rgba(255,255,255,.03); }
+
+  /* ── 배지 ── */
+  .badge {
+    display: inline-block;
+    padding: 3px 12px; border-radius: 20px;
+    font-size: .72rem; font-weight: 700; letter-spacing: .05em;
+  }
+  .badge-blue   { background: rgba(0,194,255,.15); color: var(--accent); border: 1px solid rgba(0,194,255,.3); }
+  .badge-purple { background: rgba(124,58,237,.15); color: #a78bfa; border: 1px solid rgba(124,58,237,.3); }
+  .badge-green  { background: rgba(16,185,129,.15); color: var(--accent3); border: 1px solid rgba(16,185,129,.3); }
+  .badge-amber  { background: rgba(245,158,11,.15); color: var(--accent4); border: 1px solid rgba(245,158,11,.3); }
+  .badge-red    { background: rgba(239,68,68,.15); color: var(--danger); border: 1px solid rgba(239,68,68,.3); }
+
+  /* ── 수식 블록 ── */
+  .formula {
+    font-family: 'Courier New', monospace;
+    background: rgba(0,194,255,.07);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 10px 18px;
+    font-size: .95rem;
+    color: var(--accent);
+    margin: 6px 0;
+  }
+
+  /* ── 항목 리스트 ── */
+  .item-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .item-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: .9rem; line-height: 1.55;
+  }
+  .item-list li::before {
+    content: '▸';
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── 타임라인 ── */
+  .timeline {
+    display: flex; gap: 0; width: 100%; position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 28px; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3), var(--accent4));
+  }
+  .phase {
+    flex: 1; padding: 16px 14px 0; position: relative; text-align: center;
+  }
+  .phase-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    margin: 0 auto 14px;
+    position: relative; z-index: 1;
+    box-shadow: 0 0 0 4px var(--bg);
+  }
+  .phase-dot-1 { background: var(--accent); }
+  .phase-dot-2 { background: var(--accent2); }
+  .phase-dot-3 { background: var(--accent3); }
+  .phase-dot-4 { background: var(--accent4); }
+  .phase-title { font-size: .8rem; font-weight: 700; margin-bottom: 8px; }
+  .phase-items { font-size: .75rem; color: var(--muted); line-height: 1.7; }
+
+  /* ── 비교 바 ── */
+  .bar-row { margin-bottom: 14px; }
+  .bar-label { font-size: .82rem; color: var(--muted); margin-bottom: 5px; display: flex; justify-content: space-between; }
+  .bar-track { background: rgba(255,255,255,.08); border-radius: 4px; height: 8px; overflow: hidden; }
+  .bar-fill   { height: 100%; border-radius: 4px; transition: width 1s ease; }
+
+  /* ── 큰 숫자 통계 ── */
+  .stat-num {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900; line-height: 1;
+  }
+  .stat-label { font-size: .8rem; color: var(--muted); margin-top: 6px; }
+
+  /* ── 네비게이션 ── */
+  #nav {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 16px;
+    background: rgba(10,14,26,.85);
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    padding: 10px 22px;
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+  .nav-btn {
+    background: none; border: none; cursor: pointer;
+    color: var(--muted); font-size: 1rem; padding: 4px 10px;
+    border-radius: 6px; transition: color .2s, background .2s;
+  }
+  .nav-btn:hover { color: var(--white); background: rgba(255,255,255,.08); }
+  #slide-counter { font-size: .78rem; color: var(--muted); min-width: 54px; text-align: center; }
+
+  /* 진행 바 */
+  #progress {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width .4s ease;
+    z-index: 200;
+  }
+
+  /* 슬라이드 번호 워터마크 */
+  .slide-watermark {
+    position: absolute; top: 22px; right: 32px;
+    font-size: .72rem; color: rgba(255,255,255,.12); font-weight: 700;
+  }
+
+  /* ── 슬라이드별 고유 스타일 ── */
+
+  /* S0: 타이틀 */
+  #s0 { text-align: center; }
+  #s0 .logo-ring {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    margin: 0 auto 28px;
+    background: radial-gradient(circle, rgba(0,194,255,.15), transparent);
+    box-shadow: 0 0 40px rgba(0,194,255,.25);
+    animation: pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 40px rgba(0,194,255,.25); }
+    50%      { box-shadow: 0 0 70px rgba(0,194,255,.45); }
+  }
+  #s0 .tagline {
+    font-size: clamp(.9rem, 2vw, 1.15rem);
+    color: var(--muted); max-width: 650px; margin: 20px auto 36px;
+    line-height: 1.8;
+  }
+  #s0 .meta-row {
+    display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+  }
+
+  /* S1: 문제 정의 */
+  .problem-icon { font-size: 2.2rem; margin-bottom: 12px; }
+
+  /* S2: 기술 원리 */
+  .principle-flow {
+    display: flex; align-items: center; gap: 12px;
+    flex-wrap: wrap; justify-content: center;
+    margin: 24px 0;
+  }
+  .flow-box {
+    background: rgba(0,194,255,.08);
+    border: 1px solid rgba(0,194,255,.25);
+    border-radius: 10px;
+    padding: 14px 20px;
+    text-align: center;
+    font-size: .85rem;
+    min-width: 120px;
+  }
+  .flow-arrow { color: var(--accent); font-size: 1.4rem; }
+
+  /* S7: 특허 */
+  .patent-card {
+    border-top: 3px solid;
+  }
+  .patent-card.p1 { border-color: var(--accent); }
+  .patent-card.p2 { border-color: var(--accent2); }
+
+  /* 하단 브랜드 */
+  .bottom-brand {
+    position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+    font-size: .72rem; color: rgba(255,255,255,.18); letter-spacing: .1em;
+  }
+
+  /* 키보드 힌트 */
+  #hint {
+    position: fixed; top: 20px; right: 28px;
+    font-size: .7rem; color: rgba(255,255,255,.2);
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div id="hint">← → 또는 클릭으로 이동</div>
+
+<div id="deck">
+
+  <!-- ═══════════════════════════════════════════════════
+       S0 — 타이틀
+  ════════════════════════════════════════════════════ -->
+  <section class="slide active" id="s0">
+    <div class="logo-ring">💧</div>
+    <div class="slide-label">대학생 창업 프로젝트 · 2026</div>
+    <h1>Skin<span class="accent">Sense</span></h1>
+    <p class="tagline">
+      <strong class="white">맴돌이전류(Eddy Current)</strong> 원리를 활용한<br>
+      AI 융합 <strong class="accent">비접촉</strong> 피부 수분 센서<br>
+      <span style="font-size:.9em">K-뷰티 화장품 효능 평가 × 헬스케어 스타트업</span>
+    </p>
+    <div class="meta-row">
+      <span class="badge badge-blue">비접촉 측정</span>
+      <span class="badge badge-purple">AI 보정</span>
+      <span class="badge badge-green">특허 2건 출원 예정</span>
+      <span class="badge badge-amber">PoC ₩35,000~</span>
+    </div>
+    <div class="bottom-brand">SkinSense Team · "비접촉으로 피부를 읽다"</div>
+    <div class="slide-watermark">01</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       S1 — 문제 정의
+  ════════════════════════════════════════════════════ -->
+  <section class="slide" id="s1">
+    <div class="slide-label">Problem</div>
+    <h2>기존 피부 수분 측정기의 <span class="accent">한계</span></h2>
+    <div class="grid-3">
+      <div class="card" style="text-align:center">
+        <div class="problem-icon">🤚</div>
+        <h3>접촉식의 위생 문제</h3>
+        <p style="font-size:.85rem">프로브를 피부에 직접 눌러 측정<br>다수 사용 시 교차오염 위험</p>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="problem-icon">📊</div>
+        <h3>단편적 측정 깊이</h3>
+        <p style="font-size:.85rem">각질층 최상부 1개 지점만 측정<br>겉보습·속보습 동시 측정 불가</p>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="problem-icon">💸</div>
+        <h3>높은 가격 장벽</h3>
+        <p style="font-size:.85rem">상용 Corneometer<br><span class="accent4" style="font-size:1.1rem;font-weight:700">₩300~500만원</span><br>중소 화장품사 도입 어려움</p>
+      </div>
+    </div>
+    <div style="margin-top:28px;width:100%">
+      <div class="card" style="display:flex;align-items:center;gap:28px;padding:18px 30px">
+        <div style="font-size:2rem">💡</div>
+        <div>
+          <div style="font-weight:700;font-size:1.05rem;margin-bottom:6px">
+            <span class="accent">SkinSense의 해법</span>
+          </div>
+          <p style="font-size:.9rem">맴돌이전류로 <strong class="white">비접촉·복수 깊이</strong> 동시 측정 ·
+          AI 보정으로 개인차 극복 · PoC 비용 <strong class="accent3">약 4만원</strong></p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-watermark">02</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       S2 — 핵심 기술 원리
+  ════════════════════════════════════════════════════ -->
+  <section class="slide" id="s2">
+    <div class="slide-label">Core Technology</div>
+    <h2>맴돌이전류 <span class="accent">측정 원리</span></h2>
+    <div class="principle-flow">
+      <div class="flow-box">🔁 코일<br><small class="accent">100MHz AC</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">🌊 자기장<br><small>발생</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">⚡ 맴돌이전류<br><small>피부 유도</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">📈 임피던스<br><small>변화 감지</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box" style="border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.08)">💧 수분 함량<br><small class="accent3">역산 출력</small></div>
+    </div>
+    <div class="grid-2" style="width:100%">
+      <div>
+        <h3>핵심 수식</h3>
+        <div class="formula">δ = 1 / √(π·f·μ·σ)</div>
+        <p style="font-size:.78rem;margin:.4rem 0 10px 0">침투 깊이 — 주파수 ↑ → 깊이 ↓</p>
+        <div class="formula">f₀ = 1 / (2π√LC)</div>
+        <p style="font-size:.78rem;margin:.4rem 0 10px 0">공진 주파수 — 수분 ↑ → C ↑ → f₀ ↓</p>
+        <div class="formula">S_sc = Z₁ − α × Z₂</div>
+        <p style="font-size:.78rem;margin:.4rem 0 10px 0">각질층 순수 신호 추출 <span class="badge badge-blue" style="font-size:.68rem">특허 핵심</span></p>
+        <div class="formula">Z_corr = Z / (1 + β(T − T_ref))</div>
+        <p style="font-size:.78rem;margin:.4rem 0 0 0">온도 보정</p>
+      </div>
+      <div>
+        <h3>2주파수 전략</h3>
+        <div class="card" style="margin-bottom:14px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="font-size:1.5rem">🔵</div>
+            <div>
+              <div style="font-weight:700;color:var(--accent)">100 MHz</div>
+              <div style="font-size:.82rem;color:var(--muted)">각질층 (10~20μm) · <strong class="white">겉보습</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="font-size:1.5rem">🟣</div>
+            <div>
+              <div style="font-weight:700;color:#a78bfa">1 MHz</div>
+              <div style="font-size:.82rem;color:var(--muted)">진피층 · <strong class="white">속보습</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:14px;background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.3)">
+          <div style="font-size:.85rem;text-align:center">
+            <span class="accent3" style="font-size:1.3rem;font-weight:900">R² &gt; 0.9</span><br>
+            <span style="color:var(--muted)">Corneometer 대비 상관계수</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-watermark">03</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       S3 — 경쟁 비교
+  ════════════════════════════════════════════════════ -->
+  <section class="slide" id="s3">
+    <div class="slide-label">Competitive Analysis</div>
+    <h2>기존 제품 대비 <span class="accent">SkinSense 우위</span></h2>
+    <div style="width:100%;overflow:hidden;border-radius:14px;border:1px solid var(--border)">
+      <table>
+        <thead>
+          <tr>
+            <th>비교 항목</th>
+            <th>기존 Corneometer</th>
+            <th style="background:rgba(0,194,255,.18);color:var(--accent)">SkinSense ✨</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>측정 방식</td>
+            <td>접촉식 (프로브 압박)</td>
+            <td><strong class="accent">비접촉</strong> (1~5mm 거리)</td>
+          </tr>
+          <tr>
+            <td>측정 깊이</td>
+            <td>각질층 최상부만</td>
+            <td><strong class="accent">겉보습 + 속보습</strong> 동시</td>
+          </tr>
+          <tr>
+            <td>위생</td>
+            <td><span class="badge badge-red">교차오염 위험</span></td>
+            <td><span class="badge badge-green">비접촉 위생 안전</span></td>
+          </tr>
+          <tr>
+            <td>가격</td>
+            <td>₩300~500만원</td>
+            <td><strong class="accent3">PoC 약 ₩4만원</strong></td>
+          </tr>
+          <tr>
+            <td>연속 측정</td>
+            <td><span class="badge badge-red">불가</span></td>
+            <td><span class="badge badge-green">실시간 연속 가능</span></td>
+          </tr>
+          <tr>
+            <td>AI 보정</td>
+            <td>없음</td>
+            <td><span class="badge badge-purple">거리·온도·개인차 자동 보정</span></td>
+          </tr>
+          <tr>
+            <td>스마트폰 연동</td>
+            <td>별도 장비 필요</td>
+            <td><span class="badge badge-blue">BLE + 앱 (Phase 4)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="slide-watermark">04</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       S4 — 하드웨어 구성
+  ════════════════════════════════════════════════════ -->
+  <section class="slide" id="s4">
+    <div class="slide-label">Hardware</div>
+    <h2>Phase 1 <span class="accent">하드웨어 구성</span></h2>
+    <div class="grid-2" style="width:100%;align-items:start">
+      <div>
+        <h3 style="margin-bottom:14px">BOM — 총 예산 ₩35,000~45,000</h3>
+        <div style="overflow:hidden;border-radius:10px;border:1px solid var(--border)">
+          <table>
+            <thead><tr><th>부품</th><th>역할</th><th>알리 키워드</th></tr></thead>
+            <tbody>
+              <tr><td><strong>WL02</strong></td><td><span class="badge badge-blue">핵심 센서</span></td><td style="font-size:.75rem">WL02 eddy current sensor</td></tr>
+              <tr><td><strong>Arduino Nano</strong></td><td>메인 MCU</td><td style="font-size:.75rem">Nano V3 CH340</td></tr>
+              <tr><td><strong>VL53L0X</strong></td><td>거리 보정</td><td style="font-size:.75rem">GY-530 ToF</td></tr>
+              <tr><td><strong>MLX90614</strong></td><td>온도 보정</td><td style="font-size:.75rem">GY-906 IR</td></tr>
+              <tr><td><strong>OLED 0.96"</strong></td><td>실시간 표시</td><td style="font-size:.75rem">SSD1306 I2C</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card" style="margin-top:14px;background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.25)">
+          <div style="font-size:.82rem">
+            <span class="badge badge-red">구매 취소</span>
+            <strong style="margin-left:8px">NI USB-6501 (₩58,800)</strong><br>
+            <span style="color:var(--muted)">디지털 I/O 전용 — 아날로그 신호 측정 불가</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:14px">시스템 배선도</h3>
+        <div class="card" style="font-family:'Courier New',monospace;font-size:.78rem;line-height:1.9;color:var(--accent)">
+          <div>[WL02]&nbsp;&nbsp;&nbsp;&nbsp;&mdash;&mdash;&mdash; A0</div>
+          <div>[VL53L0X]&nbsp; &mdash;&mdash;&mdash; SDA(A4)/SCL(A5)</div>
+          <div>[MLX90614] &mdash;&mdash;&mdash; SDA(A4)/SCL(A5)</div>
+          <div>[OLED]&nbsp;&nbsp;&nbsp;&nbsp; &mdash;&mdash;&mdash; SDA(A4)/SCL(A5)</div>
+          <div style="color:var(--muted);margin-top:10px">&nbsp;&nbsp;&nbsp;&nbsp;&darr; 모두 Arduino Nano 로 수렴</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;&darr; USB &rarr; PC</div>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <div style="font-size:.82rem;margin-bottom:8px;font-weight:600">I2C 주소</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <span class="badge badge-blue">VL53L0X 0x29</span>
+            <span class="badge badge-purple">MLX90614 0x5A</span>
+            <span class="badge badge-amber">OLED 0x3C</span>
+          </div>
+        </div>
+        <div class="card" style="margin-top:14px;text-align:center">
+          <div class="stat-num accent3">₩40,000</div>
+          <div class="stat-label">평균 예산 (상용 장비의 <strong class="white">1/100</strong>)</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-watermark">05</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       S5 — 팀 구성
+  ════════════════════════════════════════════════════ -->
+  <section class="slide" id="s5">
+    <div class="slide-label">Team</div>
+    <h2>팀 구성 &amp; <span class="accent">멘토십</span></h2>
+    <div class="grid-3" style="width:100%;margin-bottom:24px">
+      <div class="card" style="text-align:center">
+        <div style="font-size:2.5rem;margin-bottom:12px">🔧</div>
+        <div class="badge badge-blue" style="margin-bottom:10px">HW / 센서</div>
+        <h3 style="font-size:.95rem">하드웨어 담당</h3>
+        <ul class="item-list" style="text-align:left;margin-top:12px;font-size:.8rem">
+          <li>WL02 센서 배선 및 교정</li>
+          <li>Arduino 펌웨어 개발</li>
+          <li>PCB 코일 설계 (Phase 2)</li>
+          <li>팬텀 실험 진행</li>
+        </ul>
+      </div>
+      <div class="card" style="text-align:center">
+        <div style="font-size:2.5rem;margin-bottom:12px">🤖</div>
+        <div class="badge badge-purple" style="margin-bottom:10px">SW / AI</div>
+        <h3 style="font-size:.95rem">소프트웨어 담당</h3>
+        <ul class="item-list" style="text-align:left;margin-top:12px;font-size:.8rem">
+          <li>Python 데이터 수집 파이프라인</li>
+          <li>AI 보정 모델 학습</li>
+          <li>BLE + 스마트폰 앱 (Phase 4)</li>
+          <li>SCIE 논문 공동 저술</li>
+        </ul>
+      </div>
+      <div class="card" style="text-align:center">
+        <div style="font-size:2.5rem;margin-bottom:12px">📊</div>
+        <div class="badge badge-amber" style="margin-bottom:10px">사업기획</div>
+        <h3 style="font-size:.95rem">비즈니스 담당</h3>
+        <ul class="item-list" style="text-align:left;margin-top:12px;font-size:.8rem">
+          <li>특허 명세서 작성 (2건)</li>
+          <li>정부과제 제안서 작성</li>
+          <li>투자 IR 피칭 준비</li>
+          <li>K-뷰티 파트너사 발굴</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card" style="width:100%;background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.3)">
+      <div style="display:flex;align-items:center;gap:22px">
+        <div style="font-size:2.5rem">🏆</div>
+        <div>
+          <div style="font-weight:700;font-size:1rem;color:var(--accent4);margin-bottom:4px">지도 멘토</div>
+          <div style="font-size:.9rem">삼성디스플레이 <strong class="white">수석연구원</strong> · 응용물리학 박사</div>
+          <div style="font-size:.82rem;color:var(--muted);margin-top:4px">
+            미국 특허 130건+ 보유 · 비접촉 임피던스 측정 분야 세계 최고 전문가
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-watermark">06</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       S6 — 12개월 로드맵
+  ════════════════════════════════════════════════════ -->
+  <section class="slide" id="s6">
+    <div class="slide-label">Roadmap</div>
+    <h2>12개월 <span class="accent">실행 로드맵</span></h2>
+    <div class="timeline" style="margin-bottom:32px">
+      <div class="phase">
+        <div class="phase-dot phase-dot-1"></div>
+        <div class="phase-title accent">Phase 1<br><small>1~3개월</small></div>
+        <div class="phase-items">Arduino + WL02<br>PoC 프로토타입<br>보습 크림 실험<br><span class="badge badge-blue" style="font-size:.65rem">₩4만원</span></div>
+      </div>
+      <div class="phase">
+        <div class="phase-dot phase-dot-2"></div>
+        <div class="phase-title accent2">Phase 2<br><small>4~6개월</small></div>
+        <div class="phase-items">LDC1612 + ESP32<br>PCB 코일 설계<br>복수 주파수<br><span class="badge badge-purple" style="font-size:.65rem">특허 2건 출원</span></div>
+      </div>
+      <div class="phase">
+        <div class="phase-dot phase-dot-3"></div>
+        <div class="phase-title accent3">Phase 3<br><small>7~9개월</small></div>
+        <div class="phase-items">파일럿 임상 10명<br>AI 분류 모델<br>SCIE 논문 투고<br><span class="badge badge-green" style="font-size:.65rem">R² &gt; 0.9 검증</span></div>
+      </div>
+      <div class="phase">
+        <div class="phase-dot phase-dot-4"></div>
+        <div class="phase-title accent4">Phase 4<br><small>10~12개월</small></div>
+        <div class="phase-items">OEM 프로토 10대<br>BLE + 앱<br>정부과제 제출<br><span class="badge badge-amber" style="font-size:.65rem">법인 설립</span></div>
+      </div>
+    </div>
+    <div class="grid-4" style="width:100%">
+      <div class="card" style="text-align:center">
+        <div class="stat-num accent">4만</div>
+        <div class="stat-label">PoC 예산 (원)</div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="stat-num accent2">2건</div>
+        <div class="stat-label">특허 출원 목표</div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="stat-num accent3">10명</div>
+        <div class="stat-label">파일럿 임상 인원</div>
+      </div>
+      <div class="card" style="text-align:center">
+        <div class="stat-num accent4">1편</div>
+        <div class="stat-label">SCIE 논문 목표</div>
+      </div>
+    </div>
+    <div class="slide-watermark">07</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       S7 — 특허 전략
+  ════════════════════════════════════════════════════ -->
+  <section class="slide" id="s7">
+    <div class="slide-label">Patent Strategy</div>
+    <h2>특허 <span class="accent">2건</span> 출원 전략</h2>
+    <div class="grid-2" style="width:100%;align-items:start">
+      <div class="card patent-card p1">
+        <div class="badge badge-blue" style="margin-bottom:14px">특허 1 · 장치 특허</div>
+        <h3 style="font-size:1rem;line-height:1.5;color:var(--white)">
+          비접촉 복수 주파수 맴돌이전류<br>피부 각질층 선별 측정 장치
+        </h3>
+        <div style="margin:16px 0">
+          <div class="formula">S_sc = Z₁ − (α × Z₂)</div>
+        </div>
+        <p style="font-size:.82rem">두 주파수(100MHz / 1MHz) 차분으로
+        각질층 순수 신호를 추출하는 방법론</p>
+        <div style="margin-top:14px">
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:6px">청구항 핵심 포인트</div>
+          <ul class="item-list" style="font-size:.78rem">
+            <li>복수 주파수 동시 측정</li>
+            <li>차분 기반 각질층 분리</li>
+            <li>비접촉 1~5mm 거리 측정</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card patent-card p2">
+        <div class="badge badge-purple" style="margin-bottom:14px">특허 2 · 방법 특허</div>
+        <h3 style="font-size:1rem;line-height:1.5;color:var(--white)">
+          AI 기반 다변수 보정<br>비접촉 피부 임피던스 측정 방법
+        </h3>
+        <div style="margin:16px 0">
+          <div class="formula">Z_corr = Z / (1 + β(T − T_ref))</div>
+        </div>
+        <p style="font-size:.82rem">거리·온도·개인차를 AI로 동시 보정하여
+        표준화된 수분 지수를 산출하는 방법</p>
+        <div style="margin-top:14px">
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:6px">청구항 핵심 포인트</div>
+          <ul class="item-list" style="font-size:.78rem">
+            <li>3변수 동시 AI 보정</li>
+            <li>온도 드리프트 실시간 보정</li>
+            <li>개인 피부 편차 정규화</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="width:100%;margin-top:22px;display:flex;align-items:center;gap:18px">
+      <div style="font-size:1.6rem">📋</div>
+      <div style="font-size:.85rem">
+        <strong class="white">15개 청구항</strong> 작성 완료 ·
+        <strong class="accent4">멘토 (미국 특허 130건+)</strong> 감수 완료 ·
+        Phase 2 완료 시점 <strong class="accent">한국특허청 출원</strong> 예정
+      </div>
+    </div>
+    <div class="slide-watermark">08</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       S8 — 시장 및 비즈니스
+  ════════════════════════════════════════════════════ -->
+  <section class="slide" id="s8">
+    <div class="slide-label">Market &amp; Business</div>
+    <h2>시장 기회 &amp; <span class="accent">비즈니스 모델</span></h2>
+    <div class="grid-2" style="width:100%;align-items:start">
+      <div>
+        <h3 style="margin-bottom:14px">타깃 시장</h3>
+        <div class="card" style="margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-weight:600">K-뷰티 화장품 R&amp;D</div>
+              <div style="font-size:.8rem;color:var(--muted)">효능 평가 측정 장비 교체 수요</div>
+            </div>
+            <span class="badge badge-blue">1차 목표</span>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-weight:600">피부과 / 에스테틱</div>
+              <div style="font-size:.8rem;color:var(--muted)">시술 전후 객관적 수분 측정</div>
+            </div>
+            <span class="badge badge-purple">2차 목표</span>
+          </div>
+        </div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-weight:600">개인 헬스케어 디바이스</div>
+              <div style="font-size:.8rem;color:var(--muted)">스마트폰 연동 피부 관리 앱</div>
+            </div>
+            <span class="badge badge-green">장기 목표</span>
+          </div>
+        </div>
+        <div style="margin-top:18px">
+          <h3 style="margin-bottom:10px">수익 모델</h3>
+          <ul class="item-list" style="font-size:.85rem">
+            <li>B2B: 화장품사 측정 장비 판매 / 임대</li>
+            <li>B2B: 효능 평가 데이터 분석 서비스</li>
+            <li>B2C: 개인용 피부 센서 + 앱 구독</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:14px">경쟁 우위 요약</h3>
+        <div class="bar-row">
+          <div class="bar-label"><span>비용 경쟁력</span><span class="accent3">99% 절감</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:99%;background:var(--accent3)"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>측정 정확도</span><span class="accent">R² &gt; 0.9</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:90%;background:var(--accent)"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>위생 안전성</span><span class="accent2">비접촉 100%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--accent2)"></div></div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label"><span>기술 진입 장벽</span><span class="accent4">특허 2건</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:85%;background:var(--accent4)"></div></div>
+        </div>
+        <div class="card" style="margin-top:18px;text-align:center;background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.3)">
+          <div style="font-size:.82rem;color:var(--muted);margin-bottom:8px">목표 펀딩 경로</div>
+          <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+            <span class="badge badge-green">중기부 창업지원</span>
+            <span class="badge badge-blue">TIPS 프로그램</span>
+            <span class="badge badge-amber">엔젤 투자</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-watermark">09</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       S9 — 저장소 구조
+  ════════════════════════════════════════════════════ -->
+  <section class="slide" id="s9">
+    <div class="slide-label">Repository</div>
+    <h2>저장소 <span class="accent">구조</span></h2>
+    <div class="grid-2" style="width:100%;align-items:start">
+      <div>
+        <div class="card" style="font-family:'Courier New',monospace;font-size:.8rem;line-height:2">
+          <div style="color:var(--muted)">Moisture-Sensor/</div>
+          <div><span class="accent">📋 01_가이드/</span></div>
+          <div style="padding-left:20px;color:var(--muted)">조립가이드_완전판.md</div>
+          <div style="padding-left:20px;color:var(--muted)">원리스터디가이드.md</div>
+          <div><span class="accent2">📁 02_프로젝트문서/</span></div>
+          <div style="padding-left:20px;color:var(--muted)">종합분석보고서.pdf</div>
+          <div style="padding-left:20px;color:var(--muted)">실행계획서.docx</div>
+          <div style="padding-left:20px;color:var(--muted)">킥오프미팅자료.docx</div>
+          <div><span class="accent3">🔧 03_하드웨어/</span></div>
+          <div style="padding-left:20px;color:var(--muted)">부품가이드.docx</div>
+          <div style="padding-left:20px;color:var(--muted)">초보자핸드북_v2.docx</div>
+          <div style="padding-left:20px;color:var(--muted)">구매목록.jpg</div>
+          <div><span style="color:#a78bfa">📜 04_특허/</span></div>
+          <div style="padding-left:20px;color:var(--muted)">특허명세서_도면포함.pdf</div>
+          <div style="padding-left:20px;color:var(--muted)">특허명세서_초안.docx</div>
+          <div><span class="accent4">🔬 05_연구자료/</span></div>
+          <div style="padding-left:20px;color:var(--muted)">AI_바이오센서_개발_청사진.pdf</div>
+          <div style="padding-left:20px;color:var(--muted)">와전류_피부측정_연구.pdf</div>
+          <div><span class="accent">🖼 06_도면/ &nbsp;<small style="opacity:.5">(SVG × 11)</small></span></div>
+          <div><span class="accent4">📷 07_참고이미지/</span></div>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:14px">팀원별 첫 문서</h3>
+        <div class="card" style="margin-bottom:12px">
+          <div style="font-size:.82rem">
+            <span class="badge badge-blue" style="margin-bottom:6px">전체 팀</span><br>
+            <strong>02_프로젝트문서/종합분석보고서.pdf</strong><br>
+            <span style="color:var(--muted)">프로젝트 전체 파악 → 반드시 먼저 읽기</span>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:12px">
+          <div style="font-size:.82rem">
+            <span class="badge badge-green" style="margin-bottom:6px">HW 담당</span><br>
+            <strong>01_가이드/조립가이드_완전판.md</strong><br>
+            <span style="color:var(--muted)">부품 주문 → 배선 → 코드 → 실험</span>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:12px">
+          <div style="font-size:.82rem">
+            <span class="badge badge-purple" style="margin-bottom:6px">SW/AI 담당</span><br>
+            <strong>01_가이드/원리스터디가이드.md</strong><br>
+            <span style="color:var(--muted)">원리 이해 → 코드 작성 → 모델 학습</span>
+          </div>
+        </div>
+        <div class="card">
+          <div style="font-size:.82rem">
+            <span class="badge badge-amber" style="margin-bottom:6px">사업기획 담당</span><br>
+            <strong>04_특허/특허명세서_초안.docx</strong><br>
+            <span style="color:var(--muted)">청구항 구조 파악 → 정부과제 준비</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-watermark">10</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       S10 — 클로징
+  ════════════════════════════════════════════════════ -->
+  <section class="slide" id="s10">
+    <div style="text-align:center;max-width:700px">
+      <div class="slide-label">Closing</div>
+      <div style="font-size:3.5rem;margin-bottom:20px;animation:pulse 3s ease-in-out infinite">💧</div>
+      <h1 style="margin-bottom:18px">
+        <span class="accent">"비접촉으로</span><br>피부를 읽다<span class="accent">"</span>
+      </h1>
+      <p style="font-size:1.05rem;line-height:2;margin-bottom:32px">
+        SkinSense는 <strong class="white">맴돌이전류 물리학 + AI 보정</strong>으로<br>
+        기존 장비 대비 <strong class="accent3">1/100의 비용</strong>으로<br>
+        더 정밀한 피부 수분 측정을 실현합니다.
+      </p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:36px">
+        <div class="card" style="min-width:130px;text-align:center;padding:16px">
+          <div class="stat-num accent">특허 2</div>
+          <div class="stat-label">출원 예정</div>
+        </div>
+        <div class="card" style="min-width:130px;text-align:center;padding:16px">
+          <div class="stat-num accent3">R²&gt;0.9</div>
+          <div class="stat-label">측정 정확도</div>
+        </div>
+        <div class="card" style="min-width:130px;text-align:center;padding:16px">
+          <div class="stat-num accent2">12mo</div>
+          <div class="stat-label">창업 목표</div>
+        </div>
+        <div class="card" style="min-width:130px;text-align:center;padding:16px">
+          <div class="stat-num accent4">₩4만</div>
+          <div class="stat-label">PoC 예산</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <span class="badge badge-blue" style="padding:8px 18px;font-size:.8rem">K-뷰티 화장품 효능 평가</span>
+        <span class="badge badge-purple" style="padding:8px 18px;font-size:.8rem">AI 피부 분류</span>
+        <span class="badge badge-green" style="padding:8px 18px;font-size:.8rem">헬스케어 스타트업</span>
+      </div>
+    </div>
+    <div class="bottom-brand">SkinSense Team · 2026 · waterfirst-suji/Moisture-Sensor</div>
+    <div class="slide-watermark">11</div>
+  </section>
+
+</div><!-- #deck -->
+
+<!-- 네비게이션 -->
+<div id="nav">
+  <button class="nav-btn" id="btn-prev" title="이전 (←)">&#8592;</button>
+  <span id="slide-counter">1 / 11</span>
+  <button class="nav-btn" id="btn-next" title="다음 (→)">&#8594;</button>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let cur = 0;
+
+  function goTo(n) {
+    if (n < 0 || n >= slides.length) return;
+    slides[cur].classList.remove('active');
+    slides[cur].classList.add('exit');
+    setTimeout(() => slides[cur === n ? n : cur].classList.remove('exit'), 460);
+    cur = n;
+    slides[cur].classList.add('active');
+    counter.textContent = (cur + 1) + ' / ' + slides.length;
+    progress.style.width = ((cur + 1) / slides.length * 100) + '%';
+  }
+
+  document.getElementById('btn-next').addEventListener('click', () => goTo(cur + 1));
+  document.getElementById('btn-prev').addEventListener('click', () => goTo(cur - 1));
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') { e.preventDefault(); goTo(cur + 1); }
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')                    { e.preventDefault(); goTo(cur - 1); }
+    if (e.key === 'Home') goTo(0);
+    if (e.key === 'End')  goTo(slides.length - 1);
+  });
+
+  // 스와이프 지원
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  document.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) dx < 0 ? goTo(cur + 1) : goTo(cur - 1);
+  });
+
+  // 초기 진행바
+  progress.style.width = (1 / slides.length * 100) + '%';
+</script>
+</body>
+</html>
