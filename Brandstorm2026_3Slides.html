@@ -3,26 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SkinSense — L'Oréal Brandstorm 2026 · 3-Slide Deck</title>
-<style>
-/* ── Google Fonts ── */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap');
+<title>SkinSense — L'Oréal Brandstorm 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+<style>
+/* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --gold:    #c9a84c;
-  --gold-lt: #e8d08a;
-  --gold-dk: #7a5a10;
-  --cream:   #fdf9f2;
-  --dark:    #12100a;
-  --dark2:   #1e1a10;
-  --navy:    #0d1526;
-  --mid:     #4a3d25;
-  --muted:   #9a8a70;
-  --green:   #1a6b45;
-  --green-lt:#52b788;
-  --border:  #e0cfa5;
+  --black:   #09090b;
+  --dark:    #111113;
+  --dark2:   #1c1b1f;
+  --gold:    #c8a96e;
+  --gold-lt: #e8d4a0;
+  --gold-dk: #7a5c1e;
+  --cream:   #faf8f3;
+  --off-w:   #f3ede3;
+  --rose:    #d4a5a0;
+  --green:   #4a8c6e;
+  --text:    #1a1a1a;
+  --muted:   #6b6560;
+  --border:  #e2d9c8;
 }
 
 html, body {
@@ -32,9 +35,9 @@ html, body {
   overflow: hidden;
 }
 
-/* ════════════════════════════════
+/* ════════════════════════════
    SLIDE ENGINE
-════════════════════════════════ */
+════════════════════════════ */
 #deck {
   width: 100vw; height: 100vh;
   position: relative;
@@ -45,735 +48,911 @@ html, body {
   position: absolute;
   width: min(177.78vh, 100vw);
   height: min(56.25vw, 100vh);
-  display: flex; flex-direction: column;
   opacity: 0; pointer-events: none;
-  transform: translateX(60px);
-  transition: opacity .5s ease, transform .5s ease;
+  transform: translateX(5%);
+  transition: opacity .55s cubic-bezier(.4,0,.2,1),
+              transform .55s cubic-bezier(.4,0,.2,1);
   overflow: hidden;
-  box-shadow: 0 30px 100px rgba(0,0,0,.6);
 }
-.slide.active {
-  opacity: 1; pointer-events: all;
-  transform: translateX(0);
-}
-.slide.exit {
-  opacity: 0; transform: translateX(-60px);
-}
+.slide.active  { opacity: 1; pointer-events: all; transform: translateX(0); }
+.slide.exit    { opacity: 0; transform: translateX(-5%); }
 
-/* ════════════════════════════════
-   SLIDE BACKGROUNDS
-════════════════════════════════ */
-.bg-cream  { background: var(--cream); }
-.bg-dark   { background: var(--dark); }
-.bg-navy   { background: var(--navy); }
+/* ════════════════════════════
+   HELPERS
+════════════════════════════ */
+.abs-fill { position: absolute; inset: 0; }
+.f-bebas  { font-family: 'Bebas Neue', sans-serif; letter-spacing: .04em; }
+.f-play   { font-family: 'Playfair Display', serif; }
+.f-inter  { font-family: 'Inter', sans-serif; }
 
-/* ════════════════════════════════
-   COMMON ELEMENTS
-════════════════════════════════ */
-.slide-number {
-  position: absolute; top: 4.5%; right: 5%;
-  font-size: 2.2%; color: var(--gold);
-  letter-spacing: .2em; font-weight: 700; text-transform: uppercase;
+.tag {
+  display: inline-flex; align-items: center; gap: .5em;
+  font-size: 1.1%; font-weight: 700; letter-spacing: .22em;
+  text-transform: uppercase;
 }
-.loreal-logo {
-  position: absolute; bottom: 5%; right: 5%;
-  font-size: 1.7%; color: var(--muted); letter-spacing: .25em;
-  text-transform: uppercase; font-weight: 300;
-}
-.loreal-logo strong { color: var(--gold-dk); }
+.tag-gold  { color: var(--gold); }
+.tag-dark  { color: rgba(255,255,255,.35); }
+.tag-muted { color: var(--muted); }
 
-/* Tag line bar at top */
-.top-bar {
-  position: absolute; top: 0; left: 0; right: 0;
-  height: .6%;
-  background: linear-gradient(90deg, var(--gold), var(--gold-lt), var(--gold));
+.pill {
+  display: inline-block;
+  padding: .5em 1.2em; border-radius: 100px;
+  font-size: 1.35%; font-weight: 500;
 }
+.pill-outline-gold {
+  border: .1vw solid rgba(200,169,110,.5);
+  color: var(--gold-lt);
+}
+.pill-outline-dark {
+  border: .1vw solid rgba(0,0,0,.2);
+  color: var(--muted);
+}
+.pill-dark { background: var(--dark); color: var(--gold-lt); }
 
-/* ════════════════════════════════
-   SLIDE 1 — IDEA + TARGET
-════════════════════════════════ */
-#s1 {
-  display: grid;
-  grid-template-columns: 52% 48%;
+/* Slide watermark */
+.slide-num {
+  position: absolute; bottom: 4.5%; right: 5%;
+  font-family: 'Bebas Neue'; font-size: 1.3%;
+  color: rgba(255,255,255,.18); letter-spacing: .15em;
 }
+.slide-num.dark { color: rgba(0,0,0,.12); }
 
-/* Left panel — dark */
-.s1-left {
-  background: var(--dark);
-  padding: 9% 7% 9% 8%;
-  display: flex; flex-direction: column; justify-content: center;
-  position: relative; overflow: hidden;
-}
-.s1-left::after {
+/* ════════════════════════════
+   SLIDE 1 — THE QUESTION
+   "CAN A FRAGRANCE KNOW YOUR SKIN?"
+════════════════════════════ */
+#s1 { background: var(--black); }
+
+/* Grain texture overlay */
+#s1::before {
   content: '';
-  position: absolute; top: -20%; right: -10%;
-  width: 60%; height: 140%;
-  background: radial-gradient(ellipse, rgba(201,168,76,.07) 0%, transparent 70%);
-  pointer-events: none;
-}
-.eyebrow {
-  font-size: 1.6%; letter-spacing: .25em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 3.5%; font-weight: 600;
-}
-.s1-headline {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 8.5%; font-weight: 300; line-height: 1.12;
-  color: #fff; margin-bottom: 4%;
-}
-.s1-headline em { color: var(--gold); font-style: italic; }
-.s1-body {
-  font-size: 2.1%; color: rgba(255,255,255,.65); line-height: 1.75;
-  max-width: 90%;
-}
-.hook-stat {
-  margin-top: 5%;
-  background: rgba(201,168,76,.1);
-  border-left: .3% solid var(--gold);
-  border-radius: .5%;
-  padding: 3% 4%;
-  font-size: 2.1%; color: rgba(255,255,255,.85); line-height: 1.7;
-}
-.hook-stat .big {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 5.5%; color: var(--gold); font-weight: 700; display: block;
-  margin-bottom: .5%;
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  opacity: .6; pointer-events: none; z-index: 0;
 }
 
-/* Right panel — cream */
-.s1-right {
-  background: var(--cream);
-  padding: 7% 7% 7% 6%;
-  display: flex; flex-direction: column; justify-content: space-between;
+/* Gold top rule */
+.s1-rule {
+  position: absolute; top: 0; left: 0; right: 0; height: .35%;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
-.s1-solution-title {
-  font-size: 1.7%; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--gold-dk); font-weight: 700; margin-bottom: 3%;
+
+/* Left panel — hero copy */
+.s1-left {
+  position: absolute;
+  left: 6%; top: 0; bottom: 0; width: 50%;
+  display: flex; flex-direction: column; justify-content: center;
+  z-index: 2;
+  padding-right: 4%;
 }
-.solution-box {
-  background: #fff;
-  border-radius: 1.2%;
-  border: .1% solid var(--border);
-  padding: 5% 6%;
-  box-shadow: 0 .3% 1.5% rgba(0,0,0,.08);
+
+.s1-eyebrow {
+  font-size: 1.1%; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: 3%;
+}
+
+.s1-title {
+  font-family: 'Bebas Neue';
+  font-size: 11.5%; line-height: .94;
+  color: #fff;
   margin-bottom: 4%;
 }
-.solution-icon { font-size: 5%; margin-bottom: 3%; display: block; }
-.solution-name {
-  font-size: 3.2%; font-weight: 700; color: var(--dark); margin-bottom: 1.5%;
-}
-.solution-desc { font-size: 1.85%; color: var(--mid); line-height: 1.7; }
+.s1-title .line-gold { color: var(--gold); }
 
-.target-section {}
-.target-title {
-  font-size: 1.7%; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--gold-dk); font-weight: 700; margin-bottom: 2.5%;
-}
-.target-chips {
-  display: flex; flex-wrap: wrap; gap: 1.5%;
-}
-.chip {
-  background: var(--dark);
-  color: var(--gold-lt);
-  border-radius: 10%;
-  padding: 1.2% 2.8%;
-  font-size: 1.65%; font-weight: 500;
-}
-.chip.light {
-  background: rgba(201,168,76,.12);
-  color: var(--gold-dk);
-  border: .1% solid rgba(201,168,76,.4);
+.s1-lead {
+  font-family: 'Playfair Display';
+  font-size: 2.15%; font-style: italic;
+  color: rgba(255,255,255,.55);
+  line-height: 1.7; margin-bottom: 5%;
+  max-width: 92%;
 }
 
-/* ════════════════════════════════
-   SLIDE 2 — INNOVATION
-════════════════════════════════ */
-#s2 { background: var(--dark); flex-direction: column; }
+.s1-idea-box {
+  background: rgba(200,169,110,.08);
+  border: .1vw solid rgba(200,169,110,.25);
+  border-radius: .8%;
+  padding: 3% 3.5%;
+  margin-bottom: 4.5%;
+}
+.s1-idea-label {
+  font-size: 1%; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold); font-weight: 700; margin-bottom: 1.5%;
+}
+.s1-idea-text {
+  font-size: 1.9%; color: rgba(255,255,255,.82); line-height: 1.65;
+}
 
+.s1-pills { display: flex; flex-wrap: wrap; gap: 1%; }
+
+/* Right panel — visual */
+.s1-right {
+  position: absolute;
+  right: 0; top: 0; bottom: 0; width: 48%;
+  z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Skin scan illustration */
+.scan-scene {
+  position: relative;
+  width: 72%; padding-top: 72%;
+}
+
+/* Concentric rings */
+.ring {
+  position: absolute;
+  border-radius: 50%;
+  border: .1vw solid rgba(200,169,110,.18);
+  transform: translate(-50%, -50%);
+  left: 50%; top: 50%;
+  animation: ring-pulse 3s ease-in-out infinite;
+}
+.ring:nth-child(1) { width: 90%; padding-top: 90%; border-color: rgba(200,169,110,.35); animation-delay: 0s; }
+.ring:nth-child(2) { width: 70%; padding-top: 70%; border-color: rgba(200,169,110,.25); animation-delay: .4s; }
+.ring:nth-child(3) { width: 50%; padding-top: 50%; border-color: rgba(200,169,110,.18); animation-delay: .8s; }
+.ring:nth-child(4) { width: 30%; padding-top: 30%; border-color: rgba(200,169,110,.12); animation-delay: 1.2s; }
+
+@keyframes ring-pulse {
+  0%,100% { opacity: .5; transform: translate(-50%,-50%) scale(1); }
+  50%      { opacity: 1;  transform: translate(-50%,-50%) scale(1.03); }
+}
+
+/* Center glow */
+.scan-center {
+  position: absolute;
+  left: 50%; top: 50%; transform: translate(-50%,-50%);
+  width: 18%; padding-top: 18%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,169,110,.55) 0%, transparent 70%);
+  animation: center-glow 2.5s ease-in-out infinite;
+}
+@keyframes center-glow {
+  0%,100% { opacity: .7; }
+  50%      { opacity: 1; }
+}
+
+/* Wrist SVG overlay */
+.scan-wrist {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Floating labels around ring */
+.scan-label {
+  position: absolute;
+  font-size: 1.2%;
+  font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  white-space: nowrap;
+}
+.scan-label.l1 { top: 8%; left: 50%; transform: translateX(-50%); color: var(--gold); }
+.scan-label.l2 { bottom: 22%; right: 3%; color: rgba(255,255,255,.4); font-size: 1.1%; }
+.scan-label.l3 { bottom: 14%; left: 5%;  color: rgba(255,255,255,.4); font-size: 1.1%; }
+
+/* Gradient fade on right edge */
+.s1-fade {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 15%;
+  background: linear-gradient(to left, var(--black), transparent);
+  z-index: 3;
+}
+
+/* Bottom brand strip */
+.s1-brand {
+  position: absolute; bottom: 4.5%; left: 6%;
+  font-size: 1%; letter-spacing: .22em; text-transform: uppercase;
+  color: rgba(255,255,255,.2);
+}
+
+
+/* ════════════════════════════
+   SLIDE 2 — THE SCIENCE
+   "THE PHYSICS BEHIND OUR IDEA"
+════════════════════════════ */
+#s2 { background: var(--cream); }
+
+/* Vertical gold line decoration */
+.s2-deco-line {
+  position: absolute; left: 5.5%; top: 8%; bottom: 8%;
+  width: .15%; background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+}
+
+/* Header */
 .s2-header {
-  padding: 5% 7% 3%;
-  display: flex; align-items: baseline; gap: 2%;
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 26%;
+  background: var(--dark);
+  display: flex; align-items: center;
+  padding: 0 6%;
+  gap: 4%;
 }
+
+.s2-hl-block {}
 .s2-eyebrow {
-  font-size: 1.7%; letter-spacing: .22em; text-transform: uppercase;
-  color: var(--gold); font-weight: 600;
+  font-size: 1.1%; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold); font-weight: 700; margin-bottom: 1.5%;
 }
 .s2-headline {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 6.5%; font-weight: 300; color: #fff; line-height: 1.15;
+  font-family: 'Bebas Neue';
+  font-size: 8%; line-height: .95;
+  color: #fff;
 }
-.s2-headline em { color: var(--gold); font-style: italic; }
+.s2-headline .sub { color: rgba(255,255,255,.4); font-size: 55%; display: block; margin-top: .5%; font-family: 'Bebas Neue'; }
 
+.s2-header-note {
+  margin-left: auto; max-width: 28%;
+  font-family: 'Playfair Display'; font-style: italic;
+  font-size: 1.8%; color: rgba(255,255,255,.45); line-height: 1.7;
+  text-align: right;
+}
+
+/* Body: 3 columns */
 .s2-body {
-  flex: 1; padding: 0 6% 5%;
-  display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 2%;
-  align-items: stretch;
+  position: absolute; top: 26%; left: 0; right: 0; bottom: 0;
+  display: grid; grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 0;
 }
 
-/* Column 1 — How it works */
-.how-col {
-  display: flex; flex-direction: column; gap: 2%;
+/* Column base */
+.s2-col {
+  padding: 4% 4%;
+  display: flex; flex-direction: column; gap: 0;
+  border-right: .05vw solid var(--border);
+  position: relative;
 }
-.how-title {
-  font-size: 1.65%; letter-spacing: .15em; text-transform: uppercase;
-  color: var(--gold); font-weight: 700; margin-bottom: 1%;
+.s2-col:last-child { border-right: none; }
+
+.s2-col-title {
+  font-family: 'Bebas Neue'; font-size: 2.8%;
+  margin-bottom: 2.5%; letter-spacing: .05em;
 }
-.flow-step {
-  background: rgba(255,255,255,.04);
-  border: .1% solid rgba(201,168,76,.25);
-  border-radius: 1%;
-  padding: 3% 3.5%;
-  flex: 1;
+.col-established .s2-col-title { color: var(--text); }
+.col-concept    .s2-col-title  { color: var(--dark2); }
+.col-next       .s2-col-title  { color: var(--gold-dk); }
+
+.s2-col-sub {
+  font-size: 1.4%; color: var(--muted);
+  margin-bottom: 3%; line-height: 1.55; letter-spacing: .02em;
+}
+
+/* Center diagram column */
+.col-concept { background: var(--dark); border-right-color: transparent; border-left: .05vw solid transparent; }
+.col-concept .s2-col-title { color: var(--gold-lt); }
+
+/* Skin layer diagram (SVG) */
+.skin-svg-wrap {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  margin-top: 2%;
+}
+
+/* Science point row */
+.sci-point {
+  display: flex; gap: 3%; align-items: flex-start; margin-bottom: 3%;
+}
+.sci-point-num {
+  font-family: 'Bebas Neue'; font-size: 3.5%; color: var(--gold-dk);
+  flex-shrink: 0; line-height: 1;
+}
+.col-concept .sci-point-num { color: var(--gold); }
+.sci-point-body { font-size: 1.55%; color: var(--text); line-height: 1.65; }
+.col-concept .sci-point-body { color: rgba(255,255,255,.7); }
+
+/* Next step items */
+.next-item {
   display: flex; align-items: center; gap: 3%;
+  background: var(--off-w); border-radius: .8%;
+  border: .05vw solid var(--border);
+  padding: 2.5% 3%; margin-bottom: 2%;
 }
-.step-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 4.5%; color: var(--gold); font-weight: 700; flex-shrink: 0; line-height: 1;
+.next-num {
+  font-family: 'Bebas Neue'; font-size: 3%; color: var(--gold-dk); flex-shrink: 0;
 }
-.step-text {
-  font-size: 1.75%; color: rgba(255,255,255,.8); line-height: 1.55;
-}
-.step-text strong { color: var(--gold-lt); display: block; margin-bottom: .5%; }
-.flow-arrow {
-  text-align: center; color: var(--gold); font-size: 3%; opacity: .5;
-}
+.next-body { font-size: 1.5%; color: var(--text); line-height: 1.6; }
+.next-body strong { display: block; font-weight: 700; margin-bottom: .3%; }
 
-/* Column 2 — Diagram (visual center) */
-.diagram-col {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: rgba(201,168,76,.04);
-  border: .15% solid rgba(201,168,76,.2);
-  border-radius: 1.5%;
-  padding: 4%;
-  text-align: center;
-}
-.diagram-title {
-  font-size: 1.6%; letter-spacing: .15em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 4%; font-weight: 700;
-}
-
-/* SVG skin diagram */
-.skin-diagram {
-  width: 80%; max-width: 90%;
-}
-
-.diff-row {
-  display: flex; gap: 4%; width: 100%; margin-top: 4%;
-}
-.diff-item {
-  flex: 1; background: rgba(255,255,255,.04); border-radius: 1%;
-  padding: 3% 2%; text-align: center;
-  border: .1% solid rgba(255,255,255,.08);
-}
-.diff-freq {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 4%; font-weight: 700; line-height: 1;
-}
-.diff-freq.f1 { color: var(--gold); }
-.diff-freq.f2 { color: #8ab4f8; }
-.diff-label { font-size: 1.5%; color: rgba(255,255,255,.55); margin-top: 1%; line-height: 1.5; }
-
-/* Column 3 — Why it matters */
-.why-col {
-  display: flex; flex-direction: column; gap: 2%;
-}
-.why-title {
-  font-size: 1.65%; letter-spacing: .15em; text-transform: uppercase;
-  color: var(--gold); font-weight: 700; margin-bottom: 1%;
-}
-.kpi-card {
-  background: rgba(255,255,255,.04);
-  border-left: .3% solid var(--gold);
-  border-radius: 0 1% 1% 0;
-  padding: 2.5% 3%;
-  flex: 1;
-}
-.kpi-card.green { border-color: var(--green-lt); }
-.kpi-val {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 4.5%; color: var(--gold); font-weight: 700; line-height: 1; display: block;
-}
-.kpi-val.green-v { color: var(--green-lt); }
-.kpi-label { font-size: 1.6%; color: rgba(255,255,255,.6); margin-top: .8%; line-height: 1.5; }
-
-/* ════════════════════════════════
-   SLIDE 3 — SUSTAINABILITY + SCALE
-════════════════════════════════ */
-#s3 { background: var(--cream); flex-direction: column; }
-
-.s3-header {
-  padding: 5% 7% 2%;
-  border-bottom: .05% solid var(--border);
-  display: flex; justify-content: space-between; align-items: flex-end;
-}
-.s3-hl {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 6%; font-weight: 300; color: var(--dark); line-height: 1.15;
-}
-.s3-hl em { color: var(--gold-dk); font-style: italic; }
-.s3-sub {
-  font-size: 1.8%; color: var(--muted); max-width: 40%; text-align: right;
-  line-height: 1.65;
-}
-
-.s3-body {
-  flex: 1; padding: 3% 6% 4%;
-  display: grid; grid-template-columns: 1fr 1.6fr 1fr; gap: 3%;
-  align-items: stretch;
-}
-
-/* Left — Sustainability */
-.sust-col {
-  display: flex; flex-direction: column; gap: 2%;
-}
-.col-label {
-  font-size: 1.55%; letter-spacing: .2em; text-transform: uppercase;
-  font-weight: 700; color: var(--gold-dk); margin-bottom: 1%;
-}
-.sust-item {
-  background: #fff; border-radius: 1%;
-  border: .1% solid var(--border);
-  border-left: .4% solid var(--green);
-  padding: 2.5% 3%;
-  box-shadow: 0 .2% .8% rgba(0,0,0,.05);
-  flex: 1;
-}
-.sust-icon { font-size: 3.5%; display: block; margin-bottom: 1.5%; }
-.sust-title { font-size: 1.85%; font-weight: 700; color: var(--dark); margin-bottom: .8%; }
-.sust-text  { font-size: 1.6%; color: var(--mid); line-height: 1.6; }
-
-/* Center — Roadmap / Global */
-.scale-col {
-  display: flex; flex-direction: column;
-}
-.scale-map {
-  background: var(--dark);
-  border-radius: 1.2%;
-  flex: 1; padding: 4% 5%;
-  display: flex; flex-direction: column; justify-content: space-between;
-  margin-bottom: 2%;
-}
-.map-title { font-size: 1.55%; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 3%; }
-.phase-row {
+/* Hypothesis banner */
+.hypothesis-banner {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: var(--gold); padding: 2% 5%;
   display: flex; align-items: center; gap: 2%;
-  font-size: 1.7%;
 }
-.phase-dot {
-  width: 1.5%; padding-top: 1.5%; border-radius: 50%; flex-shrink: 0;
+.hypothesis-banner .hl-text {
+  font-family: 'Playfair Display'; font-style: italic;
+  font-size: 1.9%; color: var(--dark); line-height: 1.5;
+  flex: 1;
 }
-.ph1 { background: var(--gold); }
-.ph2 { background: #c084fc; }
-.ph3 { background: var(--green-lt); }
-.ph4 { background: #60a5fa; }
-.phase-label { color: rgba(255,255,255,.5); width: 24%; flex-shrink: 0; font-size: 1.55%; }
-.phase-desc  { color: rgba(255,255,255,.85); line-height: 1.5; }
-.phase-line  { width: .05%; background: rgba(255,255,255,.12); align-self: stretch; margin-left: .75%; }
+.hypothesis-banner .badge-dark {
+  background: var(--dark); color: var(--gold-lt);
+  padding: .8% 2%; border-radius: .5%;
+  font-size: 1.2%; font-weight: 700; letter-spacing: .08em;
+  white-space: nowrap; flex-shrink: 0;
+}
 
-.biz-row {
+
+/* ════════════════════════════
+   SLIDE 3 — VISION & NEXT STEPS
+   "FROM IDEA TO IMPACT"
+════════════════════════════ */
+#s3 { display: grid; grid-template-columns: 42% 58%; }
+
+/* Left — dark vision panel */
+.s3-left {
+  background: var(--dark2);
+  padding: 7% 6%;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+/* subtle pattern */
+.s3-left::before {
+  content: '';
+  position: absolute; bottom: -10%; left: -10%;
+  width: 80%; padding-top: 80%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,169,110,.06), transparent 70%);
+  pointer-events: none;
+}
+
+.s3-eyebrow { font-size: 1%; letter-spacing: .28em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 2%; }
+
+.s3-hl {
+  font-family: 'Bebas Neue'; font-size: 7.5%;
+  color: #fff; line-height: .95; margin-bottom: 5%;
+}
+.s3-hl em { color: var(--gold); font-style: normal; }
+
+.sust-items { display: flex; flex-direction: column; gap: 2%; flex: 1; }
+
+.sust-row {
+  display: flex; gap: 3%; align-items: flex-start;
+  background: rgba(255,255,255,.04);
+  border: .05vw solid rgba(255,255,255,.07);
+  border-radius: .8%;
+  padding: 2.5% 3%;
+}
+.sust-icon { font-size: 3%; flex-shrink: 0; line-height: 1; margin-top: .2%; }
+.sust-copy {}
+.sust-title { font-size: 1.65%; font-weight: 700; color: #fff; margin-bottom: .5%; }
+.sust-text  { font-size: 1.35%; color: rgba(255,255,255,.5); line-height: 1.6; }
+
+.s3-closing {
+  margin-top: 5%;
+  border-top: .05vw solid rgba(200,169,110,.25);
+  padding-top: 4%;
+}
+.s3-closing-text {
+  font-family: 'Playfair Display'; font-style: italic;
+  font-size: 1.8%; color: rgba(255,255,255,.45); line-height: 1.7;
+}
+
+/* Right — cream roadmap panel */
+.s3-right {
+  background: var(--off-w);
+  padding: 6% 6%;
+  display: flex; flex-direction: column;
+  position: relative;
+}
+
+/* Top tag */
+.s3-r-eyebrow { font-size: 1%; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-dk); font-weight: 700; margin-bottom: 2%; }
+
+.s3-r-hl {
+  font-family: 'Bebas Neue'; font-size: 5.5%; color: var(--text); line-height: 1; margin-bottom: 4%;
+}
+
+/* Roadmap steps */
+.roadmap { flex: 1; display: flex; flex-direction: column; gap: 0; position: relative; }
+.roadmap::before {
+  content: '';
+  position: absolute; left: 4.5%; top: 2%; bottom: 2%;
+  width: .15%; background: linear-gradient(to bottom, var(--gold), rgba(200,169,110,.2));
+}
+
+.rm-step {
+  display: flex; gap: 4%; align-items: flex-start;
+  padding: 2% 0 2% 0;
+  position: relative;
+}
+.rm-dot-wrap {
+  width: 9%; flex-shrink: 0; display: flex; justify-content: center; padding-top: .2%;
+}
+.rm-dot {
+  width: 1.4vw; height: 1.4vw; border-radius: 50%;
+  border: .15vw solid var(--gold);
+  background: var(--off-w);
+  flex-shrink: 0; position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+}
+.rm-dot.filled { background: var(--gold); }
+.rm-dot-inner { width: 40%; height: 40%; border-radius: 50%; background: var(--off-w); }
+
+.rm-content { flex: 1; }
+.rm-phase { font-size: 1%; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-dk); font-weight: 700; margin-bottom: .5%; }
+.rm-title { font-family: 'Bebas Neue'; font-size: 2.8%; color: var(--text); margin-bottom: .8%; line-height: 1; }
+.rm-desc  { font-size: 1.4%; color: var(--muted); line-height: 1.6; }
+.rm-tags  { display: flex; flex-wrap: wrap; gap: .5%; margin-top: 1%; }
+.rm-tag   { font-size: 1.1%; color: var(--muted); background: rgba(0,0,0,.06); padding: .3% 1%; border-radius: 100px; }
+
+/* Bottom: biz model */
+.s3-biz {
+  margin-top: auto; padding-top: 3%;
+  border-top: .05vw solid var(--border);
   display: flex; gap: 2%;
 }
-.biz-box {
-  flex: 1; background: #fff; border-radius: 1%;
-  border: .1% solid var(--border); padding: 2.5% 3%;
-  text-align: center; box-shadow: 0 .2% .8% rgba(0,0,0,.05);
+.biz-card {
+  flex: 1; background: var(--dark2); border-radius: .8%;
+  padding: 2.5% 3%;
 }
-.biz-icon { font-size: 3%; margin-bottom: 1%; display: block; }
-.biz-label { font-size: 1.5%; color: var(--mid); line-height: 1.5; }
+.biz-icon { font-size: 2.5%; margin-bottom: 1%; display: block; }
+.biz-type { font-size: 1%; letter-spacing: .15em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: .5%; }
+.biz-desc { font-size: 1.3%; color: rgba(255,255,255,.55); line-height: 1.55; }
 
-/* Right — Why L'Oréal */
-.why-loreal-col {
-  display: flex; flex-direction: column; gap: 2%;
+/* Top right brand */
+.s3-brand-top {
+  position: absolute; top: 4.5%; right: 5%;
+  font-size: 1%; letter-spacing: .22em; text-transform: uppercase;
+  color: rgba(0,0,0,.18);
 }
-.wl-title { font-size: 1.55%; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; color: var(--gold-dk); margin-bottom: 1%; }
-.wl-item {
-  background: var(--dark); border-radius: 1%;
-  padding: 3% 3.5%; flex: 1;
-  display: flex; flex-direction: column; justify-content: center;
-}
-.wl-stat {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 4.5%; color: var(--gold); font-weight: 700; line-height: 1; display: block;
-}
-.wl-desc { font-size: 1.55%; color: rgba(255,255,255,.6); margin-top: 1%; line-height: 1.5; }
-.wl-item.light {
-  background: rgba(201,168,76,.09); border: .1% solid rgba(201,168,76,.3);
-}
-.wl-item.light .wl-stat { color: var(--gold-dk); }
-.wl-item.light .wl-desc { color: var(--mid); }
 
 
-/* ════════════════════════════════
+/* ════════════════════════════
    NAVIGATION
-════════════════════════════════ */
+════════════════════════════ */
 #nav {
-  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
-  display: flex; align-items: center; gap: 12px;
-  background: rgba(18,16,10,.9); border: 1px solid rgba(201,168,76,.3);
-  border-radius: 40px; padding: 8px 20px; backdrop-filter: blur(12px);
-  z-index: 200;
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 14px;
+  background: rgba(9,9,11,.88); border: 1px solid rgba(200,169,110,.3);
+  border-radius: 50px; padding: 8px 22px;
+  backdrop-filter: blur(14px); z-index: 200;
 }
-.nav-btn {
-  background: none; border: none; cursor: pointer;
-  color: rgba(255,255,255,.4); font-size: 1rem; padding: 4px 10px;
-  border-radius: 6px; transition: color .2s;
-}
-.nav-btn:hover { color: var(--gold); }
-.nav-dots { display: flex; gap: 8px; }
-.dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: rgba(255,255,255,.2); cursor: pointer; transition: background .3s;
-}
-.dot.active { background: var(--gold); }
+.nb { background:none; border:none; cursor:pointer; color:rgba(255,255,255,.35); font-size:1.1rem; padding:3px 10px; border-radius:6px; transition:color .2s; }
+.nb:hover { color: var(--gold); }
+.dots { display:flex; gap:8px; align-items:center; }
+.dot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.2); cursor:pointer; transition:all .3s; }
+.dot.on { background:var(--gold); width:20px; border-radius:4px; }
 
-/* Progress */
-#prog {
-  position: fixed; top: 0; left: 0; height: 2px;
-  background: linear-gradient(90deg, var(--gold), var(--gold-lt));
-  transition: width .4s ease; z-index: 300;
-}
-#hint {
-  position: fixed; top: 16px; right: 20px;
-  font-size: 11px; color: rgba(255,255,255,.2); z-index: 200;
-}
+#prog { position:fixed; top:0; left:0; height:2px; background:linear-gradient(90deg,var(--gold),var(--gold-lt)); transition:width .45s; z-index:300; }
+#hint { position:fixed; top:14px; right:18px; font-size:10px; color:rgba(255,255,255,.18); z-index:200; letter-spacing:.05em; }
 
-/* Print */
 @media print {
-  html, body { background: #fff; overflow: visible; }
-  #deck { display: block; height: auto; }
-  .slide { position: relative; width: 100%; height: auto; min-height: 56.25vw; opacity: 1; transform: none; margin-bottom: 20px; page-break-after: always; }
-  #nav, #prog, #hint { display: none; }
+  html,body { background:#fff; overflow:visible; }
+  #deck { display:block; height:auto; }
+  .slide { position:relative; width:100%; height:56.25vw; opacity:1; transform:none; page-break-after:always; margin-bottom:10px; }
+  #nav,#prog,#hint { display:none; }
 }
 </style>
 </head>
 <body>
 <div id="prog"></div>
-<div id="hint">← → keys to navigate</div>
+<div id="hint">← → to navigate · Print → PDF for submission</div>
 
 <div id="deck">
 
-<!-- ══════════════════════════════════════
-     SLIDE 1 — YOUR IDEA + TARGET AUDIENCE
-═══════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════
+     SLIDE 1 — THE QUESTION
+══════════════════════════════════════════ -->
 <section class="slide active" id="s1">
-  <div class="top-bar"></div>
-  <div class="slide-number">01 / 03</div>
-  <div class="loreal-logo">L'Oréal <strong>Brandstorm</strong> 2026</div>
+  <div class="s1-rule"></div>
 
-  <!-- LEFT: Dark panel — problem + big idea -->
+  <!-- Left: Hero copy -->
   <div class="s1-left">
-    <div class="eyebrow">The Big Idea</div>
-    <h1 class="s1-headline">
-      What if a perfume<br>
-      <em>knew</em> your skin?
-    </h1>
-    <p class="s1-body">
-      Every skin is unique. Dry skin makes fragrance fade in 2 hours.
-      Hydrated skin keeps the same scent alive for 8. Yet no luxury
-      counter has ever measured this — until now.
-    </p>
-    <div class="hook-stat">
-      <span class="big">78%</span>
-      of luxury fragrance buyers say the scent smelled different at home
-      than at the store. The culprit? Nobody checked their skin first.
-    </div>
-  </div>
+    <div class="s1-eyebrow">L'Oréal Brandstorm 2026 · Team Korea</div>
 
-  <!-- RIGHT: Cream panel — solution + audience -->
-  <div class="s1-right">
     <div>
-      <div class="s1-solution-title">Our Solution</div>
-      <div class="solution-box">
-        <span class="solution-icon">💧</span>
-        <div class="solution-name">SkinSense</div>
-        <div class="solution-desc">
-          A non-contact AI skin hydration sensor that reads your skin's
-          unique moisture fingerprint — <strong>in 3 seconds, without touching you</strong>
-          — and recommends the fragrance that will last longest and smell
-          truest on <em>your</em> skin, today.
-        </div>
+      <h1 class="s1-title">
+        CAN A<br>
+        FRAGRANCE<br>
+        <span class="line-gold">KNOW YOUR</span><br>
+        SKIN?
+      </h1>
+      <p class="s1-lead">
+        The same perfume smells different on everyone —<br>
+        because every skin is different. We asked:<br>
+        <em>what if we could measure that difference?</em>
+      </p>
+    </div>
+
+    <div class="s1-idea-box">
+      <div class="s1-idea-label">Our Idea — SkinSense</div>
+      <div class="s1-idea-text">
+        A non-contact skin moisture sensor that reads your skin's
+        unique hydration profile in seconds — without ever touching you —
+        and uses that data to recommend the fragrance that will last
+        longest and smell truest on <em>your</em> skin.
+        <br><br>
+        <span style="color:rgba(255,255,255,.4);font-size:.9em">
+          ✦ This is our concept. We're a student team with a hypothesis —<br>
+          &nbsp;&nbsp;and we're ready to prove it.
+        </span>
       </div>
     </div>
 
-    <div class="target-section">
-      <div class="target-title">Target Audience</div>
-      <div class="target-chips">
-        <span class="chip">L'Oréal Luxe Boutiques</span>
-        <span class="chip">Beauty Advisors</span>
-        <span class="chip light">Luxury Fragrance Shoppers</span>
-        <span class="chip light">All skin types</span>
-        <span class="chip light">All genders · All ages</span>
-        <span class="chip light">Global · Any climate</span>
-      </div>
+    <div class="s1-pills">
+      <span class="pill pill-outline-gold">L'Oréal Luxe Boutiques</span>
+      <span class="pill pill-outline-gold">Beauty Advisors</span>
+      <span class="pill pill-outline-gold" style="border-color:rgba(255,255,255,.18);color:rgba(255,255,255,.4)">All skin types · All genders · All ages</span>
     </div>
   </div>
+
+  <!-- Right: Scan visualization -->
+  <div class="s1-right">
+    <div class="scan-scene">
+      <!-- Rings -->
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <!-- Center glow -->
+      <div class="scan-center"></div>
+      <!-- Wrist / hand SVG -->
+      <div class="scan-wrist">
+        <svg viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg" style="width:52%;opacity:.9">
+          <!-- Device body -->
+          <rect x="65" y="8" width="90" height="38" rx="9" fill="#c8a96e" opacity=".95"/>
+          <rect x="73" y="14" width="74" height="26" rx="5" fill="rgba(0,0,0,.25)"/>
+          <!-- Screen glow -->
+          <rect x="77" y="17" width="66" height="20" rx="3" fill="#c8a96e" opacity=".15"/>
+          <text x="110" y="30" text-anchor="middle" fill="#fff" font-size="8" font-family="Inter" font-weight="700" opacity=".9">SkinSense</text>
+          <!-- Gap indicator -->
+          <line x1="110" y1="46" x2="110" y2="60" stroke="#c8a96e" stroke-width="1.2" stroke-dasharray="3,2.5" opacity=".6"/>
+          <text x="120" y="55" fill="rgba(200,169,110,.7)" font-size="6.5" font-family="Inter">3 sec</text>
+          <!-- Wrist outline -->
+          <path d="M55,65 Q50,100 52,140 Q54,165 60,175 L70,178 Q90,190 110,192 Q130,190 150,178 L160,175 Q166,165 168,140 Q170,100 165,65 Z"
+                fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+          <!-- Skin layers fill (subtle) -->
+          <path d="M60,72 Q62,105 63,140 Q64,160 70,170 L75,173 Q92,183 110,184 Q128,183 145,173 L150,170 Q156,160 157,140 Q158,105 160,72 Z"
+                fill="rgba(200,169,110,.05)"/>
+          <!-- Layer lines -->
+          <path d="M63,80 Q90,76 110,76 Q130,76 157,80" stroke="rgba(200,169,110,.3)" stroke-width=".8" fill="none"/>
+          <text x="170" y="80" fill="rgba(200,169,110,.5)" font-size="6" font-family="Inter">SC</text>
+          <path d="M62,98 Q90,93 110,93 Q130,93 158,98" stroke="rgba(255,255,255,.1)" stroke-width=".6" fill="none"/>
+          <!-- Wave beams from device -->
+          <path d="M110,46 L90,76" stroke="#c8a96e" stroke-width=".8" opacity=".4" stroke-dasharray="2,2"/>
+          <path d="M110,46 L130,76" stroke="#c8a96e" stroke-width=".8" opacity=".4" stroke-dasharray="2,2"/>
+          <!-- Moisture dots -->
+          <circle cx="95" cy="85"  r="2" fill="#c8a96e" opacity=".5"/>
+          <circle cx="110" cy="82" r="2.5" fill="#c8a96e" opacity=".7"/>
+          <circle cx="125" cy="85" r="2" fill="#c8a96e" opacity=".5"/>
+          <circle cx="90" cy="110"  r="1.5" fill="rgba(138,180,248,.4)"/>
+          <circle cx="110" cy="115" r="2" fill="rgba(138,180,248,.6)"/>
+          <circle cx="130" cy="110" r="1.5" fill="rgba(138,180,248,.4)"/>
+          <!-- Question mark highlight -->
+          <text x="110" y="148" text-anchor="middle" fill="rgba(200,169,110,.08)"
+                font-family="Bebas Neue,sans-serif" font-size="55" letter-spacing=".05em">?</text>
+        </svg>
+      </div>
+      <!-- Float labels -->
+      <div class="scan-label l1">Non-Contact</div>
+      <div class="scan-label l2">100 MHz wave</div>
+      <div class="scan-label l3">1 MHz wave</div>
+    </div>
+  </div>
+
+  <div class="s1-fade"></div>
+  <div class="s1-brand">SkinSense · L'Oréal Brandstorm 2026</div>
+  <div class="slide-num">01 / 03</div>
 </section>
 
 
-<!-- ══════════════════════════════════════
-     SLIDE 2 — INNOVATION FACTOR
-═══════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════
+     SLIDE 2 — THE SCIENCE
+══════════════════════════════════════════ -->
 <section class="slide" id="s2">
-  <div class="top-bar"></div>
-  <div class="slide-number">02 / 03</div>
-  <div class="loreal-logo" style="color:rgba(255,255,255,.3)">L'Oréal <strong style="color:var(--gold)">Brandstorm</strong> 2026</div>
+  <div class="s2-deco-line"></div>
 
+  <!-- Dark header bar -->
   <div class="s2-header">
-    <div>
+    <div class="s2-hl-block">
       <div class="s2-eyebrow">Innovation Factor</div>
       <div class="s2-headline">
-        Non-contact. Dual-depth. <em>AI-personalized.</em><br>
-        The world's first skin-to-scent matching engine.
+        The Physics<br>
+        Behind Our Idea
+        <span class="sub">Established science. Unproven in luxury fragrance. That's our opportunity.</span>
       </div>
+    </div>
+    <div class="s2-header-note">
+      "We haven't run experiments yet —<br>
+      but the theory is real, and we know<br>
+      exactly how to test it."
     </div>
   </div>
 
+  <!-- Three-column body -->
   <div class="s2-body">
 
-    <!-- Column 1: How it works (simplified) -->
-    <div class="how-col">
-      <div class="how-title">How It Works</div>
-      <div class="flow-step">
-        <span class="step-num">1</span>
-        <div class="step-text">
-          <strong>SEND</strong>
-          Device emits an invisible magnetic wave toward skin — same safe tech as wireless phone charging.
+    <!-- Col 1: What science tells us -->
+    <div class="s2-col col-established">
+      <div class="s2-col-title">What Science<br>Already Knows</div>
+      <div class="s2-col-sub">Established physics — no experiments needed to verify this part.</div>
+
+      <div class="sci-point">
+        <div class="sci-point-num">01</div>
+        <div class="sci-point-body">
+          <strong style="display:block;margin-bottom:.3%">Eddy Currents</strong>
+          Alternating magnetic fields induce "eddy currents" in conductive materials — including moist human tissue. This is proven physics used in MRI and industrial NDT sensors.
         </div>
       </div>
-      <div class="flow-arrow">↓</div>
-      <div class="flow-step">
-        <span class="step-num">2</span>
-        <div class="step-text">
-          <strong>READ</strong>
-          The wave "bounces back" differently depending on skin moisture. Our sensor captures this change in under 3 seconds.
+      <div class="sci-point">
+        <div class="sci-point-num">02</div>
+        <div class="sci-point-body">
+          <strong style="display:block;margin-bottom:.3%">Depth vs. Frequency</strong>
+          Higher frequency = shallower penetration (δ = 1/√πfμσ). At ~100 MHz, the field stays in the stratum corneum. At ~1 MHz, it reaches the dermis.
         </div>
       </div>
-      <div class="flow-arrow">↓</div>
-      <div class="flow-step">
-        <span class="step-num">3</span>
-        <div class="step-text">
-          <strong>MATCH</strong>
-          AI calculates your skin's hydration profile and surfaces the fragrances that will perform best on your unique skin — including predicted longevity.
-        </div>
-      </div>
-    </div>
-
-    <!-- Column 2: Diagram -->
-    <div class="diagram-col">
-      <div class="diagram-title">Dual-Depth Measurement</div>
-
-      <!-- SVG skin cross-section diagram -->
-      <svg class="skin-diagram" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" style="width:88%">
-        <!-- Device -->
-        <rect x="100" y="8" width="100" height="28" rx="6" fill="#c9a84c" opacity=".9"/>
-        <text x="150" y="27" text-anchor="middle" fill="#12100a" font-size="11" font-weight="700" font-family="Inter">SkinSense</text>
-
-        <!-- Wave lines -->
-        <path d="M150,36 L150,62" stroke="#c9a84c" stroke-width="1.5" stroke-dasharray="4,3" opacity=".7"/>
-        <path d="M110,36 L95,62" stroke="#8ab4f8" stroke-width="1.5" stroke-dasharray="4,3" opacity=".7"/>
-        <path d="M190,36 L205,62" stroke="#8ab4f8" stroke-width="1.5" stroke-dasharray="4,3" opacity=".7"/>
-
-        <!-- Skin layers -->
-        <!-- Stratum Corneum -->
-        <rect x="30" y="62" width="240" height="26" rx="3" fill="#e8c870" opacity=".25"/>
-        <text x="40" y="79" fill="#c9a84c" font-size="9" font-family="Inter" font-weight="600">Stratum Corneum (surface)</text>
-        <text x="220" y="79" fill="#c9a84c" font-size="8" font-family="Inter">10–20 μm</text>
-
-        <!-- Epidermis -->
-        <rect x="30" y="88" width="240" height="30" rx="3" fill="#c9a84c" opacity=".12"/>
-        <text x="40" y="107" fill="rgba(255,255,255,.5)" font-size="9" font-family="Inter">Epidermis</text>
-
-        <!-- Dermis -->
-        <rect x="30" y="118" width="240" height="50" rx="3" fill="#8ab4f8" opacity=".12"/>
-        <text x="40" y="148" fill="#8ab4f8" font-size="9" font-family="Inter" font-weight="600">Dermis (deep)</text>
-
-        <!-- 100 MHz beam — shallow -->
-        <ellipse cx="150" cy="80" rx="35" ry="10" fill="#c9a84c" opacity=".2"/>
-        <text x="150" y="83" text-anchor="middle" fill="#c9a84c" font-size="8.5" font-family="Inter" font-weight="700">100 MHz</text>
-
-        <!-- 1 MHz beam — deep -->
-        <ellipse cx="150" cy="145" rx="70" ry="18" fill="#8ab4f8" opacity=".15"/>
-        <text x="150" y="149" text-anchor="middle" fill="#8ab4f8" font-size="8.5" font-family="Inter" font-weight="700">1 MHz</text>
-
-        <!-- Labels right -->
-        <line x1="268" y1="75" x2="268" y2="90" stroke="rgba(255,255,255,.15)" stroke-width=".5"/>
-        <text x="275" y="82" fill="rgba(255,255,255,.4)" font-size="8" font-family="Inter">surface</text>
-        <line x1="268" y1="130" x2="268" y2="155" stroke="rgba(255,255,255,.15)" stroke-width=".5"/>
-        <text x="275" y="145" fill="rgba(255,255,255,.4)" font-size="8" font-family="Inter">deep</text>
-      </svg>
-
-      <div class="diff-row">
-        <div class="diff-item">
-          <div class="diff-freq f1">100 MHz</div>
-          <div class="diff-label">Surface moisture<br><em>Top note performance</em></div>
-        </div>
-        <div class="diff-item">
-          <div class="diff-freq f2">1 MHz</div>
-          <div class="diff-label">Deep moisture<br><em>Base note longevity</em></div>
+      <div class="sci-point">
+        <div class="sci-point-num">03</div>
+        <div class="sci-point-body">
+          <strong style="display:block;margin-bottom:.3%">Skin Moisture = Fragrance Duration</strong>
+          Peer-reviewed literature confirms that skin hydration directly affects fragrance evaporation rate and scent character. Dry skin loses fragrance faster.
         </div>
       </div>
     </div>
 
-    <!-- Column 3: Why it matters -->
-    <div class="why-col">
-      <div class="why-title">Why It's New</div>
+    <!-- Col 2: Diagram (center) -->
+    <div class="s2-col col-concept">
+      <div class="s2-col-title">Our Concept</div>
+      <div class="s2-col-sub" style="color:rgba(255,255,255,.4)">A dual-frequency, non-contact sensor — designed around these physics principles.</div>
 
-      <div class="kpi-card">
-        <span class="kpi-val">0 touch</span>
-        <div class="kpi-label">Fully non-contact · 1–5 mm air gap<br>The only hygienic skin sensor for luxury retail</div>
+      <div class="skin-svg-wrap">
+        <svg viewBox="0 0 280 210" xmlns="http://www.w3.org/2000/svg" style="width:95%">
+          <!-- Device -->
+          <rect x="90" y="4" width="100" height="32" rx="7" fill="#c8a96e" opacity=".92"/>
+          <rect x="98" y="9" width="84" height="22" rx="4" fill="rgba(0,0,0,.3)"/>
+          <text x="140" y="23" text-anchor="middle" fill="#fff" font-size="9" font-weight="700" font-family="Inter" opacity=".9">SkinSense</text>
+
+          <!-- Gap -->
+          <text x="148" y="47" fill="rgba(200,169,110,.6)" font-size="7" font-family="Inter">— air gap ≈ 3mm</text>
+
+          <!-- Beam lines -->
+          <path d="M115,36 L100,72" stroke="#c8a96e" stroke-dasharray="3,3" stroke-width="1.2" opacity=".5"/>
+          <path d="M140,36 L140,72" stroke="#c8a96e" stroke-dasharray="3,3" stroke-width="1.2" opacity=".6"/>
+          <path d="M165,36 L180,72" stroke="#c8a96e" stroke-dasharray="3,3" stroke-width="1.2" opacity=".5"/>
+
+          <!-- 1MHz deep beams (blue) -->
+          <path d="M108,36 L70,130" stroke="#8ab4f8" stroke-dasharray="4,3" stroke-width=".8" opacity=".35"/>
+          <path d="M172,36 L210,130" stroke="#8ab4f8" stroke-dasharray="4,3" stroke-width=".8" opacity=".35"/>
+
+          <!-- Skin layer 1: Stratum Corneum -->
+          <rect x="22" y="72" width="236" height="24" rx="3" fill="#c8a96e" opacity=".18"/>
+          <rect x="22" y="72" width="236" height="1.5" rx="1" fill="#c8a96e" opacity=".5"/>
+          <text x="30" y="86" fill="#c8a96e" font-size="8" font-family="Inter" font-weight="600">Stratum Corneum</text>
+          <text x="30" y="93" fill="rgba(200,169,110,.5)" font-size="6.5" font-family="Inter">surface hydration · 10–20 μm</text>
+
+          <!-- 100MHz field ellipse -->
+          <ellipse cx="140" cy="84" rx="50" ry="9" fill="#c8a96e" opacity=".15"/>
+          <ellipse cx="140" cy="84" rx="50" ry="9" fill="none" stroke="#c8a96e" stroke-width=".8" opacity=".5"/>
+          <text x="140" y="87" text-anchor="middle" fill="#c8a96e" font-size="7.5" font-family="Inter" font-weight="700">100 MHz ↔ top notes</text>
+
+          <!-- Skin layer 2: Epidermis -->
+          <rect x="22" y="96" width="236" height="22" rx="0" fill="rgba(255,255,255,.04)"/>
+          <text x="30" y="111" fill="rgba(255,255,255,.3)" font-size="7" font-family="Inter">Epidermis</text>
+
+          <!-- Skin layer 3: Dermis -->
+          <rect x="22" y="118" width="236" height="52" rx="0" fill="#8ab4f8" opacity=".08"/>
+          <rect x="22" y="118" width="236" height="1" fill="rgba(138,180,248,.25)"/>
+          <text x="30" y="148" fill="#8ab4f8" font-size="8" font-family="Inter" font-weight="600">Dermis</text>
+          <text x="30" y="157" fill="rgba(138,180,248,.5)" font-size="6.5" font-family="Inter">deep moisture · base note longevity</text>
+
+          <!-- 1MHz field ellipse -->
+          <ellipse cx="140" cy="148" rx="88" ry="14" fill="#8ab4f8" opacity=".1"/>
+          <ellipse cx="140" cy="148" rx="88" ry="14" fill="none" stroke="#8ab4f8" stroke-width=".8" opacity=".35"/>
+          <text x="140" y="151" text-anchor="middle" fill="#8ab4f8" font-size="7.5" font-family="Inter" font-weight="700">1 MHz ↔ base notes</text>
+
+          <!-- AI label -->
+          <rect x="22" y="173" width="236" height="32" rx="4" fill="rgba(200,169,110,.08)" stroke="rgba(200,169,110,.25)" stroke-width=".8"/>
+          <text x="140" y="186" text-anchor="middle" fill="rgba(200,169,110,.8)" font-size="8" font-family="Inter" font-weight="700">AI LAYER</text>
+          <text x="140" y="197" text-anchor="middle" fill="rgba(200,169,110,.4)" font-size="6.5" font-family="Inter">corrects for distance · temperature · individual variation</text>
+        </svg>
       </div>
-      <div class="kpi-card">
-        <span class="kpi-val">×100</span>
-        <div class="kpi-label">Lower cost than current clinical-grade sensors (€25 PoC vs. €2,000+)</div>
+    </div>
+
+    <!-- Col 3: What we plan to test -->
+    <div class="s2-col col-next">
+      <div class="s2-col-title">What We Plan<br>to Prove</div>
+      <div class="s2-col-sub">Our roadmap from concept to validated prototype.</div>
+
+      <div class="next-item">
+        <div class="next-num">1</div>
+        <div class="next-body">
+          <strong>Build the PoC</strong>
+          Assemble a working sensor (eddy current + distance + temperature modules) for under €30.
+        </div>
       </div>
-      <div class="kpi-card green">
-        <span class="kpi-val green-v">R²&gt;0.9</span>
-        <div class="kpi-label">Accuracy vs. laboratory Corneometer — validated by published physics models</div>
+      <div class="next-item">
+        <div class="next-num">2</div>
+        <div class="next-body">
+          <strong>Validate on Volunteers</strong>
+          Measure 20+ participants across varying skin types, hydration levels, and seasons. Compare against reference measurements.
+        </div>
       </div>
-      <div class="kpi-card">
-        <span class="kpi-val" style="font-size:3.5%">2 Patents</span>
-        <div class="kpi-label">Pending: dual-frequency device (Patent 1) + AI multi-variable correction method (Patent 2) · 15 claims</div>
+      <div class="next-item">
+        <div class="next-num">3</div>
+        <div class="next-body">
+          <strong>Build the Fragrance Link</strong>
+          Measure skin before and after fragrance application. Correlate skin moisture readings with fragrance longevity across a range of L'Oréal Luxe scents.
+        </div>
+      </div>
+      <div class="next-item">
+        <div class="next-num">4</div>
+        <div class="next-body">
+          <strong>Train the AI Model</strong>
+          Use collected data to train a personalization model — recommending fragrance concentration and application points based on individual skin profiles.
+        </div>
       </div>
     </div>
 
   </div><!-- s2-body -->
+
+  <!-- Bottom hypothesis banner -->
+  <div class="hypothesis-banner">
+    <div class="hl-text">
+      "We believe eddy current physics, applied to skin moisture at two frequencies, can predict fragrance performance with accuracy comparable to clinical devices — at a fraction of the cost."
+    </div>
+    <div class="badge-dark">Our Hypothesis</div>
+  </div>
+
+  <div class="slide-num dark">02 / 03</div>
 </section>
 
 
-<!-- ══════════════════════════════════════
-     SLIDE 3 — SUSTAINABILITY + SCALABILITY
-═══════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════
+     SLIDE 3 — VISION & NEXT STEPS
+══════════════════════════════════════════ -->
 <section class="slide" id="s3">
-  <div class="top-bar"></div>
-  <div class="slide-number">03 / 03</div>
-  <div class="loreal-logo">L'Oréal <strong>Brandstorm</strong> 2026</div>
 
-  <div class="s3-header">
+  <!-- LEFT: dark panel — sustainability vision -->
+  <div class="s3-left">
     <div>
-      <div class="eyebrow" style="color:var(--gold-dk);font-size:1.6%">Sustainability &amp; Global Scale</div>
-      <div class="s3-hl">Good for skin.<br><em>Good for the planet.</em> Good for L'Oréal.</div>
+      <div class="s3-eyebrow">Sustainability &amp; Vision</div>
+      <div class="s3-hl">
+        DESIGNED<br>TO BE<br><em>RESPONSIBLE</em>
+      </div>
     </div>
-    <div class="s3-sub">
-      SkinSense is built on three pillars: <strong>zero waste at the counter,
-      science-driven personalization</strong>, and a clear path to global deployment
-      across every L'Oréal Luxe market.
+
+    <div class="sust-items">
+      <div class="sust-row">
+        <div class="sust-icon">🚫</div>
+        <div class="sust-copy">
+          <div class="sust-title">Zero Consumables by Design</div>
+          <div class="sust-text">No probe covers, no gel pads, no wipes — ever. Non-contact is our core principle, not an afterthought. Eliminates 100% of single-use waste at the point of sale.</div>
+        </div>
+      </div>
+      <div class="sust-row">
+        <div class="sust-icon">📦</div>
+        <div class="sust-copy">
+          <div class="sust-title">Right Product, First Time</div>
+          <div class="sust-text">We believe personalized recommendations will cut fragrance returns. Fewer returns means less packaging waste, less transport emissions, less unsold inventory.</div>
+        </div>
+      </div>
+      <div class="sust-row">
+        <div class="sust-icon">🌱</div>
+        <div class="sust-copy">
+          <div class="sust-title">Aligned with L'Oréal for the Future</div>
+          <div class="sust-text">Our zero-consumable design directly supports L'Oréal's 2030 commitment to eliminate plastic from point-of-sale materials.</div>
+        </div>
+      </div>
+      <div class="sust-row">
+        <div class="sust-icon">🌍</div>
+        <div class="sust-copy">
+          <div class="sust-title">Inclusive by Nature</div>
+          <div class="sust-text">Non-contact sensors are inherently unbiased across skin tones, skin conditions, and cultural backgrounds. No calibration changes per skin type needed.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="s3-closing">
+      <div class="s3-closing-text">
+        "We're students at Day One.<br>
+        The physics is real. The market is ready.<br>
+        We just need the chance to build it."
+      </div>
     </div>
   </div>
 
-  <div class="s3-body">
+  <!-- RIGHT: cream panel — roadmap -->
+  <div class="s3-right">
+    <div class="s3-brand-top">L'Oréal Brandstorm 2026</div>
 
-    <!-- Left: Sustainability -->
-    <div class="sust-col">
-      <div class="col-label">♻️ Sustainability</div>
+    <div class="s3-r-eyebrow">From Idea to Impact</div>
+    <div class="s3-r-hl">OUR PATH FORWARD</div>
 
-      <div class="sust-item">
-        <span class="sust-icon">🚫</span>
-        <div class="sust-title">Zero Consumables</div>
-        <div class="sust-text">No probe covers, no gel pads, no alcohol wipes — ever. Non-contact by design.</div>
-      </div>
-
-      <div class="sust-item">
-        <span class="sust-icon">📦</span>
-        <div class="sust-title">Less Waste, Fewer Returns</div>
-        <div class="sust-text">Right product, first time. Personalized matching cuts fragrance returns → less packaging &amp; logistics CO₂.</div>
-      </div>
-
-      <div class="sust-item" style="border-color:#1a6b45;background:linear-gradient(135deg,#f0faf5,#fff)">
-        <span class="sust-icon">🌍</span>
-        <div class="sust-title">L'Oréal for the Future</div>
-        <div class="sust-text">Directly aligned with L'Oréal's 2030 zero-plastic &amp; zero-waste point-of-sale commitments.</div>
-      </div>
-    </div>
-
-    <!-- Center: Scale roadmap + biz model -->
-    <div class="scale-col">
-      <div class="scale-map">
-        <div class="map-title">Global Rollout</div>
-
-        <div class="phase-row">
-          <div class="phase-dot ph1"></div>
-          <div class="phase-label" style="color:var(--gold)">Month 1–6</div>
-          <div class="phase-desc">🇰🇷 Korea — K-Beauty pilot · Lancôme &amp; YSL counters</div>
+    <div class="roadmap">
+      <div class="rm-step">
+        <div class="rm-dot-wrap">
+          <div class="rm-dot filled"><div class="rm-dot-inner"></div></div>
         </div>
-        <div style="height:1%;border-left:.1% solid rgba(255,255,255,.1);margin-left:.75%;margin-top:1%;margin-bottom:1%"></div>
-        <div class="phase-row">
-          <div class="phase-dot ph2"></div>
-          <div class="phase-label" style="color:#c084fc">Month 7–12</div>
-          <div class="phase-desc">🇫🇷 Paris — Champs-Élysées flagship · 2 patents filed</div>
-        </div>
-        <div style="height:1%;border-left:.1% solid rgba(255,255,255,.1);margin-left:.75%;margin-top:1%;margin-bottom:1%"></div>
-        <div class="phase-row">
-          <div class="phase-dot ph3"></div>
-          <div class="phase-label" style="color:var(--green-lt)">Year 2</div>
-          <div class="phase-desc">🇯🇵🇦🇪 Japan &amp; Middle East · climate-adapted AI models</div>
-        </div>
-        <div style="height:1%;border-left:.1% solid rgba(255,255,255,.1);margin-left:.75%;margin-top:1%;margin-bottom:1%"></div>
-        <div class="phase-row">
-          <div class="phase-dot ph4"></div>
-          <div class="phase-label" style="color:#60a5fa">Year 3</div>
-          <div class="phase-desc">🌐 Global DTC — consumer device + L'Oréal app ecosystem</div>
+        <div class="rm-content">
+          <div class="rm-phase">Phase 1 · Months 1–3</div>
+          <div class="rm-title">Build &amp; Calibrate</div>
+          <div class="rm-desc">Assemble first working prototype. Test sensor accuracy on team members and volunteers. Document everything.</div>
+          <div class="rm-tags">
+            <span class="rm-tag">€25–30 hardware</span>
+            <span class="rm-tag">eddy current + ToF + IR modules</span>
+          </div>
         </div>
       </div>
 
-      <!-- Business model row -->
-      <div class="biz-row">
-        <div class="biz-box">
-          <span class="biz-icon">🏪</span>
-          <div class="biz-label"><strong>B2B Hardware</strong><br>Device lease to Luxe counters</div>
+      <div class="rm-step">
+        <div class="rm-dot-wrap">
+          <div class="rm-dot"><div class="rm-dot-inner" style="background:transparent"></div></div>
         </div>
-        <div class="biz-box">
-          <span class="biz-icon">📊</span>
-          <div class="biz-label"><strong>B2B Data SaaS</strong><br>Skin trends for L'Oréal R&amp;I</div>
+        <div class="rm-content">
+          <div class="rm-phase">Phase 2 · Months 4–6</div>
+          <div class="rm-title">Test the Fragrance Link</div>
+          <div class="rm-desc">Measure skin before and after applying L'Oréal fragrances across 20+ volunteers. Build the correlation dataset that proves our hypothesis.</div>
+          <div class="rm-tags">
+            <span class="rm-tag">20+ participants</span>
+            <span class="rm-tag">multiple skin types</span>
+            <span class="rm-tag">fragrance longevity tracking</span>
+          </div>
         </div>
-        <div class="biz-box">
-          <span class="biz-icon">📱</span>
-          <div class="biz-label"><strong>B2C Device + App</strong><br>Personal sensor subscription</div>
+      </div>
+
+      <div class="rm-step">
+        <div class="rm-dot-wrap">
+          <div class="rm-dot"><div class="rm-dot-inner" style="background:transparent"></div></div>
+        </div>
+        <div class="rm-content">
+          <div class="rm-phase">Phase 3 · Months 7–12</div>
+          <div class="rm-title">Train the AI &amp; Validate</div>
+          <div class="rm-desc">Use collected data to build a personalization model. If results are strong, seek L'Oréal partnership for counter pilot.</div>
+          <div class="rm-tags">
+            <span class="rm-tag">AI recommendation engine</span>
+            <span class="rm-tag">counter-ready prototype</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rm-step">
+        <div class="rm-dot-wrap">
+          <div class="rm-dot" style="border-color:rgba(200,169,110,.3)"><div class="rm-dot-inner" style="background:transparent"></div></div>
+        </div>
+        <div class="rm-content">
+          <div class="rm-phase">Vision · Year 2+</div>
+          <div class="rm-title">Scale with L'Oréal Luxe</div>
+          <div class="rm-desc">If validated: deploy across L'Oréal Luxe boutiques globally. The vision is every customer getting a fragrance recommendation powered by their own skin data.</div>
+          <div class="rm-tags">
+            <span class="rm-tag" style="color:var(--gold-dk);background:rgba(200,169,110,.12)">Korea → Paris → Global</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Right: Why L'Oréal + key metrics -->
-    <div class="why-loreal-col">
-      <div class="col-label">✦ Why L'Oréal</div>
-
-      <div class="wl-item">
-        <span class="wl-stat">€52B</span>
-        <div class="wl-desc">Global luxury fragrance market growing at 6.5% CAGR — ripe for tech disruption</div>
+    <!-- Business model at bottom -->
+    <div class="s3-biz">
+      <div class="biz-card">
+        <span class="biz-icon">🏪</span>
+        <div class="biz-type">B2B</div>
+        <div class="biz-desc">Counter device for L'Oréal Luxe boutiques — the premium in-store ritual</div>
       </div>
-
-      <div class="wl-item light">
-        <span class="wl-stat" style="color:var(--gold-dk)">Exclusive</span>
-        <div class="wl-desc" style="color:var(--mid)">Creates a proprietary skin-scent data moat no competitor can replicate</div>
+      <div class="biz-card">
+        <span class="biz-icon">📊</span>
+        <div class="biz-type">Data</div>
+        <div class="biz-desc">Skin moisture trends for L'Oréal R&amp;I — powering next-gen fragrance formulas</div>
       </div>
-
-      <div class="wl-item">
-        <span class="wl-stat" style="font-size:3%">Beauty Tech<br>for All</span>
-        <div class="wl-desc">Democratizes lab-grade skin science — from dermatologists' clinics to every Luxe boutique worldwide</div>
-      </div>
-
-      <div class="wl-item light">
-        <span class="wl-stat" style="color:var(--gold-dk)">Inclusive</span>
-        <div class="wl-desc" style="color:var(--mid)">Works on all skin tones, types &amp; ages — no contact bias, no calibration per skin tone needed</div>
+      <div class="biz-card">
+        <span class="biz-icon">📱</span>
+        <div class="biz-type">B2C</div>
+        <div class="biz-desc">Personal device + app subscription — skincare ritual meets scent journey</div>
       </div>
     </div>
 
-  </div><!-- s3-body -->
+    <div class="slide-num dark">03 / 03</div>
+  </div>
+
 </section>
 
 </div><!-- #deck -->
 
 <!-- Navigation -->
 <div id="nav">
-  <button class="nav-btn" id="btn-prev">&#8592;</button>
-  <div class="nav-dots">
-    <div class="dot active" data-n="0"></div>
+  <button class="nb" id="bp">&#8592;</button>
+  <div class="dots">
+    <div class="dot on" data-n="0"></div>
     <div class="dot" data-n="1"></div>
     <div class="dot" data-n="2"></div>
   </div>
-  <button class="nav-btn" id="btn-next">&#8594;</button>
+  <button class="nb" id="bn">&#8594;</button>
 </div>
 
 <script>
-const slides = document.querySelectorAll('.slide');
-const dots   = document.querySelectorAll('.dot');
+const slides = [...document.querySelectorAll('.slide')];
+const dots   = [...document.querySelectorAll('.dot')];
 const prog   = document.getElementById('prog');
 let cur = 0;
 
@@ -781,31 +960,27 @@ function go(n) {
   if (n < 0 || n >= slides.length) return;
   slides[cur].classList.remove('active');
   slides[cur].classList.add('exit');
-  const prev = cur;
-  cur = n;
-  setTimeout(() => slides[prev].classList.remove('exit'), 520);
+  const prev = cur; cur = n;
+  setTimeout(() => slides[prev].classList.remove('exit'), 580);
   slides[cur].classList.add('active');
-  dots.forEach((d,i) => d.classList.toggle('active', i === cur));
-  prog.style.width = ((cur+1)/slides.length*100) + '%';
+  dots.forEach((d,i) => d.classList.toggle('on', i===cur));
+  prog.style.width = ((cur+1)/slides.length*100)+'%';
 }
 
-document.getElementById('btn-next').onclick = () => go(cur+1);
-document.getElementById('btn-prev').onclick = () => go(cur-1);
+document.getElementById('bn').onclick = () => go(cur+1);
+document.getElementById('bp').onclick = () => go(cur-1);
 dots.forEach(d => d.onclick = () => go(+d.dataset.n));
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(cur+1); }
-  if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur-1); }
+  if (e.key==='ArrowRight'||e.key===' ') { e.preventDefault(); go(cur+1); }
+  if (e.key==='ArrowLeft')               { e.preventDefault(); go(cur-1); }
 });
 
-let tx = 0;
-document.addEventListener('touchstart', e => tx = e.touches[0].clientX, {passive:true});
-document.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - tx;
-  if (Math.abs(dx) > 50) dx < 0 ? go(cur+1) : go(cur-1);
-});
+let tx=0;
+document.addEventListener('touchstart', e => tx=e.touches[0].clientX, {passive:true});
+document.addEventListener('touchend',   e => { const d=e.changedTouches[0].clientX-tx; if(Math.abs(d)>50) d<0?go(cur+1):go(cur-1); });
 
-prog.style.width = (1/slides.length*100) + '%';
+prog.style.width = (1/slides.length*100)+'%';
 </script>
 </body>
 </html>
