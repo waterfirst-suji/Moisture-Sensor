@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550" font-family="'Malgun Gothic', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+    </marker>
+    <linearGradient id="sc" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDEBD0"/>
+      <stop offset="100%" stop-color="#F5CBA7"/>
+    </linearGradient>
+    <linearGradient id="ep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F5CBA7"/>
+      <stop offset="100%" stop-color="#EDBB99"/>
+    </linearGradient>
+    <linearGradient id="dr" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EDBB99"/>
+      <stop offset="100%" stop-color="#D4A574"/>
+    </linearGradient>
+  </defs>
+
+  <text x="400" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">【도 2】 복수 주파수에 따른 피부 침투 깊이(δ) 모식도</text>
+
+  <!-- Probe -->
+  <rect x="200" y="50" width="400" height="50" rx="10" fill="#D5E8F0" stroke="#2E75B6" stroke-width="2"/>
+  <text x="400" y="80" text-anchor="middle" font-size="13" font-weight="bold" fill="#2E75B6">센서 프로브 (이격거리 d = 0.1~5mm)</text>
+
+  <!-- Coils inside probe -->
+  <ellipse cx="310" cy="90" rx="40" ry="8" fill="none" stroke="#E74C3C" stroke-width="2.5"/>
+  <text x="310" y="115" text-anchor="middle" font-size="10" fill="#E74C3C">제1코일 (f₁ 저주파)</text>
+  <ellipse cx="490" cy="90" rx="30" ry="6" fill="none" stroke="#3498DB" stroke-width="2.5"/>
+  <text x="490" y="115" text-anchor="middle" font-size="10" fill="#3498DB">제2코일 (f₂ 고주파)</text>
+
+  <!-- Gap -->
+  <rect x="200" y="100" width="400" height="30" fill="white" stroke="none"/>
+  <text x="400" y="122" text-anchor="middle" font-size="10" fill="#888">↕ 이격거리 d</text>
+
+  <!-- Skin layers -->
+  <!-- Stratum corneum -->
+  <rect x="100" y="135" width="600" height="40" fill="url(#sc)" stroke="#B07B4F" stroke-width="1.5"/>
+  <text x="60" y="160" text-anchor="middle" font-size="10" fill="#6B3A00" transform="rotate(-90,60,160)">각질층</text>
+  <text x="750" y="155" text-anchor="start" font-size="9" fill="#888">~10-20μm</text>
+  <text x="750" y="168" text-anchor="start" font-size="9" fill="#888">σ ≈ 0.02 S/m</text>
+
+  <!-- Epidermis -->
+  <rect x="100" y="175" width="600" height="70" fill="url(#ep)" stroke="#B07B4F" stroke-width="1"/>
+  <text x="60" y="215" text-anchor="middle" font-size="10" fill="#6B3A00" transform="rotate(-90,60,215)">표피층</text>
+  <text x="750" y="210" text-anchor="start" font-size="9" fill="#888">~100μm</text>
+  <text x="750" y="223" text-anchor="start" font-size="9" fill="#888">σ ≈ 0.1 S/m</text>
+
+  <!-- Dermis -->
+  <rect x="100" y="245" width="600" height="150" fill="url(#dr)" stroke="#B07B4F" stroke-width="1"/>
+  <text x="60" y="320" text-anchor="middle" font-size="10" fill="#6B3A00" transform="rotate(-90,60,320)">진피층</text>
+  <text x="750" y="310" text-anchor="start" font-size="9" fill="#888">~1-4mm</text>
+  <text x="750" y="323" text-anchor="start" font-size="9" fill="#888">σ ≈ 0.5-1.0 S/m</text>
+
+  <!-- Blood vessels in dermis -->
+  <path d="M180,290 Q200,280 220,290 Q240,300 260,290" fill="none" stroke="#C0392B" stroke-width="2" opacity="0.4"/>
+  <path d="M350,330 Q370,320 390,330 Q410,340 430,330" fill="none" stroke="#C0392B" stroke-width="2" opacity="0.4"/>
+  <path d="M520,300 Q540,290 560,300 Q580,310 600,300" fill="none" stroke="#C0392B" stroke-width="2" opacity="0.4"/>
+  <text x="640" y="350" font-size="9" fill="#C0392B" opacity="0.7">혈관·조직액</text>
+
+  <!-- Sub-dermis -->
+  <rect x="100" y="395" width="600" height="50" fill="#F0E0C8" stroke="#B07B4F" stroke-width="1"/>
+  <text x="400" y="425" text-anchor="middle" font-size="11" fill="#8B6914">피하조직</text>
+
+  <!-- HIGH FREQUENCY penetration (shallow) -->
+  <path d="M490,100 L490,135" stroke="#3498DB" stroke-width="2" marker-end="url(#arrow)"/>
+  <ellipse cx="490" cy="165" rx="55" ry="25" fill="none" stroke="#3498DB" stroke-width="2" stroke-dasharray="6,3" opacity="0.7"/>
+  <text x="560" y="162" font-size="10" font-weight="bold" fill="#3498DB">δ₂ ≈ 0.05mm</text>
+  <text x="560" y="176" font-size="9" fill="#2980B9">(100MHz 기준)</text>
+  <text x="560" y="192" font-size="10" font-weight="bold" fill="#3498DB">→ 겉보습 측정</text>
+
+  <!-- LOW FREQUENCY penetration (deep) -->
+  <path d="M310,100 L310,135" stroke="#E74C3C" stroke-width="2" marker-end="url(#arrow)"/>
+  <ellipse cx="310" cy="280" rx="80" ry="90" fill="none" stroke="#E74C3C" stroke-width="2" stroke-dasharray="8,4" opacity="0.5"/>
+  <text x="160" y="280" font-size="10" font-weight="bold" fill="#E74C3C">δ₁ ≈ 0.5mm</text>
+  <text x="160" y="294" font-size="9" fill="#C0392B">(1MHz 기준)</text>
+  <text x="160" y="312" font-size="10" font-weight="bold" fill="#E74C3C">→ 속보습 측정</text>
+
+  <!-- Formula box -->
+  <rect x="150" y="460" width="500" height="60" rx="8" fill="#F8F9FA" stroke="#AAA" stroke-width="1.5"/>
+  <text x="400" y="482" text-anchor="middle" font-size="13" font-weight="bold" fill="#333">침투깊이 공식:  δ = 1 / √(π · f · μ · σ)</text>
+  <text x="400" y="505" text-anchor="middle" font-size="11" fill="#666">f: 주파수, μ: 투자율, σ: 전기 전도도  |  f↑ → δ↓ (얕은 침투)  |  f↓ → δ↑ (깊은 침투)</text>
+
+  <!-- Depth scale -->
+  <line x1="90" y1="135" x2="90" y2="395" stroke="#555" stroke-width="1"/>
+  <line x1="85" y1="135" x2="95" y2="135" stroke="#555" stroke-width="1"/>
+  <line x1="85" y1="175" x2="95" y2="175" stroke="#555" stroke-width="1"/>
+  <line x1="85" y1="245" x2="95" y2="245" stroke="#555" stroke-width="1"/>
+  <line x1="85" y1="395" x2="95" y2="395" stroke="#555" stroke-width="1"/>
+  <text x="82" y="138" text-anchor="end" font-size="8" fill="#555">0</text>
+  <text x="82" y="178" text-anchor="end" font-size="8" fill="#555">20μm</text>
+  <text x="82" y="248" text-anchor="end" font-size="8" fill="#555">120μm</text>
+  <text x="82" y="398" text-anchor="end" font-size="8" fill="#555">~4mm</text>
+</svg>

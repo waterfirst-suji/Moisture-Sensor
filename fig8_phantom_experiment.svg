@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 600" font-family="'Malgun Gothic', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+    </marker>
+    <pattern id="gelPattern" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1" fill="#5DADE2" opacity="0.3"/>
+      <circle cx="8" cy="8" r="1" fill="#5DADE2" opacity="0.2"/>
+    </pattern>
+  </defs>
+
+  <text x="425" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">【도 8】 실시예 1: 피부 모의조직(Phantom) 실험 구성도</text>
+
+  <!-- Experiment setup overview -->
+  <!-- DAQ / Signal Generator -->
+  <rect x="30" y="80" width="160" height="80" rx="8" fill="#EBF5FB" stroke="#2E86C1" stroke-width="2"/>
+  <text x="110" y="110" text-anchor="middle" font-size="11" font-weight="bold" fill="#2E86C1">신호 발생기</text>
+  <text x="110" y="128" text-anchor="middle" font-size="10" fill="#2E86C1">f₁=1MHz, f₂=100MHz</text>
+  <text x="110" y="148" text-anchor="middle" font-size="9" fill="#2980B9">교류 구동 신호</text>
+
+  <!-- LCR / Impedance Analyzer -->
+  <rect x="30" y="200" width="160" height="80" rx="8" fill="#FFF3E0" stroke="#E67E22" stroke-width="2"/>
+  <text x="110" y="228" text-anchor="middle" font-size="11" font-weight="bold" fill="#E67E22">임피던스 분석기</text>
+  <text x="110" y="248" text-anchor="middle" font-size="10" fill="#E67E22">R + jX 측정</text>
+  <text x="110" y="265" text-anchor="middle" font-size="9" fill="#E67E22">(위상/크기 동시 취득)</text>
+
+  <!-- PC / AI -->
+  <rect x="30" y="330" width="160" height="70" rx="8" fill="#F5EEF8" stroke="#8E44AD" stroke-width="2"/>
+  <text x="110" y="358" text-anchor="middle" font-size="11" font-weight="bold" fill="#8E44AD">데이터 처리 PC</text>
+  <text x="110" y="378" text-anchor="middle" font-size="10" fill="#8E44AD">AI 보정 알고리즘</text>
+
+  <!-- Connections -->
+  <line x1="190" y1="120" x2="310" y2="200" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="190" y1="240" x2="310" y2="240" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="110" y1="280" x2="110" y2="330" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ====== PHANTOM SETUP (center) ====== -->
+  <rect x="290" y="100" width="300" height="320" rx="12" fill="#FAFAFA" stroke="#AAA" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="440" y="90" text-anchor="middle" font-size="12" font-weight="bold" fill="#555">측정 영역</text>
+
+  <!-- Probe -->
+  <rect x="370" y="120" width="140" height="45" rx="8" fill="#D5E8F0" stroke="#2E75B6" stroke-width="2"/>
+  <text x="440" y="142" text-anchor="middle" font-size="10" font-weight="bold" fill="#2E75B6">WL02 코일 프로브</text>
+  <text x="440" y="157" text-anchor="middle" font-size="9" fill="#2E75B6">직경 10mm</text>
+
+  <!-- Coils in probe -->
+  <ellipse cx="415" cy="160" rx="15" ry="4" fill="none" stroke="#E74C3C" stroke-width="2"/>
+  <ellipse cx="465" cy="160" rx="10" ry="3" fill="none" stroke="#3498DB" stroke-width="2"/>
+
+  <!-- Air gap -->
+  <rect x="350" y="170" width="180" height="20" fill="white" stroke="none"/>
+  <text x="440" y="183" text-anchor="middle" font-size="8" fill="#888">이격 d ≈ 1mm</text>
+  <line x1="345" y1="168" x2="345" y2="192" stroke="#888" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <line x1="535" y1="168" x2="535" y2="192" stroke="#888" stroke-width="0.5" stroke-dasharray="2,2"/>
+
+  <!-- Layer 1: Dry collagen membrane (stratum corneum analog) -->
+  <rect x="320" y="195" width="240" height="40" fill="#F5F5DC" stroke="#8B8B00" stroke-width="1.5"/>
+  <text x="440" y="213" text-anchor="middle" font-size="10" font-weight="bold" fill="#6B6B00">건조 콜라겐 막</text>
+  <text x="440" y="228" text-anchor="middle" font-size="9" fill="#8B8B00">(각질층 모사, σ ≈ 0.02 S/m)</text>
+
+  <!-- Layer 2: Saline gelatin gel (dermis analog) -->
+  <rect x="320" y="235" width="240" height="120" fill="#D6EAF8" stroke="#2E86C1" stroke-width="1.5"/>
+  <rect x="320" y="235" width="240" height="120" fill="url(#gelPattern)"/>
+  <text x="440" y="275" text-anchor="middle" font-size="10" font-weight="bold" fill="#1B4F72">생리식염수 젤라틴 겔</text>
+  <text x="440" y="295" text-anchor="middle" font-size="9" fill="#2E86C1">(진피층 모사, σ ≈ 0.5~1.0 S/m)</text>
+  <text x="440" y="315" text-anchor="middle" font-size="9" fill="#2E86C1">NaCl 농도 조절 → σ 변화</text>
+  <text x="440" y="335" text-anchor="middle" font-size="8" fill="#5499C7">💧 수분 상태별 4단계 준비</text>
+
+  <!-- Container -->
+  <rect x="310" y="355" width="260" height="30" fill="#E8DAEF" stroke="#8E44AD" stroke-width="1"/>
+  <text x="440" y="375" text-anchor="middle" font-size="9" fill="#8E44AD">비전도성 용기 (아크릴)</text>
+
+  <!-- Eddy currents in phantom -->
+  <ellipse cx="415" cy="310" rx="45" ry="15" fill="none" stroke="#E74C3C" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.5"/>
+  <ellipse cx="465" cy="215" rx="25" ry="8" fill="none" stroke="#3498DB" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.5"/>
+
+  <!-- Reference: Corneometer -->
+  <rect x="630" y="150" width="190" height="100" rx="8" fill="#D5F5E3" stroke="#27AE60" stroke-width="2"/>
+  <text x="725" y="178" text-anchor="middle" font-size="11" font-weight="bold" fill="#229954">Corneometer</text>
+  <text x="725" y="198" text-anchor="middle" font-size="10" fill="#229954">(접촉식 기준값)</text>
+  <text x="725" y="218" text-anchor="middle" font-size="9" fill="#27AE60">동일 phantom에서</text>
+  <text x="725" y="233" text-anchor="middle" font-size="9" fill="#27AE60">기준 측정 수행</text>
+
+  <line x1="630" y1="200" x2="570" y2="260" stroke="#27AE60" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- Experiment conditions table -->
+  <rect x="310" y="420" width="510" height="160" rx="8" fill="#FFF8E1" stroke="#F9A825" stroke-width="1.5"/>
+  <text x="565" y="445" text-anchor="middle" font-size="12" font-weight="bold" fill="#F57F17">실험 조건</text>
+  <line x1="325" y1="455" x2="805" y2="455" stroke="#F9A825" stroke-width="1"/>
+
+  <!-- Condition rows -->
+  <text x="340" y="475" font-size="10" font-weight="bold" fill="#555">NaCl 농도 (4단계):</text>
+  <text x="500" y="475" font-size="10" fill="#555">0.1%, 0.5%, 0.9% (생리식염수), 2.0%</text>
+
+  <text x="340" y="498" font-size="10" font-weight="bold" fill="#555">대응 전도도:</text>
+  <text x="500" y="498" font-size="10" fill="#555">σ ≈ 0.17, 0.50, 0.90, 1.80 S/m</text>
+
+  <text x="340" y="521" font-size="10" font-weight="bold" fill="#555">측정 주파수:</text>
+  <text x="500" y="521" font-size="10" fill="#555">f₁ = 1 MHz (속보습), f₂ = 100 MHz (겉보습)</text>
+
+  <text x="340" y="544" font-size="10" font-weight="bold" fill="#555">반복 측정:</text>
+  <text x="500" y="544" font-size="10" fill="#555">각 조건당 10회 반복, 평균±SD 산출</text>
+
+  <text x="340" y="567" font-size="10" font-weight="bold" fill="#555">프로브-시료 이격:</text>
+  <text x="500" y="567" font-size="10" fill="#555">d = 0.5, 1.0, 2.0, 3.0, 5.0 mm (5단계)</text>
+</svg>

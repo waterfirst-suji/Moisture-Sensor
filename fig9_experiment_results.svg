@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 650" font-family="'Malgun Gothic', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <text x="425" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">【도 9】 실시예 1 예상 실험 결과: NaCl 농도별 임피던스 변화</text>
+
+  <!-- ====== CHART A: Resistance (R) ====== -->
+  <text x="220" y="62" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">(a) 저항 성분 (R) 변화</text>
+
+  <!-- Axes A -->
+  <line x1="80" y1="310" x2="400" y2="310" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="80" y1="310" x2="80" y2="72" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="240" y="338" text-anchor="middle" font-size="10" fill="#555">NaCl 농도 (%)</text>
+  <text x="50" y="190" text-anchor="middle" font-size="10" fill="#555" transform="rotate(-90,50,190)">저항 R (Ω)</text>
+
+  <!-- X-axis labels A -->
+  <text x="130" y="325" text-anchor="middle" font-size="9" fill="#888">0.1</text>
+  <text x="210" y="325" text-anchor="middle" font-size="9" fill="#888">0.5</text>
+  <text x="290" y="325" text-anchor="middle" font-size="9" fill="#888">0.9</text>
+  <text x="370" y="325" text-anchor="middle" font-size="9" fill="#888">2.0</text>
+
+  <!-- Grid A -->
+  <line x1="80" y1="260" x2="390" y2="260" stroke="#F0F0F0" stroke-width="0.5"/>
+  <line x1="80" y1="210" x2="390" y2="210" stroke="#F0F0F0" stroke-width="0.5"/>
+  <line x1="80" y1="160" x2="390" y2="160" stroke="#F0F0F0" stroke-width="0.5"/>
+  <line x1="80" y1="110" x2="390" y2="110" stroke="#F0F0F0" stroke-width="0.5"/>
+
+  <!-- f1 = 1 MHz (Red, deep penetration) - R decreases with σ -->
+  <!-- Bar chart style with error bars -->
+  <rect x="110" y="110" width="18" height="200" rx="2" fill="#E74C3C" opacity="0.7"/>
+  <line x1="119" y1="100" x2="119" y2="120" stroke="#C0392B" stroke-width="1.5"/>
+  <line x1="113" y1="100" x2="125" y2="100" stroke="#C0392B" stroke-width="1"/>
+  <line x1="113" y1="120" x2="125" y2="120" stroke="#C0392B" stroke-width="1"/>
+
+  <rect x="190" y="170" width="18" height="140" rx="2" fill="#E74C3C" opacity="0.7"/>
+  <line x1="199" y1="160" x2="199" y2="180" stroke="#C0392B" stroke-width="1.5"/>
+  <line x1="193" y1="160" x2="205" y2="160" stroke="#C0392B" stroke-width="1"/>
+
+  <rect x="270" y="220" width="18" height="90" rx="2" fill="#E74C3C" opacity="0.7"/>
+  <line x1="279" y1="210" x2="279" y2="230" stroke="#C0392B" stroke-width="1.5"/>
+  <line x1="273" y1="210" x2="285" y2="210" stroke="#C0392B" stroke-width="1"/>
+
+  <rect x="350" y="260" width="18" height="50" rx="2" fill="#E74C3C" opacity="0.7"/>
+  <line x1="359" y1="252" x2="359" y2="268" stroke="#C0392B" stroke-width="1.5"/>
+  <line x1="353" y1="252" x2="365" y2="252" stroke="#C0392B" stroke-width="1"/>
+
+  <!-- f2 = 100 MHz (Blue, shallow penetration) - R decreases less -->
+  <rect x="132" y="160" width="18" height="150" rx="2" fill="#3498DB" opacity="0.7"/>
+  <line x1="141" y1="150" x2="141" y2="170" stroke="#2471A3" stroke-width="1.5"/>
+  <line x1="135" y1="150" x2="147" y2="150" stroke="#2471A3" stroke-width="1"/>
+
+  <rect x="212" y="200" width="18" height="110" rx="2" fill="#3498DB" opacity="0.7"/>
+  <line x1="221" y1="192" x2="221" y2="210" stroke="#2471A3" stroke-width="1.5"/>
+
+  <rect x="292" y="235" width="18" height="75" rx="2" fill="#3498DB" opacity="0.7"/>
+  <line x1="301" y1="228" x2="301" y2="243" stroke="#2471A3" stroke-width="1.5"/>
+
+  <rect x="372" y="265" width="18" height="45" rx="2" fill="#3498DB" opacity="0.7"/>
+  <line x1="381" y1="258" x2="381" y2="272" stroke="#2471A3" stroke-width="1.5"/>
+
+  <!-- Annotation A -->
+  <text x="170" y="98" font-size="9" font-weight="bold" fill="#E74C3C">ΔR₁ 크다</text>
+  <text x="170" y="110" font-size="8" fill="#E74C3C">(깊은 침투 → 젤 전체 감지)</text>
+
+  <!-- ====== CHART B: Reactance (X) ====== -->
+  <text x="640" y="62" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">(b) 리액턴스 성분 (X) 변화</text>
+
+  <!-- Axes B -->
+  <line x1="480" y1="310" x2="800" y2="310" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="480" y1="310" x2="480" y2="72" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="640" y="338" text-anchor="middle" font-size="10" fill="#555">NaCl 농도 (%)</text>
+  <text x="450" y="190" text-anchor="middle" font-size="10" fill="#555" transform="rotate(-90,450,190)">리액턴스 X (Ω)</text>
+
+  <!-- X-axis labels B -->
+  <text x="530" y="325" text-anchor="middle" font-size="9" fill="#888">0.1</text>
+  <text x="610" y="325" text-anchor="middle" font-size="9" fill="#888">0.5</text>
+  <text x="690" y="325" text-anchor="middle" font-size="9" fill="#888">0.9</text>
+  <text x="770" y="325" text-anchor="middle" font-size="9" fill="#888">2.0</text>
+
+  <!-- Grid B -->
+  <line x1="480" y1="260" x2="790" y2="260" stroke="#F0F0F0" stroke-width="0.5"/>
+  <line x1="480" y1="210" x2="790" y2="210" stroke="#F0F0F0" stroke-width="0.5"/>
+  <line x1="480" y1="160" x2="790" y2="160" stroke="#F0F0F0" stroke-width="0.5"/>
+  <line x1="480" y1="110" x2="790" y2="110" stroke="#F0F0F0" stroke-width="0.5"/>
+
+  <!-- f1 bars for X -->
+  <rect x="510" y="130" width="18" height="180" rx="2" fill="#E74C3C" opacity="0.7"/>
+  <line x1="519" y1="120" x2="519" y2="140" stroke="#C0392B" stroke-width="1.5"/>
+
+  <rect x="590" y="185" width="18" height="125" rx="2" fill="#E74C3C" opacity="0.7"/>
+  <line x1="599" y1="177" x2="599" y2="195" stroke="#C0392B" stroke-width="1.5"/>
+
+  <rect x="670" y="230" width="18" height="80" rx="2" fill="#E74C3C" opacity="0.7"/>
+  <line x1="679" y1="223" x2="679" y2="238" stroke="#C0392B" stroke-width="1.5"/>
+
+  <rect x="750" y="265" width="18" height="45" rx="2" fill="#E74C3C" opacity="0.7"/>
+  <line x1="759" y1="258" x2="759" y2="272" stroke="#C0392B" stroke-width="1.5"/>
+
+  <!-- f2 bars for X -->
+  <rect x="532" y="180" width="18" height="130" rx="2" fill="#3498DB" opacity="0.7"/>
+  <line x1="541" y1="172" x2="541" y2="188" stroke="#2471A3" stroke-width="1.5"/>
+
+  <rect x="612" y="220" width="18" height="90" rx="2" fill="#3498DB" opacity="0.7"/>
+  <line x1="621" y1="213" x2="621" y2="228" stroke="#2471A3" stroke-width="1.5"/>
+
+  <rect x="692" y="250" width="18" height="60" rx="2" fill="#3498DB" opacity="0.7"/>
+  <line x1="701" y1="244" x2="701" y2="257" stroke="#2471A3" stroke-width="1.5"/>
+
+  <rect x="772" y="275" width="18" height="35" rx="2" fill="#3498DB" opacity="0.7"/>
+  <line x1="781" y1="269" x2="781" y2="281" stroke="#2471A3" stroke-width="1.5"/>
+
+  <!-- Common Legend -->
+  <rect x="250" y="355" width="350" height="45" rx="6" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+  <rect x="275" y="368" width="15" height="15" fill="#E74C3C" opacity="0.7" rx="2"/>
+  <text x="300" y="380" font-size="10" fill="#555">f₁ = 1 MHz (저주파, 속보습)</text>
+  <rect x="480" y="368" width="15" height="15" fill="#3498DB" opacity="0.7" rx="2"/>
+  <text x="505" y="380" font-size="10" fill="#555">f₂ = 100 MHz (고주파, 겉보습)</text>
+
+  <!-- ====== CHART C: ΔR sensitivity comparison ====== -->
+  <text x="425" y="425" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">(c) 주파수별 민감도 비교 (0.1% → 2.0% NaCl 임피던스 변화율)</text>
+
+  <!-- Simple comparison bars -->
+  <rect x="150" y="450" width="200" height="35" rx="4" fill="#E74C3C" opacity="0.8"/>
+  <text x="250" y="472" text-anchor="middle" font-size="11" font-weight="bold" fill="white">f₁ (1 MHz): ΔZ/Z₀ ≈ 45%</text>
+
+  <rect x="150" y="495" width="130" height="35" rx="4" fill="#3498DB" opacity="0.8"/>
+  <text x="215" y="517" text-anchor="middle" font-size="11" font-weight="bold" fill="white">f₂ (100 MHz): ΔZ/Z₀ ≈ 28%</text>
+
+  <!-- Arrow showing difference -->
+  <line x1="380" y1="467" x2="380" y2="512" stroke="#27AE60" stroke-width="2"/>
+  <line x1="375" y1="467" x2="385" y2="467" stroke="#27AE60" stroke-width="2"/>
+  <line x1="375" y1="512" x2="385" y2="512" stroke="#27AE60" stroke-width="2"/>
+  <text x="400" y="495" font-size="10" font-weight="bold" fill="#27AE60">차이 = 깊이별</text>
+  <text x="400" y="510" font-size="10" font-weight="bold" fill="#27AE60">수분 구분 가능</text>
+
+  <!-- Key finding box -->
+  <rect x="150" y="550" width="550" height="80" rx="8" fill="#E8F8F5" stroke="#1ABC9C" stroke-width="2"/>
+  <text x="425" y="575" text-anchor="middle" font-size="12" font-weight="bold" fill="#16A085">핵심 발견 (예상)</text>
+  <text x="425" y="598" text-anchor="middle" font-size="11" fill="#16A085">• 저주파(f₁)가 고주파(f₂)보다 NaCl 농도 변화에 더 큰 임피던스 변화를 보임</text>
+  <text x="425" y="618" text-anchor="middle" font-size="11" fill="#16A085">• → 저주파는 심층 젤(진피 모사) 전도도에 민감 = 속보습 측정 원리 검증</text>
+
+  <!-- Note -->
+  <text x="425" y="648" text-anchor="middle" font-size="9" fill="#999">※ 수치는 이론 기반 예상값이며, 실제 Phase 1 PoC 실험을 통해 검증 예정 | 오차 막대 = ±1 SD (n=10)</text>
+</svg>

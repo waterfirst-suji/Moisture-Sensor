@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 580" font-family="'Malgun Gothic', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <text x="400" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">【도 7】 주파수별 침투 깊이 및 피부 층 대응 관계</text>
+
+  <!-- Axes -->
+  <line x1="120" y1="450" x2="620" y2="450" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="120" y1="450" x2="120" y2="70" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="370" y="490" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">주파수 (log scale)</text>
+  <text x="60" y="260" text-anchor="middle" font-size="12" font-weight="bold" fill="#333" transform="rotate(-90,60,260)">침투 깊이 δ (mm, log scale)</text>
+
+  <!-- X-axis labels (log scale) -->
+  <text x="170" y="468" text-anchor="middle" font-size="9" fill="#888">100 kHz</text>
+  <text x="280" y="468" text-anchor="middle" font-size="9" fill="#888">1 MHz</text>
+  <text x="390" y="468" text-anchor="middle" font-size="9" fill="#888">10 MHz</text>
+  <text x="500" y="468" text-anchor="middle" font-size="9" fill="#888">100 MHz</text>
+  <text x="580" y="468" text-anchor="middle" font-size="9" fill="#888">500 MHz</text>
+  <line x1="170" y1="445" x2="170" y2="455" stroke="#AAA" stroke-width="1"/>
+  <line x1="280" y1="445" x2="280" y2="455" stroke="#AAA" stroke-width="1"/>
+  <line x1="390" y1="445" x2="390" y2="455" stroke="#AAA" stroke-width="1"/>
+  <line x1="500" y1="445" x2="500" y2="455" stroke="#AAA" stroke-width="1"/>
+  <line x1="580" y1="445" x2="580" y2="455" stroke="#AAA" stroke-width="1"/>
+
+  <!-- Y-axis labels (log scale) -->
+  <text x="110" y="120" text-anchor="end" font-size="9" fill="#888">5.0</text>
+  <text x="110" y="180" text-anchor="end" font-size="9" fill="#888">1.6</text>
+  <text x="110" y="250" text-anchor="end" font-size="9" fill="#888">0.5</text>
+  <text x="110" y="320" text-anchor="end" font-size="9" fill="#888">0.16</text>
+  <text x="110" y="390" text-anchor="end" font-size="9" fill="#888">0.05</text>
+  <text x="110" y="430" text-anchor="end" font-size="9" fill="#888">0.02</text>
+  <line x1="115" y1="180" x2="125" y2="180" stroke="#AAA" stroke-width="1"/>
+  <line x1="115" y1="250" x2="125" y2="250" stroke="#AAA" stroke-width="1"/>
+  <line x1="115" y1="320" x2="125" y2="320" stroke="#AAA" stroke-width="1"/>
+  <line x1="115" y1="390" x2="125" y2="390" stroke="#AAA" stroke-width="1"/>
+
+  <!-- Skin layer bands (horizontal) -->
+  <!-- Stratum corneum band: ~0.01-0.02 mm -->
+  <rect x="120" y="420" width="500" height="30" fill="#FDEBD0" opacity="0.5" stroke="none"/>
+  <text x="635" y="438" font-size="9" font-weight="bold" fill="#B07B4F">각질층</text>
+  <text x="635" y="450" font-size="8" fill="#B07B4F">10-20μm</text>
+
+  <!-- Epidermis band: ~0.05-0.12 mm -->
+  <rect x="120" y="365" width="500" height="55" fill="#F5CBA7" opacity="0.3" stroke="none"/>
+  <text x="635" y="395" font-size="9" font-weight="bold" fill="#B07B4F">표피층</text>
+  <text x="635" y="407" font-size="8" fill="#B07B4F">~100μm</text>
+
+  <!-- Dermis band: ~0.5-4 mm -->
+  <rect x="120" y="110" width="500" height="255" fill="#EDBB99" opacity="0.15" stroke="none"/>
+  <text x="635" y="240" font-size="9" font-weight="bold" fill="#B07B4F">진피층</text>
+  <text x="635" y="252" font-size="8" fill="#B07B4F">1-4mm</text>
+
+  <!-- Penetration depth curves -->
+  <!-- σ = 0.02 S/m (dry skin / SC) -->
+  <path d="M170,110 L280,180 L390,250 L500,320 L580,365" fill="none" stroke="#E67E22" stroke-width="2.5" stroke-dasharray="8,4"/>
+  
+  <!-- σ = 0.1 S/m (epidermis) -->
+  <path d="M170,155 L280,225 L390,295 L500,365 L580,405" fill="none" stroke="#27AE60" stroke-width="2.5"/>
+  
+  <!-- σ = 0.5 S/m (wet dermis) -->
+  <path d="M170,195 L280,265 L390,335 L500,405 L580,435" fill="none" stroke="#2E86C1" stroke-width="2.5"/>
+  
+  <!-- σ = 1.0 S/m (high moisture dermis) -->
+  <path d="M170,220 L280,290 L390,360 L500,425 L580,445" fill="none" stroke="#8E44AD" stroke-width="2.5" stroke-dasharray="4,4"/>
+
+  <!-- Data points from Table 1 (σ=0.1 S/m) -->
+  <circle cx="170" cy="155" r="6" fill="#27AE60" stroke="white" stroke-width="1.5"/>
+  <text x="175" y="148" font-size="9" font-weight="bold" fill="#27AE60">1.6mm</text>
+  <circle cx="280" cy="225" r="6" fill="#27AE60" stroke="white" stroke-width="1.5"/>
+  <text x="285" y="218" font-size="9" font-weight="bold" fill="#27AE60">0.5mm</text>
+  <circle cx="390" cy="295" r="6" fill="#27AE60" stroke="white" stroke-width="1.5"/>
+  <text x="395" y="288" font-size="9" font-weight="bold" fill="#27AE60">0.16mm</text>
+  <circle cx="500" cy="365" r="6" fill="#27AE60" stroke="white" stroke-width="1.5"/>
+  <text x="505" y="358" font-size="9" font-weight="bold" fill="#27AE60">0.05mm</text>
+
+  <!-- Measurement zones -->
+  <!-- f1 zone -->
+  <rect x="160" y="95" width="160" height="32" rx="5" fill="#E74C3C" opacity="0.15" stroke="#E74C3C" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="240" y="115" text-anchor="middle" font-size="10" font-weight="bold" fill="#E74C3C">f₁ 영역: 속보습</text>
+  <text x="240" y="88" text-anchor="middle" font-size="9" fill="#C0392B">0.5~5 MHz</text>
+
+  <!-- f2 zone -->
+  <rect x="440" y="340" width="160" height="32" rx="5" fill="#3498DB" opacity="0.15" stroke="#3498DB" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="520" y="360" text-anchor="middle" font-size="10" font-weight="bold" fill="#3498DB">f₂ 영역: 겉보습</text>
+  <text x="520" y="335" text-anchor="middle" font-size="9" fill="#2980B9">50~200 MHz</text>
+
+  <!-- Legend -->
+  <rect x="140" y="500" width="480" height="65" rx="8" fill="#FAFAFA" stroke="#CCC" stroke-width="1"/>
+  <line x1="180" y1="520" x2="210" y2="520" stroke="#E67E22" stroke-width="2.5" stroke-dasharray="8,4"/>
+  <text x="220" y="524" font-size="9" fill="#555">σ=0.02 S/m (건조 각질층)</text>
+  <line x1="380" y1="520" x2="410" y2="520" stroke="#27AE60" stroke-width="2.5"/>
+  <text x="420" y="524" font-size="9" fill="#555">σ=0.1 S/m (표피)</text>
+  <line x1="180" y1="545" x2="210" y2="545" stroke="#2E86C1" stroke-width="2.5"/>
+  <text x="220" y="549" font-size="9" fill="#555">σ=0.5 S/m (수분 진피)</text>
+  <line x1="380" y1="545" x2="410" y2="545" stroke="#8E44AD" stroke-width="2.5" stroke-dasharray="4,4"/>
+  <text x="420" y="549" font-size="9" fill="#555">σ=1.0 S/m (고수분 진피)</text>
+
+  <!-- Formula -->
+  <text x="400" y="575" text-anchor="middle" font-size="10" fill="#666">δ = 1/√(πfμσ)  |  ●: 표 1 계산값 (σ=0.1 S/m, μ=4π×10⁻⁷ H/m)</text>
+</svg>

@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 580" font-family="'Malgun Gothic', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <text x="400" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">【도 6】 피부 수분량과 전기 전도도 상관관계 및 AI 보정 개념도</text>
+
+  <!-- Main chart area -->
+  <!-- Axes -->
+  <line x1="100" y1="450" x2="580" y2="450" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="100" y1="450" x2="100" y2="80" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="340" y="490" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">피부 수분량 (Corneometer, AU)</text>
+  <text x="55" y="265" text-anchor="middle" font-size="12" font-weight="bold" fill="#333" transform="rotate(-90,55,265)">전기 전도도 σ (S/m)</text>
+
+  <!-- X-axis ticks -->
+  <text x="100" y="468" text-anchor="middle" font-size="9" fill="#888">0</text>
+  <text x="200" y="468" text-anchor="middle" font-size="9" fill="#888">20</text>
+  <text x="300" y="468" text-anchor="middle" font-size="9" fill="#888">40</text>
+  <text x="400" y="468" text-anchor="middle" font-size="9" fill="#888">60</text>
+  <text x="500" y="468" text-anchor="middle" font-size="9" fill="#888">80</text>
+  <line x1="200" y1="445" x2="200" y2="455" stroke="#AAA" stroke-width="1"/>
+  <line x1="300" y1="445" x2="300" y2="455" stroke="#AAA" stroke-width="1"/>
+  <line x1="400" y1="445" x2="400" y2="455" stroke="#AAA" stroke-width="1"/>
+  <line x1="500" y1="445" x2="500" y2="455" stroke="#AAA" stroke-width="1"/>
+
+  <!-- Y-axis ticks -->
+  <text x="90" y="450" text-anchor="end" font-size="9" fill="#888">0</text>
+  <text x="90" y="370" text-anchor="end" font-size="9" fill="#888">0.2</text>
+  <text x="90" y="290" text-anchor="end" font-size="9" fill="#888">0.5</text>
+  <text x="90" y="210" text-anchor="end" font-size="9" fill="#888">0.8</text>
+  <text x="90" y="130" text-anchor="end" font-size="9" fill="#888">1.0</text>
+  <line x1="95" y1="370" x2="105" y2="370" stroke="#AAA" stroke-width="1"/>
+  <line x1="95" y1="290" x2="105" y2="290" stroke="#AAA" stroke-width="1"/>
+  <line x1="95" y1="210" x2="105" y2="210" stroke="#AAA" stroke-width="1"/>
+  <line x1="95" y1="130" x2="105" y2="130" stroke="#AAA" stroke-width="1"/>
+
+  <!-- Grid -->
+  <line x1="100" y1="370" x2="570" y2="370" stroke="#F0F0F0" stroke-width="0.5"/>
+  <line x1="100" y1="290" x2="570" y2="290" stroke="#F0F0F0" stroke-width="0.5"/>
+  <line x1="100" y1="210" x2="570" y2="210" stroke="#F0F0F0" stroke-width="0.5"/>
+  <line x1="100" y1="130" x2="570" y2="130" stroke="#F0F0F0" stroke-width="0.5"/>
+
+  <!-- Scatter data: Dermis (f1, deep) -->
+  <circle cx="140" cy="410" r="4" fill="#E74C3C" opacity="0.6"/>
+  <circle cx="170" cy="385" r="4" fill="#E74C3C" opacity="0.6"/>
+  <circle cx="210" cy="360" r="4" fill="#E74C3C" opacity="0.6"/>
+  <circle cx="235" cy="330" r="4" fill="#E74C3C" opacity="0.6"/>
+  <circle cx="260" cy="310" r="4" fill="#E74C3C" opacity="0.6"/>
+  <circle cx="300" cy="270" r="4" fill="#E74C3C" opacity="0.6"/>
+  <circle cx="330" cy="240" r="4" fill="#E74C3C" opacity="0.6"/>
+  <circle cx="360" cy="215" r="4" fill="#E74C3C" opacity="0.6"/>
+  <circle cx="400" cy="190" r="4" fill="#E74C3C" opacity="0.6"/>
+  <circle cx="430" cy="170" r="4" fill="#E74C3C" opacity="0.6"/>
+  <circle cx="470" cy="150" r="4" fill="#E74C3C" opacity="0.6"/>
+  <circle cx="510" cy="135" r="4" fill="#E74C3C" opacity="0.6"/>
+
+  <!-- Scatter data: Stratum corneum (f2, shallow) -->
+  <circle cx="140" cy="435" r="4" fill="#3498DB" opacity="0.6"/>
+  <circle cx="175" cy="420" r="4" fill="#3498DB" opacity="0.6"/>
+  <circle cx="215" cy="405" r="4" fill="#3498DB" opacity="0.6"/>
+  <circle cx="250" cy="385" r="4" fill="#3498DB" opacity="0.6"/>
+  <circle cx="285" cy="365" r="4" fill="#3498DB" opacity="0.6"/>
+  <circle cx="310" cy="350" r="4" fill="#3498DB" opacity="0.6"/>
+  <circle cx="350" cy="330" r="4" fill="#3498DB" opacity="0.6"/>
+  <circle cx="390" cy="310" r="4" fill="#3498DB" opacity="0.6"/>
+  <circle cx="420" cy="295" r="4" fill="#3498DB" opacity="0.6"/>
+  <circle cx="460" cy="275" r="4" fill="#3498DB" opacity="0.6"/>
+  <circle cx="500" cy="260" r="4" fill="#3498DB" opacity="0.6"/>
+
+  <!-- Regression lines -->
+  <path d="M120,425 Q300,290 530,125" fill="none" stroke="#E74C3C" stroke-width="2.5"/>
+  <path d="M120,445 Q300,375 520,250" fill="none" stroke="#3498DB" stroke-width="2.5"/>
+
+  <!-- AI confidence band (dermis) -->
+  <path d="M120,410 Q300,270 530,105 L530,145 Q300,310 120,440 Z" fill="#E74C3C" opacity="0.08"/>
+
+  <!-- AI confidence band (SC) -->
+  <path d="M120,430 Q300,355 520,230 L520,270 Q300,395 120,460 Z" fill="#3498DB" opacity="0.08"/>
+
+  <!-- Zone labels -->
+  <rect x="115" y="440" width="80" height="18" rx="3" fill="#FADBD8" stroke="#E74C3C" stroke-width="0.5"/>
+  <text x="155" y="453" text-anchor="middle" font-size="9" font-weight="bold" fill="#C0392B">매우 건조</text>
+  
+  <rect x="230" y="440" width="60" height="18" rx="3" fill="#FEF9E7" stroke="#D4AC0D" stroke-width="0.5"/>
+  <text x="260" y="453" text-anchor="middle" font-size="9" font-weight="bold" fill="#B7950B">건조</text>
+  
+  <rect x="340" y="440" width="60" height="18" rx="3" fill="#D5F5E3" stroke="#27AE60" stroke-width="0.5"/>
+  <text x="370" y="453" text-anchor="middle" font-size="9" font-weight="bold" fill="#229954">보통</text>
+  
+  <rect x="450" y="440" width="70" height="18" rx="3" fill="#D6EAF8" stroke="#3498DB" stroke-width="0.5"/>
+  <text x="485" y="453" text-anchor="middle" font-size="9" font-weight="bold" fill="#2E86C1">촉촉</text>
+
+  <!-- Legend -->
+  <rect x="600" y="80" width="190" height="180" rx="8" fill="#FAFAFA" stroke="#CCC" stroke-width="1.5"/>
+  <text x="695" y="105" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">범례</text>
+  <line x1="615" y1="115" x2="775" y2="115" stroke="#DDD" stroke-width="1"/>
+
+  <circle cx="630" cy="138" r="5" fill="#E74C3C"/>
+  <line x1="640" y1="138" x2="670" y2="138" stroke="#E74C3C" stroke-width="2.5"/>
+  <text x="680" y="142" font-size="10" fill="#555">진피층 (f₁ 저주파)</text>
+  <text x="680" y="156" font-size="9" fill="#888">속보습 지표</text>
+
+  <circle cx="630" cy="180" r="5" fill="#3498DB"/>
+  <line x1="640" y1="180" x2="670" y2="180" stroke="#3498DB" stroke-width="2.5"/>
+  <text x="680" y="184" font-size="10" fill="#555">각질층 (f₂ 고주파)</text>
+  <text x="680" y="198" font-size="9" fill="#888">겉보습 지표</text>
+
+  <rect x="625" y="215" width="15" height="10" fill="#E74C3C" opacity="0.15"/>
+  <rect x="625" y="230" width="15" height="10" fill="#3498DB" opacity="0.15"/>
+  <text x="650" y="224" font-size="9" fill="#555">AI 보정 신뢰 구간</text>
+  <text x="650" y="249" font-size="9" fill="#555">(기계학습 예측 범위)</text>
+
+  <!-- AI Calibration annotation -->
+  <rect x="600" y="300" width="190" height="120" rx="8" fill="#F5EEF8" stroke="#8E44AD" stroke-width="1.5"/>
+  <text x="695" y="325" text-anchor="middle" font-size="11" font-weight="bold" fill="#8E44AD">AI 보정 입력 변수</text>
+  <line x1="615" y1="335" x2="775" y2="335" stroke="#D7BDE2" stroke-width="1"/>
+  <text x="625" y="355" font-size="10" fill="#8E44AD">• Z₁, Z₂ (임피던스)</text>
+  <text x="625" y="375" font-size="10" fill="#8E44AD">• 환경 온도, 습도</text>
+  <text x="625" y="395" font-size="10" fill="#8E44AD">• 피부 타입 (건성/지성)</text>
+  <text x="625" y="415" font-size="10" fill="#8E44AD">• 측정 부위 (팔/이마)</text>
+
+  <!-- R² annotation -->
+  <text x="480" y="160" font-size="11" font-weight="bold" fill="#E74C3C">R² ≥ 0.90 (목표)</text>
+  <text x="460" y="285" font-size="11" font-weight="bold" fill="#3498DB">R² ≥ 0.85 (목표)</text>
+
+  <!-- Subtitle -->
+  <text x="340" y="545" text-anchor="middle" font-size="10" fill="#888">※ 데이터는 예상 상관관계이며, 실제 실험(Phase 3)을 통해 검증 예정</text>
+  <text x="340" y="565" text-anchor="middle" font-size="10" fill="#888">※ Corneometer 접촉식 측정값을 기준값(ground truth)으로 사용하여 AI 모델 학습</text>
+</svg>

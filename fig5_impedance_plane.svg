@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" font-family="'Malgun Gothic', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+    </marker>
+    <marker id="arrowR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#E74C3C"/>
+    </marker>
+    <marker id="arrowB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3498DB"/>
+    </marker>
+  </defs>
+
+  <text x="400" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">【도 5】 임피던스 평면(Impedance Plane) 분석 다이어그램</text>
+
+  <!-- Axes -->
+  <line x1="100" y1="500" x2="650" y2="500" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="100" y1="500" x2="100" y2="60" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="670" y="505" font-size="13" font-weight="bold" fill="#333">R (저항, Ω)</text>
+  <text x="95" y="50" text-anchor="end" font-size="13" font-weight="bold" fill="#333">X (리액턴스, Ω)</text>
+
+  <!-- Grid lines -->
+  <line x1="100" y1="420" x2="620" y2="420" stroke="#EEE" stroke-width="0.5"/>
+  <line x1="100" y1="340" x2="620" y2="340" stroke="#EEE" stroke-width="0.5"/>
+  <line x1="100" y1="260" x2="620" y2="260" stroke="#EEE" stroke-width="0.5"/>
+  <line x1="100" y1="180" x2="620" y2="180" stroke="#EEE" stroke-width="0.5"/>
+  <line x1="230" y1="500" x2="230" y2="80" stroke="#EEE" stroke-width="0.5"/>
+  <line x1="360" y1="500" x2="360" y2="80" stroke="#EEE" stroke-width="0.5"/>
+  <line x1="490" y1="500" x2="490" y2="80" stroke="#EEE" stroke-width="0.5"/>
+
+  <!-- Air point (reference) -->
+  <circle cx="200" cy="150" r="8" fill="#27AE60" stroke="#1E8449" stroke-width="2"/>
+  <text x="215" y="140" font-size="11" font-weight="bold" fill="#27AE60">공기 기준점</text>
+  <text x="215" y="155" font-size="9" fill="#27AE60">(프로브 단독, σ=0)</text>
+
+  <!-- Low freq trajectory (deep, dermis) -->
+  <path d="M200,150 Q280,180 330,250 Q370,310 400,390 Q420,440 450,470" fill="none" stroke="#E74C3C" stroke-width="3" marker-end="url(#arrowR)"/>
+  <text x="310" y="210" font-size="11" font-weight="bold" fill="#E74C3C">f₁ (저주파) 궤적</text>
+  <text x="310" y="226" font-size="9" fill="#C0392B">진피층 수분 변화에 민감</text>
+
+  <!-- Data points on low freq curve -->
+  <circle cx="270" cy="200" r="5" fill="#E74C3C"/>
+  <text x="252" y="215" font-size="8" fill="#C0392B">건조</text>
+  <circle cx="350" cy="310" r="5" fill="#E74C3C"/>
+  <text x="360" y="305" font-size="8" fill="#C0392B">보통</text>
+  <circle cx="420" cy="440" r="5" fill="#E74C3C"/>
+  <text x="430" y="435" font-size="8" fill="#C0392B">촉촉</text>
+
+  <!-- High freq trajectory (shallow, stratum corneum) -->
+  <path d="M200,150 Q240,170 270,200 Q300,230 320,270 Q340,310 350,340" fill="none" stroke="#3498DB" stroke-width="3" marker-end="url(#arrowB)"/>
+  <text x="150" y="260" font-size="11" font-weight="bold" fill="#3498DB">f₂ (고주파) 궤적</text>
+  <text x="150" y="276" font-size="9" fill="#2980B9">각질층 수분 변화에 민감</text>
+
+  <!-- Data points on high freq curve -->
+  <circle cx="245" cy="175" r="5" fill="#3498DB"/>
+  <text x="220" y="180" font-size="8" fill="#2980B9">건조</text>
+  <circle cx="300" cy="240" r="5" fill="#3498DB"/>
+  <text x="270" y="245" font-size="8" fill="#2980B9">보통</text>
+  <circle cx="340" cy="310" r="5" fill="#3498DB"/>
+  <text x="310" y="325" font-size="8" fill="#2980B9">촉촉</text>
+
+  <!-- σ increase direction -->
+  <text x="500" y="380" font-size="12" font-weight="bold" fill="#8E44AD">σ 증가 방향</text>
+  <text x="500" y="398" font-size="10" fill="#8E44AD">(수분↑ → 전도도↑)</text>
+  <line x1="540" y1="350" x2="540" y2="410" stroke="#8E44AD" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="6,3"/>
+
+  <!-- Explanation box -->
+  <rect x="460" y="80" width="310" height="180" rx="8" fill="#F8F9FA" stroke="#AAA" stroke-width="1.5"/>
+  <text x="615" y="105" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">임피던스 평면 해석</text>
+  <line x1="475" y1="115" x2="755" y2="115" stroke="#DDD" stroke-width="1"/>
+  
+  <circle cx="485" cy="135" r="4" fill="#27AE60"/>
+  <text x="500" y="139" font-size="10" fill="#555">공기 기준점: 피부 없을 때 임피던스</text>
+  
+  <circle cx="485" cy="160" r="4" fill="#E74C3C"/>
+  <text x="500" y="164" font-size="10" fill="#555">f₁ 궤적: 깊은 침투 → 속보습 반영</text>
+  
+  <circle cx="485" cy="185" r="4" fill="#3498DB"/>
+  <text x="500" y="189" font-size="10" fill="#555">f₂ 궤적: 얕은 침투 → 겉보습 반영</text>
+
+  <text x="480" y="215" font-size="10" fill="#555">• 수분↑ → R 증가, X 증가 (임피던스 변화)</text>
+  <text x="480" y="235" font-size="10" fill="#555">• 두 궤적 차이 → 깊이별 수분 분리 가능</text>
+  <text x="480" y="255" font-size="10" fill="#555">• NDT 80개 교정커브 대신 AI 학습으로 보정</text>
+
+  <!-- Impedance vector -->
+  <line x1="100" y1="500" x2="350" y2="310" stroke="#8E44AD" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="190" y="420" font-size="10" fill="#8E44AD" transform="rotate(-40,190,420)">|Z| = √(R²+X²)</text>
+  
+  <!-- Angle -->
+  <path d="M140,500 Q145,480 160,470" fill="none" stroke="#8E44AD" stroke-width="1"/>
+  <text x="155" y="488" font-size="9" fill="#8E44AD">θ</text>
+</svg>

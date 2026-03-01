@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 600" font-family="'Malgun Gothic', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <text x="425" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">【도 4】 NDT 코팅 검사 vs 피부 수분 측정 구조 비교도</text>
+
+  <!-- LEFT: NDT -->
+  <text x="210" y="65" text-anchor="middle" font-size="14" font-weight="bold" fill="#2E86C1">【NDT 코팅 두께 검사】</text>
+
+  <!-- NDT Probe -->
+  <rect x="120" y="85" width="180" height="40" rx="8" fill="#D5E8F0" stroke="#2E86C1" stroke-width="2"/>
+  <text x="210" y="110" text-anchor="middle" font-size="11" fill="#2E86C1">맴돌이전류 프로브</text>
+
+  <!-- NDT Coating (non-conductive) -->
+  <rect x="80" y="140" width="260" height="60" rx="0" fill="#F5F5DC" stroke="#8B8B00" stroke-width="1.5"/>
+  <text x="210" y="165" text-anchor="middle" font-size="11" font-weight="bold" fill="#6B6B00">비전도성 코팅</text>
+  <text x="210" y="180" text-anchor="middle" font-size="10" fill="#8B8B00">σ ≈ 0 S/m</text>
+
+  <!-- NDT Metal substrate -->
+  <rect x="80" y="200" width="260" height="100" rx="0" fill="#BDC3C7" stroke="#7F8C8D" stroke-width="1.5"/>
+  <text x="210" y="240" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">전도성 금속 기판</text>
+  <text x="210" y="258" text-anchor="middle" font-size="10" fill="#666">σ ≈ 10⁶~10⁷ S/m</text>
+  <text x="210" y="280" text-anchor="middle" font-size="9" fill="#888">(알루미늄, 구리, 강철 등)</text>
+
+  <!-- NDT eddy currents -->
+  <ellipse cx="210" cy="250" rx="50" ry="18" fill="none" stroke="#E74C3C" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.5"/>
+  <ellipse cx="210" cy="230" rx="35" ry="12" fill="none" stroke="#E74C3C" stroke-width="1" stroke-dasharray="4,3" opacity="0.3"/>
+
+  <!-- NDT annotation -->
+  <rect x="80" y="320" width="260" height="70" rx="6" fill="#FFF3E0" stroke="#E67E22" stroke-width="1"/>
+  <text x="210" y="340" text-anchor="middle" font-size="10" font-weight="bold" fill="#E67E22">전도도 민감도 = 노이즈 ⚠️</text>
+  <text x="210" y="358" text-anchor="middle" font-size="9" fill="#E67E22">코팅 두께만 측정 목적</text>
+  <text x="210" y="374" text-anchor="middle" font-size="9" fill="#E67E22">기판 전도도 변화 = 측정 오차 요인</text>
+
+  <!-- CENTER: Arrow / Transform -->
+  <rect x="375" y="170" width="100" height="80" rx="40" fill="#27AE60" stroke="#1E8449" stroke-width="2"/>
+  <text x="425" y="200" text-anchor="middle" font-size="20" fill="white">⟹</text>
+  <text x="425" y="220" text-anchor="middle" font-size="10" font-weight="bold" fill="white">패러다임</text>
+  <text x="425" y="235" text-anchor="middle" font-size="10" font-weight="bold" fill="white">전환</text>
+
+  <text x="425" y="270" text-anchor="middle" font-size="11" font-weight="bold" fill="#27AE60">노이즈 → 시그널</text>
+
+  <!-- RIGHT: Skin -->
+  <text x="640" y="65" text-anchor="middle" font-size="14" font-weight="bold" fill="#E74C3C">【피부 수분 측정 (본 발명)】</text>
+
+  <!-- Skin Probe -->
+  <rect x="550" y="85" width="180" height="40" rx="8" fill="#FADBD8" stroke="#E74C3C" stroke-width="2"/>
+  <text x="640" y="110" text-anchor="middle" font-size="11" fill="#E74C3C">SkinSense 프로브</text>
+
+  <!-- Stratum corneum -->
+  <rect x="510" y="140" width="260" height="40" rx="0" fill="#FDEBD0" stroke="#B07B4F" stroke-width="1.5"/>
+  <text x="640" y="158" text-anchor="middle" font-size="11" font-weight="bold" fill="#6B3A00">각질층 (건조)</text>
+  <text x="640" y="173" text-anchor="middle" font-size="10" fill="#8B6914">σ ≈ 0.02 S/m</text>
+
+  <!-- Dermis -->
+  <rect x="510" y="180" width="260" height="120" rx="0" fill="#EDBB99" stroke="#B07B4F" stroke-width="1.5"/>
+  <text x="640" y="220" text-anchor="middle" font-size="11" font-weight="bold" fill="#6B3A00">진피층 (수분 풍부)</text>
+  <text x="640" y="240" text-anchor="middle" font-size="10" fill="#8B6914">σ ≈ 0.5~1.0 S/m</text>
+  <text x="640" y="260" text-anchor="middle" font-size="9" fill="#8B6914">(혈관, 조직액, 전해질)</text>
+
+  <!-- Skin eddy currents -->
+  <ellipse cx="640" cy="230" rx="50" ry="20" fill="none" stroke="#E74C3C" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.5"/>
+  <ellipse cx="640" cy="195" rx="30" ry="10" fill="none" stroke="#3498DB" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+
+  <!-- Blood vessels -->
+  <path d="M560,270 Q575,260 590,270" fill="none" stroke="#C0392B" stroke-width="1.5" opacity="0.4"/>
+  <path d="M680,260 Q695,250 710,260" fill="none" stroke="#C0392B" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Skin annotation -->
+  <rect x="510" y="320" width="260" height="70" rx="6" fill="#E8F8F5" stroke="#1ABC9C" stroke-width="1"/>
+  <text x="640" y="340" text-anchor="middle" font-size="10" font-weight="bold" fill="#16A085">전도도 민감도 = 시그널 ✅</text>
+  <text x="640" y="358" text-anchor="middle" font-size="9" fill="#16A085">피부 수분에 의한 전도도 변화가</text>
+  <text x="640" y="374" text-anchor="middle" font-size="9" fill="#16A085">직접적 측정 대상 → 유리한 물리적 특성</text>
+
+  <!-- Comparison table -->
+  <rect x="80" y="420" width="690" height="170" rx="8" fill="#FAFAFA" stroke="#CCC" stroke-width="1.5"/>
+  <text x="425" y="445" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">구조 대비표</text>
+
+  <!-- Table headers -->
+  <line x1="80" y1="455" x2="770" y2="455" stroke="#CCC" stroke-width="1"/>
+  <text x="195" y="472" text-anchor="middle" font-size="10" font-weight="bold" fill="#555">항목</text>
+  <text x="380" y="472" text-anchor="middle" font-size="10" font-weight="bold" fill="#2E86C1">NDT 코팅 검사</text>
+  <text x="620" y="472" text-anchor="middle" font-size="10" font-weight="bold" fill="#E74C3C">피부 수분 측정</text>
+  <line x1="80" y1="480" x2="770" y2="480" stroke="#CCC" stroke-width="1"/>
+  <line x1="280" y1="455" x2="280" y2="590" stroke="#CCC" stroke-width="0.5"/>
+  <line x1="500" y1="455" x2="500" y2="590" stroke="#CCC" stroke-width="0.5"/>
+
+  <!-- Row 1 -->
+  <text x="180" y="498" text-anchor="middle" font-size="10" fill="#555">표면층</text>
+  <text x="380" y="498" text-anchor="middle" font-size="10" fill="#2E86C1">비전도성 코팅</text>
+  <text x="620" y="498" text-anchor="middle" font-size="10" fill="#E74C3C">각질층 (낮은 전도도)</text>
+  <line x1="100" y1="506" x2="750" y2="506" stroke="#EEE" stroke-width="0.5"/>
+
+  <!-- Row 2 -->
+  <text x="180" y="522" text-anchor="middle" font-size="10" fill="#555">하부층</text>
+  <text x="380" y="522" text-anchor="middle" font-size="10" fill="#2E86C1">전도성 금속 기판</text>
+  <text x="620" y="522" text-anchor="middle" font-size="10" fill="#E74C3C">진피층 (높은 전도도)</text>
+  <line x1="100" y1="530" x2="750" y2="530" stroke="#EEE" stroke-width="0.5"/>
+
+  <!-- Row 3 -->
+  <text x="180" y="546" text-anchor="middle" font-size="10" fill="#555">전도도 변화</text>
+  <text x="380" y="546" text-anchor="middle" font-size="10" fill="#2E86C1">오차 요인 (노이즈)</text>
+  <text x="620" y="546" text-anchor="middle" font-size="10" fill="#E74C3C">측정 대상 (시그널)</text>
+  <line x1="100" y1="554" x2="750" y2="554" stroke="#EEE" stroke-width="0.5"/>
+
+  <!-- Row 4 -->
+  <text x="180" y="570" text-anchor="middle" font-size="10" fill="#555">교정 방식</text>
+  <text x="380" y="570" text-anchor="middle" font-size="10" fill="#2E86C1">80개 고정 교정 커브</text>
+  <text x="620" y="570" text-anchor="middle" font-size="10" fill="#E74C3C">AI 적응적 기계학습 보정</text>
+</svg>

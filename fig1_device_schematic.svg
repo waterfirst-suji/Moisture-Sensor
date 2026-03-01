@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" font-family="'Malgun Gothic', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+    </marker>
+    <linearGradient id="skinGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDEBD0"/>
+      <stop offset="40%" stop-color="#F5CBA7"/>
+      <stop offset="100%" stop-color="#E8A87C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">【도 1】 비접촉 피부 수분 측정 장치(100)의 개략적 구성도</text>
+
+  <!-- Skin surface -->
+  <rect x="30" y="380" width="250" height="120" rx="8" fill="url(#skinGrad)" stroke="#B07B4F" stroke-width="1.5"/>
+  <text x="155" y="405" text-anchor="middle" font-size="11" fill="#6B3A00">각질층 (10~20μm)</text>
+  <line x1="30" y1="415" x2="280" y2="415" stroke="#B07B4F" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <text x="155" y="435" text-anchor="middle" font-size="11" fill="#6B3A00">표피층</text>
+  <line x1="30" y1="450" x2="280" y2="450" stroke="#B07B4F" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <text x="155" y="475" text-anchor="middle" font-size="11" fill="#6B3A00">진피층 (혈관, 조직액)</text>
+  <text x="155" y="510" text-anchor="middle" font-size="12" font-weight="bold" fill="#444">피부 조직</text>
+
+  <!-- Probe housing -->
+  <rect x="80" y="270" width="150" height="90" rx="10" fill="#D5E8F0" stroke="#2E75B6" stroke-width="2"/>
+  <text x="155" y="295" text-anchor="middle" font-size="11" font-weight="bold" fill="#2E75B6">센서 프로브</text>
+
+  <!-- Coil 1 (low freq) -->
+  <ellipse cx="120" cy="330" rx="25" ry="8" fill="none" stroke="#E74C3C" stroke-width="2"/>
+  <text x="120" y="350" text-anchor="middle" font-size="9" fill="#E74C3C">제1코일(110)</text>
+  <text x="120" y="362" text-anchor="middle" font-size="8" fill="#C0392B">f₁ (저주파)</text>
+
+  <!-- Coil 2 (high freq) -->
+  <ellipse cx="190" cy="330" rx="18" ry="6" fill="none" stroke="#3498DB" stroke-width="2"/>
+  <text x="190" y="350" text-anchor="middle" font-size="9" fill="#3498DB">제2코일(120)</text>
+  <text x="190" y="362" text-anchor="middle" font-size="8" fill="#2980B9">f₂ (고주파)</text>
+
+  <!-- Gap indicator -->
+  <line x1="270" y1="360" x2="270" y2="385" stroke="#888" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="290" y="373" font-size="9" fill="#888">이격거리 d</text>
+  <line x1="265" y1="360" x2="275" y2="360" stroke="#888" stroke-width="1"/>
+  <line x1="265" y1="385" x2="275" y2="385" stroke="#888" stroke-width="1"/>
+
+  <!-- Impedance detection block -->
+  <rect x="350" y="180" width="160" height="60" rx="8" fill="#FFF3E0" stroke="#E67E22" stroke-width="2"/>
+  <text x="430" y="205" text-anchor="middle" font-size="12" font-weight="bold" fill="#E67E22">임피던스 검출부</text>
+  <text x="430" y="222" text-anchor="middle" font-size="10" fill="#E67E22">(130)</text>
+
+  <!-- Signal processor block -->
+  <rect x="560" y="180" width="160" height="60" rx="8" fill="#E8F8F5" stroke="#1ABC9C" stroke-width="2"/>
+  <text x="640" y="205" text-anchor="middle" font-size="12" font-weight="bold" fill="#16A085">신호 처리부</text>
+  <text x="640" y="222" text-anchor="middle" font-size="10" fill="#16A085">(140) - AI 보정</text>
+
+  <!-- Display block -->
+  <rect x="560" y="290" width="160" height="55" rx="8" fill="#F5EEF8" stroke="#8E44AD" stroke-width="2"/>
+  <text x="640" y="312" text-anchor="middle" font-size="12" font-weight="bold" fill="#8E44AD">표시부 (150)</text>
+  <text x="640" y="330" text-anchor="middle" font-size="10" fill="#8E44AD">겉보습 / 속보습</text>
+
+  <!-- Temp/Humidity sensor -->
+  <rect x="350" y="290" width="160" height="55" rx="8" fill="#FDEBD0" stroke="#D4AC0D" stroke-width="2"/>
+  <text x="430" y="312" text-anchor="middle" font-size="11" font-weight="bold" fill="#B7950B">온·습도 센서</text>
+  <text x="430" y="330" text-anchor="middle" font-size="10" fill="#B7950B">(온도, 습도 보정)</text>
+
+  <!-- Driver -->
+  <rect x="350" y="80" width="160" height="50" rx="8" fill="#EBF5FB" stroke="#2E86C1" stroke-width="2"/>
+  <text x="430" y="102" text-anchor="middle" font-size="12" font-weight="bold" fill="#2E86C1">주파수 발생부</text>
+  <text x="430" y="118" text-anchor="middle" font-size="10" fill="#2E86C1">f₁, f₂ 구동 신호</text>
+
+  <!-- Arrows -->
+  <!-- Driver to probe -->
+  <line x1="350" y1="105" x2="230" y2="295" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Probe to impedance -->
+  <line x1="230" y1="310" x2="350" y2="210" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Impedance to signal -->
+  <line x1="510" y1="210" x2="560" y2="210" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Signal to display -->
+  <line x1="640" y1="240" x2="640" y2="290" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Temp to signal -->
+  <line x1="510" y1="317" x2="560" y2="240" stroke="#D4AC0D" stroke-width="1.2" marker-end="url(#arrow)" stroke-dasharray="5,3"/>
+
+  <!-- Eddy current indication in skin -->
+  <ellipse cx="120" cy="450" rx="35" ry="12" fill="none" stroke="#E74C3C" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.6"/>
+  <ellipse cx="120" cy="430" rx="28" ry="10" fill="none" stroke="#E74C3C" stroke-width="1" stroke-dasharray="4,3" opacity="0.4"/>
+  <text x="50" y="465" font-size="8" fill="#E74C3C">맴돌이전류 (깊은 침투)</text>
+
+  <ellipse cx="190" cy="405" rx="22" ry="8" fill="none" stroke="#3498DB" stroke-width="1.5" stroke-dasharray="6,3" opacity="0.6"/>
+  <text x="220" y="410" font-size="8" fill="#3498DB">맴돌이전류 (얕은 침투)</text>
+
+  <!-- Device label -->
+  <rect x="60" y="55" width="200" height="30" rx="5" fill="#F0F0F0" stroke="#AAA" stroke-width="1"/>
+  <text x="160" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">장치 (100)</text>
+</svg>

@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 900" font-family="'Malgun Gothic', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+    </marker>
+  </defs>
+
+  <text x="350" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">【도 3】 비접촉 피부 수분 측정 방법의 흐름도</text>
+
+  <!-- S1: Start -->
+  <ellipse cx="350" cy="70" rx="80" ry="25" fill="#E8F8F5" stroke="#1ABC9C" stroke-width="2"/>
+  <text x="350" y="75" text-anchor="middle" font-size="12" font-weight="bold" fill="#16A085">시 작</text>
+  <line x1="350" y1="95" x2="350" y2="120" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- S2: Position probe -->
+  <rect x="220" y="120" width="260" height="50" rx="8" fill="#EBF5FB" stroke="#2E86C1" stroke-width="2"/>
+  <text x="350" y="142" text-anchor="middle" font-size="11" font-weight="bold" fill="#2E86C1">S10: 센서 프로브 위치 설정</text>
+  <text x="350" y="158" text-anchor="middle" font-size="10" fill="#2E86C1">피부로부터 이격거리 d (0.1~5mm)</text>
+  <line x1="350" y1="170" x2="350" y2="195" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- S3: Apply f1 -->
+  <rect x="200" y="195" width="300" height="50" rx="8" fill="#FFF3E0" stroke="#E67E22" stroke-width="2"/>
+  <text x="350" y="217" text-anchor="middle" font-size="11" font-weight="bold" fill="#E67E22">S20: 제1주파수(f₁) 교류 자기장 인가</text>
+  <text x="350" y="233" text-anchor="middle" font-size="10" fill="#E67E22">저주파 → 진피층까지 깊은 침투</text>
+  <line x1="350" y1="245" x2="350" y2="270" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- S4: Detect impedance f1 -->
+  <path d="M250,295 L350,270 L450,295 L350,320 Z" fill="#FDEDEC" stroke="#E74C3C" stroke-width="2"/>
+  <text x="350" y="293" text-anchor="middle" font-size="10" font-weight="bold" fill="#C0392B">S30: 제1임피던스</text>
+  <text x="350" y="307" text-anchor="middle" font-size="10" fill="#C0392B">변화량 검출 (Z₁)</text>
+  <line x1="350" y1="320" x2="350" y2="345" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- S5: Apply f2 -->
+  <rect x="200" y="345" width="300" height="50" rx="8" fill="#EBF5FB" stroke="#3498DB" stroke-width="2"/>
+  <text x="350" y="367" text-anchor="middle" font-size="11" font-weight="bold" fill="#2980B9">S40: 제2주파수(f₂) 교류 자기장 인가</text>
+  <text x="350" y="383" text-anchor="middle" font-size="10" fill="#2980B9">고주파 → 각질층 얕은 침투</text>
+  <line x1="350" y1="395" x2="350" y2="420" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- S6: Detect impedance f2 -->
+  <path d="M250,445 L350,420 L450,445 L350,470 Z" fill="#D6EAF8" stroke="#3498DB" stroke-width="2"/>
+  <text x="350" y="443" text-anchor="middle" font-size="10" font-weight="bold" fill="#2471A3">S50: 제2임피던스</text>
+  <text x="350" y="457" text-anchor="middle" font-size="10" fill="#2471A3">변화량 검출 (Z₂)</text>
+  <line x1="350" y1="470" x2="350" y2="495" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- S7: Environment compensation -->
+  <rect x="200" y="495" width="300" height="50" rx="8" fill="#FDEBD0" stroke="#D4AC0D" stroke-width="2"/>
+  <text x="350" y="517" text-anchor="middle" font-size="11" font-weight="bold" fill="#B7950B">S60: 환경 보정</text>
+  <text x="350" y="533" text-anchor="middle" font-size="10" fill="#B7950B">온도·습도 센서 데이터로 보정</text>
+  <line x1="350" y1="545" x2="350" y2="570" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- S8: AI calibration -->
+  <rect x="180" y="570" width="340" height="60" rx="8" fill="#F5EEF8" stroke="#8E44AD" stroke-width="2"/>
+  <text x="350" y="593" text-anchor="middle" font-size="11" font-weight="bold" fill="#8E44AD">S70: AI 기계학습 보정</text>
+  <text x="350" y="610" text-anchor="middle" font-size="10" fill="#8E44AD">피부타입·측정부위·Corneometer 기준값 상관 학습</text>
+  <text x="350" y="625" text-anchor="middle" font-size="9" fill="#8E44AD">입력: Z₁, Z₂, 온도, 습도, 피부타입, 부위</text>
+  <line x1="350" y1="630" x2="350" y2="660" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- S9: Compute profiles -->
+  <rect x="200" y="660" width="300" height="55" rx="8" fill="#E8F8F5" stroke="#1ABC9C" stroke-width="2"/>
+  <text x="350" y="682" text-anchor="middle" font-size="11" font-weight="bold" fill="#16A085">S80: 깊이별 전도도 프로파일 산출</text>
+  <text x="350" y="700" text-anchor="middle" font-size="10" fill="#16A085">겉보습 지표 (각질층) + 속보습 지표 (진피층)</text>
+  <line x1="350" y1="715" x2="350" y2="745" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- S10: Output -->
+  <rect x="200" y="745" width="300" height="50" rx="8" fill="#D5F5E3" stroke="#27AE60" stroke-width="2"/>
+  <text x="350" y="767" text-anchor="middle" font-size="11" font-weight="bold" fill="#229954">S90: 피부 수분 상태 판정 및 표시</text>
+  <text x="350" y="783" text-anchor="middle" font-size="10" fill="#229954">겉보습/속보습 지표 수치 출력</text>
+  <line x1="350" y1="795" x2="350" y2="825" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- End -->
+  <ellipse cx="350" cy="850" rx="80" ry="25" fill="#E8F8F5" stroke="#1ABC9C" stroke-width="2"/>
+  <text x="350" y="855" text-anchor="middle" font-size="12" font-weight="bold" fill="#16A085">종 료</text>
+
+  <!-- Side note: simultaneous or sequential -->
+  <rect x="530" y="270" width="150" height="70" rx="6" fill="#FFF8E1" stroke="#F9A825" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="605" y="290" text-anchor="middle" font-size="9" fill="#F57F17">※ S20~S50 단계는</text>
+  <text x="605" y="305" text-anchor="middle" font-size="9" fill="#F57F17">동시 또는 순차적으로</text>
+  <text x="605" y="320" text-anchor="middle" font-size="9" fill="#F57F17">수행 가능</text>
+  <line x1="530" y1="305" x2="460" y2="305" stroke="#F9A825" stroke-width="1" stroke-dasharray="3,2"/>
+</svg>
